@@ -1,4 +1,4 @@
-#summary How we measure time in Divvy
+#summary Measuring time
 
 === Documentation Links ===
 
