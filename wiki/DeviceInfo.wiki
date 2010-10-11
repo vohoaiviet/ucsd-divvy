@@ -1,0 +1,5 @@
+#summary Obtaining data on compute devices
+
+=== Documentation Links ===
+
+[http://developer.apple.com/library/mac/#documentation/Performance/Conceptual/OpenCL_MacProgGuide/TheOpenCLWorkflow/TheOpenCLWorkflow.html Section on querying available compute devices]
