@@ -1,4 +1,4 @@
-How we measure time in Divvy
+#summary How we measure time in Divvy
 
 = Apple Documentation Links =
 
