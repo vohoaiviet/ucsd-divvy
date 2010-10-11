@@ -2,7 +2,7 @@
 
 = Apple Documentation Links =
 
-[http://developer.apple.com/library/mac/#qa/qa2004/qa1398.html Reference info]
+[http://developer.apple.com/library/mac/#qa/qa2004/qa1398.html Reference info] -- mainly listing 2 is what we want, I think
 
 [http://developer.apple.com/library/mac/#documentation/Darwin/Conceptual/KernelProgramming/services/services.html Less relevant reference info]
 
