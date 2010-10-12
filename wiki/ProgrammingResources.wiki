@@ -9,3 +9,5 @@
 [http://www.chris-lott.org/resources/cstyle/indhill-cstyle.pdf Indian Hill C Style and Coding Standards]
 
 [http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml Google C++ Style Guide]
+
+[http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml Google Objective-C Style Guide]
