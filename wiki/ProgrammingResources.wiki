@@ -1,0 +1,11 @@
+#summary Programming best practices
+
+=== C Reference ===
+
+[http://proquest.safaribooksonline.com/1-56592-306-5/ Practical C Programming]
+
+=== Style Guides ===
+
+[http://www.chris-lott.org/resources/cstyle/indhill-cstyle.pdf Indian Hill C Style and Coding Standards]
+
+[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml Google C++ Style Guide]
