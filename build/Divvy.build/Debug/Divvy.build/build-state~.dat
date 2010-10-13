@@ -1,239 +1,0 @@
-TDivvy
-v7
-r0
-t292196032.542000
-cCheck dependencies
-cProcessInfoPlistFile /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Info.plist Divvy-Info.plist
-cCopyStringsFile /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-cCompileXIB /Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib
-cProcessPCH /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch.gch Divvy_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/main.o /Users/jlewis/Documents/Projects/Divvy/Divvy/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyAppDelegate.o /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyController.o /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cLd /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy normal x86_64
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004ABBF0FD00000000000000EE
-t1253830909
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
-c000000004AB9B48E00000000000000BF
-t1253684366
-s191
-
-N/System/Library/Frameworks/Cocoa.framework/Cocoa
-c000000004A1F2D63000000000000A5E0
-t1243557219
-s42464
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.h
-c000000004BBA51E20000000000000127
-t1270501858
-s295
-i<Cocoa/Cocoa.h>
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m
-c000000004BBA51E2000000000000015A
-t1270501858
-s346
-i"DivvyAppDelegate.h"
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.h
-c000000004BBA55CD00000000000000FC
-t1270502861
-s252
-i<Cocoa/Cocoa.h>
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m
-c000000004BBA565B00000000000009C3
-t1270503003
-s2499
-i"DivvyController.h"
-i<QuartzCore/QuartzCore.h>
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/Divvy_Prefix.pch
-c000000004BBA51E2000000000000008D
-t1270501858
-s141
-i<Cocoa/Cocoa.h>
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/InfoPlist.strings
-c000000004BBA51E2000000000000002D
-t1270501858
-s45
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib
-c000000004BBA572E00000000000310B6
-t1270503214
-s200886
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app
-t2
-s0
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Info.plist
-t1270503227
-s880
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy
-t2
-s0
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/PkgInfo
-t1270503227
-s8
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/InfoPlist.strings
-t1270503227
-s92
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/MainMenu.nib
-t1270503228
-s39502
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/Divvy.LinkFileList
-c000000004BBA573B0000000000000161
-t1270503227
-s353
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyAppDelegate.o
-t1270503231
-s21072
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyController.o
-t1270503232
-s23680
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/main.o
-t1270503231
-s5008
-
-N/Users/jlewis/Documents/Projects/Divvy/Divvy/main.m
-c000000004BBA51E200000000000000ED
-t1270501858
-s237
-i<Cocoa/Cocoa.h>
-
-N/var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch.gch
-t1270503231
-s54212368
-
-NDivvy-Info.plist
-c000000004BBA51E200000000000003EA
-t1270501858
-s1002
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies292196027#292196027#0(0"0(0#1#0"4300885448#0"0#
-
-CCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyAppDelegate.o /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s292196031.762289
-e292196031.934017
-r1
-xCompileC
-xbuild/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyAppDelegate.o
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@71"Compile /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m292196031#292196031#0(0"0(0#0#63"/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m4300885448#1500"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-generated-files.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-own-target-headers.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-all-target-headers.hmap -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-project-headers.hmap -F/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/include -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources/x86_64 -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources -include /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch -c /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyAppDelegate.m -o /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyAppDelegate.o0#
-
-CCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyController.o /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s292196031.932950
-e292196032.100360
-r1
-xCompileC
-xbuild/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyController.o
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m292196031#292196032#0(0"0(0#0#62"/Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m4300885448#1498"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-generated-files.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-own-target-headers.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-all-target-headers.hmap -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-project-headers.hmap -F/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/include -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources/x86_64 -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources -include /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch -c /Users/jlewis/Documents/Projects/Divvy/Divvy/DivvyController.m -o /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/DivvyController.o0#
-
-CCompileC build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/main.o /Users/jlewis/Documents/Projects/Divvy/Divvy/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s292196031.760935
-e292196031.932848
-r1
-xCompileC
-xbuild/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/main.o
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/main.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@59"Compile /Users/jlewis/Documents/Projects/Divvy/Divvy/main.m292196031#292196031#0(0"0(0#0#51"/Users/jlewis/Documents/Projects/Divvy/Divvy/main.m4300885448#1476"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-generated-files.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-own-target-headers.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-all-target-headers.hmap -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-project-headers.hmap -F/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/include -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources/x86_64 -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources -include /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch -c /Users/jlewis/Documents/Projects/Divvy/Divvy/main.m -o /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/main.o0#
-
-CCompileXIB /Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib
-s292196027.878305
-e292196028.359083
-r1
-xCompileXIB
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib
-lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib292196027#292196028#0(0"0(0#0#71"/Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib4300885448#343"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/MainMenu.nib /Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/MainMenu.xib0#
-
-CCopyStringsFile /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-s292196027.877145
-e292196027.904463
-r1
-xCopyStringsFile
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj/InfoPlist.strings
-xEnglish.lproj/InfoPlist.strings
-lSLF07#2@36"Copy English.lproj/InfoPlist.strings292196027#292196027#0(0"0(0#0#76"/Users/jlewis/Documents/Projects/Divvy/Divvy/English.lproj/InfoPlist.strings4300885448#375"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Resources/English.lproj0#
-
-CLd /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy normal x86_64
-s292196032.100460
-e292196032.541931
-r0
-xLd
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy
-xnormal
-xx86_64
-oUndefined symbols:
-o  "_kCATransactionAnimationDuration", referenced from:
-o      -[DivvyController changeDestination] in DivvyController.o
-o  "_OBJC_CLASS_$_CALayer", referenced from:
-o      __objc_classrefs__DATA@0 in DivvyController.o
-o  "_CATransform3DMakeScale", referenced from:
-o      -[DivvyController changeDestination] in DivvyController.o
-o  "_CATransform3DRotate", referenced from:
-o      -[DivvyController changeDestination] in DivvyController.o
-o  "_OBJC_CLASS_$_CATransaction", referenced from:
-o      __objc_classrefs__DATA@0 in DivvyController.o
-old: symbol(s) not found
-ocollect2: ld returned 1 exit status
-lSLF07#2@92"Link /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy292196032#292196032#0(613"Undefined symbols:  "_kCATransactionAnimationDuration", referenced from:      -[DivvyController changeDestination] in DivvyController.o  "_OBJC_CLASS_$_CALayer", referenced from:      __objc_classrefs__DATA@0 in DivvyController.o  "_CATransform3DMakeScale", referenced from:      -[DivvyController changeDestination] in DivvyController.o  "_CATransform3DRotate", referenced from:      -[DivvyController changeDestination] in DivvyController.o  "_OBJC_CLASS_$_CATransaction", referenced from:      __objc_classrefs__DATA@0 in DivvyController.old: symbol(s) not foundcollect2: ld returned 1 exit status12(4@52""_kCATransactionAnimationDuration", referenced from:292196032#19#55#0(6@0"292196032#0#0#0#0#0"0(13@57"-[DivvyController changeDestination] in DivvyController.o292196032#74#64#0(6@0"292196032#0#0#0#0#0"0(4@41""_OBJC_CLASS_$_CALayer", referenced from:292196032#138#44#0(6@0"292196032#0#0#0#0#0"0(13@45"__objc_classrefs__DATA@0 in DivvyController.o292196032#182#52#0(6@0"292196032#0#0#0#0#0"0(4@43""_CATransform3DMakeScale", referenced from:292196032#234#46#0(6@0"292196032#0#0#0#0#0"0(13@57"-[DivvyController changeDestination] in DivvyController.o292196032#280#64#0(6@0"292196032#0#0#0#0#0"0(4@40""_CATransform3DRotate", referenced from:292196032#344#43#0(6@0"292196032#0#0#0#0#0"0(13@57"-[DivvyController changeDestination] in DivvyController.o292196032#387#64#0(6@0"292196032#0#0#0#0#0"0(4@47""_OBJC_CLASS_$_CATransaction", referenced from:292196032#451#50#0(6@0"292196032#0#0#0#0#0"0(13@45"__objc_classrefs__DATA@0 in DivvyController.o292196032#501#52#0(6@0"292196032#0#0#0#0#0"0(13@19"Symbol(s) not found292196032#553#24#0(6@0"292196032#0#0#0#0#0"0(13@35"Collect2: ld returned 1 exit status292196032#577#36#0(6@0"292196032#0#0#0#0#0"0(0#0#0"4300885448#562"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -F/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -filelist /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Objects-normal/x86_64/Divvy.LinkFileList -mmacosx-version-min=10.6 -framework Cocoa -o /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/MacOS/Divvy1#
-
-CProcessInfoPlistFile /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Info.plist Divvy-Info.plist
-s292196027.872933
-e292196027.877030
-r1
-xProcessInfoPlistFile
-x/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Info.plist
-xDivvy-Info.plist
-lSLF07#2@24"Process Divvy-Info.plist292196027#292196027#0(0"0(0#0#61"/Users/jlewis/Documents/Projects/Divvy/Divvy/Divvy-Info.plist4300885448#322"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    builtin-infoPlistUtility Divvy-Info.plist -genpkginfo /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app/Contents/Info.plist0#
-
-CProcessPCH /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch.gch Divvy_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s292196028.359211
-e292196031.760730
-r1
-xProcessPCH
-x/var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch.gch
-xDivvy_Prefix.pch
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@27"Precompile Divvy_Prefix.pch292196028#292196031#0(0"0(0#0#61"/Users/jlewis/Documents/Projects/Divvy/Divvy/Divvy_Prefix.pch4300885448#1378"    cd /Users/jlewis/Documents/Projects/Divvy/Divvy    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-generated-files.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-own-target-headers.hmap -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-all-target-headers.hmap -iquote /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/Divvy-project-headers.hmap -F/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/include -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources/x86_64 -I/Users/jlewis/Documents/Projects/Divvy/Divvy/build/Divvy.build/Debug/Divvy.build/DerivedSources -c /Users/jlewis/Documents/Projects/Divvy/Divvy/Divvy_Prefix.pch -o /var/folders/Zf/Zf72uE-THfSWeOjF4AOrFE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Divvy_Prefix-bvjlxaybwcowuqczdmoenmbsfdih/Divvy_Prefix.pch.gch0#
-
-CTouch /Users/jlewis/Documents/Projects/Divvy/Divvy/build/Debug/Divvy.app
-r0
-
