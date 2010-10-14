@@ -1,0 +1,7 @@
+#summary Resources for doing linear algebra quickly on CPUs and GPUs
+
+= BLAS and LAPACK =
+
+[http://www.netlib.org/blas/blast-forum/blas-report.pdf BLAS Documentation]
+
+= MAGMA =
