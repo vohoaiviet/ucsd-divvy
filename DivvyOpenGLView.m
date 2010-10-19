@@ -10,6 +10,9 @@
 #include <OpenGL/gl.h>
 
 @implementation DivvyOpenGLView
+-(void)awakeFromNib {
+}
+
 -(void)setData:(float *)newData setN:(int)newN {
 	data = newData;
 	N = newN;
@@ -27,6 +30,7 @@
 
 -(void) drawRect:(NSRect) bounds {
 	int curAssignment;
+	unsigned int D = 2;
 	float kColor[] = {
 		1.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f,
@@ -48,10 +52,11 @@
 		0.5f, 0.5f, 0.5f,
 		0.2f, 0.2f, 0.2f,
 		0.8f, 0.8f, 0.8f};
-	unsigned int D = 2;
+	
 	
 	glClearColor(0, 0, 0, 0);
-	glClear(GL_COLOR_BUFFER_BIT); // Probably only have to do this on init...
+	glClear(GL_COLOR_BUFFER_BIT);
+	glViewport(0, 0, bounds.size.width, bounds.size.height);
 
 	/*
 	glBegin(GL_LINES);
