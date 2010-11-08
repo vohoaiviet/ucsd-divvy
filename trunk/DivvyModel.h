@@ -58,8 +58,8 @@ int teardownCL();
 void assignLaunch(int *dendrite, int k, int N, int *assignment);
 void assign(int *dendrite, int line, int k, int N, int *assignment);
 
--(int *)kmeans:(int)k eig:(int)eig;
--(int *)linkage:(int)k;
+-(int *)kmeans:(int)k eig:(int)eig skew:(float)skew;
+-(int *)linkage:(int)k skew:(float)skew;
 -(int *)spectral:(int)k sigma:(float)sigma;
 -(int *)knn:(int)kappa;
 
