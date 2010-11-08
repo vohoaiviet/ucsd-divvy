@@ -20,12 +20,18 @@
 	IBOutlet NSSlider	*kSliderSpectral;
 	IBOutlet NSSlider	*kSliderLinkage;
 	IBOutlet NSSlider	*sigmaSlider;
+  
+  IBOutlet NSSlider *skewSliderkMeans;
+  IBOutlet NSSlider *skewSliderLinkage;
 	
 	IBOutlet NSTabView	*methodTabView;
 	
 	unsigned int N;
 	unsigned int k;
+  
 	float sigma;
+  float skew;
+  
 	DivvyModel *model;
 }
 
@@ -33,5 +39,6 @@
 
 -(IBAction)changeK:(id)sender;
 -(IBAction)changeSigma:(id)sender;
+-(IBAction)changeSkew:(id)sender;
 
 @end

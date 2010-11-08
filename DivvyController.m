@@ -28,6 +28,7 @@
 	
 	k = [kSliderkMeans intValue];
 	sigma = [sigmaSlider floatValue];
+  skew = [skewSliderkMeans floatValue];
 	
 	[model setData:data setN:N setD:D];
 	
@@ -47,7 +48,7 @@
 	for(int i = 0; i < N * D; i++)
 		viewData[i] = (2 * (data[i] - min)) / (max - min) - 1;
 
-	int *assignment = [model kmeans:k eig:0];
+	int *assignment = [model kmeans:k eig:0 skew:skew];
 	//int *knn = [model knn:k];
 
 	[glView setAssignment:assignment];
@@ -61,7 +62,7 @@
 	printf("Clustering...\n");
 	if([methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]] == 0) {
 		k = [kSliderkMeans intValue];
-		assignment = [model kmeans:k eig:0];
+		assignment = [model kmeans:k eig:0 skew:skew];
 		//knn = [model knn:k];
 		//[glView setKNN:knn];
 	}
@@ -71,7 +72,7 @@
 	}
 	else {
 		k = [kSliderLinkage intValue];
-		assignment = [model linkage:k];
+		assignment = [model linkage:k skew:skew];
 	}
 
 	[glView setAssignment:assignment];
@@ -87,5 +88,11 @@
 	sigma = [sender intValue];
 	[self recompute:nil];
 }
+
+-(IBAction)changeSkew:(id)sender {
+	skew = [sender floatValue];
+	[self recompute:nil];
+}
+
 
 @end

@@ -132,7 +132,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 	}
 }
 
--(int *)linkage:(int)k {
+-(int *)linkage:(int)k skew:(float)skew {
     int i, j, l, m, o;
 	
 	int *tracker = (int *)malloc(sizeof(int) * N);
@@ -211,16 +211,22 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 						for(i = m * blockSize; i < (m + 1) * blockSize - (m == o ? 1 : 0); i++)
 							for(j = (m == o ? i + 1 : o * blockSize); j < (o + 1) * blockSize; j++)
 							{
-								cblas_scopy(D, &data[j * D], 1, copy, 1);				
-								cblas_saxpy(D, -1, &data[i * D], 1, copy, 1);
-								norm = cblas_snrm2(D, copy, 1);
-								distance[j * (j - 1) / 2 + i] = norm;
+								//cblas_scopy(D, &data[j * D], 1, copy, 1);				
+								//cblas_saxpy(D, -1, &data[i * D], 1, copy, 1);
+								//norm = cblas_snrm2(D, copy, 1);
+								//distance[j * (j - 1) / 2 + i] = norm;
+                for(int z = 0; z < D; z++)
+                  if(z == 0)
+                    distance[j * (j - 1) / 2 + i] += skew * (data[j * D + z] - data[i * D + z]) * (data[j * D + z] - data[i * D + z]);
+                  else
+                    distance[j * (j - 1) / 2 + i] += (1.f - skew) * (data[j * D + z] - data[i * D + z]) * (data[j * D + z] - data[i * D + z]);
 								index[j * (j - 1) + 2 * i] = i;
 								index[j * (j - 1) + 2 * i + 1] = j;
 							}
 				free(copy);
 			}
 		}
+	
 		mend = mach_absolute_time();
 		printf("Pairwise Calc Time (Parallel):\t%1.3g\n", machcore(mend, mbeg));
 		printf("%1.3g\t%1.3g\t%1.3g\t%1.3g\n", distance[0], distance[20], distance[100], distance[500]);
@@ -270,12 +276,12 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 
 	assignLaunch(dendrite, k, N, min_index);
 	
-    free(tracker);
-    free(distance);
-    free(index);
+  free(tracker);
+  free(distance);
+  free(index);
 	free(dendrite);
 	
-    return min_index;	
+  return min_index;	
 }
 
 -(int *)spectral:(int)k sigma:(float)sigma {
@@ -341,12 +347,12 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		free(affsum);
 	}
 		
-	return [self kmeans:k eig:1];
+	return [self kmeans:k eig:1 skew:.5f];
 }
 
--(int *)kmeans:(int)k eig:(int)eig {
+-(int *)kmeans:(int)k eig:(int)eig skew:(float)skew {
 	
-	const int MAX_ITERATIONS = 10;
+	const int MAX_ITERATIONS = 50;
 	const int ACHUNK_SIZE = (int)(N / 2);
 	const int MCHUNK_SIZE = (int)(k / 2);
 	int i, j, l, m;	
@@ -382,9 +388,9 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		if(TRUE)
 		{
 			mbegA = mach_absolute_time();
-			//#pragma omp parallel private(l, m, sum, diff, min_distance)
-			//{
-			//	#pragma omp for schedule(dynamic, ACHUNK_SIZE) nowait
+			#pragma omp parallel private(l, m, sum, diff, min_distance)
+			{
+				#pragma omp for schedule(dynamic, ACHUNK_SIZE) nowait
 				for(j = 0; j < N; j++)
 				{
 					min_distance = 0xFFFFFFFF;
@@ -395,7 +401,10 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 						for(m = 0; m < D; m++)
 						{
 							diff = curData[j * D + m] - centroids[l * D + m];
-							sum += diff * diff;
+              if(m == 0)
+                sum += skew * diff * diff;
+              else
+                sum += (1.f - skew) * diff * diff;
 						}
 						
 						if(sum < min_distance)
@@ -405,7 +414,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 						}
 					}
 				}
-			//}
+			}
 			mendA = mach_absolute_time();
 			err = clEnqueueWriteBuffer(cmd_queue, min_index_mem, CL_TRUE, 0, min_index_size,
 									   (void*)min_index, 0, NULL, NULL);
@@ -423,9 +432,9 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		if(TRUE)
 		{
 			mbegM = mach_absolute_time();
-			//#pragma omp parallel private(l, m, count)
-			//{
-			//	#pragma omp for schedule(dynamic, MCHUNK_SIZE) nowait
+			#pragma omp parallel private(l, m, count)
+			{
+				#pragma omp for schedule(dynamic, MCHUNK_SIZE) nowait
 				for(j = 0; j < k; j++)
 				{
 					count = 0;
@@ -436,7 +445,10 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 						{
 							count++;
 							for(l = 0; l < D; l++)
-								centroids[j * D + l] += curData[m * D + l];
+                //if(l == 0)
+                  centroids[j * D + l] += curData[m * D + l];
+                //else
+                //  centroids[j * D + l] += (1.f - skew) * curData[m * D + l];
 						}
 					if(count != 0)
 						for(l = 0; l < D; l++)
@@ -445,7 +457,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 						for(l = 0; l < D; l++)
 							centroids[j * D + l] = curData[j * D + l];
 				}
-			//}
+			}
 			mendM = mach_absolute_time();
 			err = clEnqueueWriteBuffer(cmd_queue, centroids_mem, CL_TRUE, 0, centroids_size,
 									   (void*)centroids, 0, NULL, NULL);
