@@ -7,7 +7,6 @@
 //
 
 #import "DivvyOpenGLView.h"
-#include <OpenGL/gl.h>
 
 @implementation DivvyOpenGLView
 -(void)awakeFromNib {
@@ -51,10 +50,10 @@
 		1.0f, 1.0f, 1.0f,
 		0.5f, 0.5f, 0.5f,
 		0.2f, 0.2f, 0.2f,
-		0.8f, 0.8f, 0.8f};
+		1.0f, 1.0f, 1.0f};
 	
 	
-	glClearColor(0, 0, 0, 0);
+	//glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glViewport(0, 0, bounds.size.width, bounds.size.height);
 
@@ -71,17 +70,41 @@
     glEnd();
 	 */
     
+/*	
 	glBegin(GL_POINTS);
 	for(int i = 0; i < N; i++)
 	{
-		curAssignment = assignment[i];
+    if(assignment == NULL)
+      curAssignment = 19;
+    else
+      curAssignment = assignment[i];
 		glColor3f(kColor[curAssignment * 3], 
 				  kColor[curAssignment * 3 + 1], 
 				  kColor[curAssignment * 3 + 2]);
 		glVertex2f(data[i * D], data[i * D + 1]);
 	}
     glEnd();
+*/
+ 
+	for(int i = 0; i < N; i++)
+	{
+    if(assignment == NULL)
+      curAssignment = 19;
+    else
+      curAssignment = assignment[i];
+		glColor3f(kColor[curAssignment * 3], 
+              kColor[curAssignment * 3 + 1], 
+              kColor[curAssignment * 3 + 2]);
+    glBegin(GL_TRIANGLE_FAN);
+    
+		glVertex2f(data[i * D], data[i * D + 1]);
+    for(float j = 0.0f; j <= 2 * M_PI + .1; j += M_PI / 50)
+      glVertex2f(data[i * D] + sin(j) * .01, data[i * D + 1] + cos(j) * .01);
+    
+      glEnd();
+	}
 	
+  
 	glFlush();
 }
 

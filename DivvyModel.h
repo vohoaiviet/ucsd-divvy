@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <OpenCL/OpenCL.h>
+
 #include <stdio.h>
 #include <assert.h>
 #include <sys/sysctl.h>
@@ -20,18 +21,20 @@
 #include <vecLib/clapack.h>
 #include <omp.h>
 
+#include "distance.h"
+#include "linkage.h"
+
 
 @interface DivvyModel : NSObject {
+  int N;
+  int D;
+  int local_size;
+  float curSigma;
+  
+  float *data;
+  float *eigendata;
+  int *min_index;	
 }
-
-int N;
-int D;
-int local_size;
-float curSigma;
-
-float *data;
-float *eigendata;
-int *min_index;	
 
 cl_program program[2];
 cl_kernel kernel[2];
@@ -51,8 +54,8 @@ cl_mem data_mem, centroids_mem, min_index_mem;
 
 double machcore(uint64_t endTime, uint64_t startTime);
 char * load_program_source(const char *filename);
-int setupCL();
-int executeCL(void *return_value, int global_size, int local_size, int kern, int k);
+int setupCL(float *data, int N, int D);
+int executeCL(void *return_value, int global_size, int local_size, int kern, int k, int N, int D);
 int teardownCL();
 
 void assignLaunch(int *dendrite, int k, int N, int *assignment);
