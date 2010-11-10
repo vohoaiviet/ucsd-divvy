@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#include <OpenGL/gl.h>
+#include <math.h>
 
 @interface DivvyOpenGLView : NSOpenGLView {
 	float *data;

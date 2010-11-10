@@ -27,7 +27,6 @@
 -(void)dealloc{
 	teardownCL();
 	free(min_index);
-	free(data);
 	free(eigendata);
 	
 	[super dealloc];
@@ -35,8 +34,6 @@
 }
 
 -(void)setData:(float *)newData setN:(int)newN setD:(int)newD {
-	if(data != NULL)
-		free(data);
 	data = newData;
 	N = newN;
 	D = newD;
@@ -49,7 +46,7 @@
 	
 	if(data_mem != NULL)
 		teardownCL();
-	setupCL();
+	setupCL(data, N, D);
 }
 
 -(int *)knn:(int)kappa {
@@ -268,7 +265,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 			else if (i == b)
 				tracker[i] = -1;
 			else if ((tracker[i] != -1) && (i != a) && (i != b)) {
-				distance[akIndex] = fmax(distance[akIndex], distance[bkIndex]);
+				distance[akIndex] = fmin(distance[akIndex], distance[bkIndex]);
 				distance[bkIndex] = FLT_MAX;
 			}
 		}
@@ -424,7 +421,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		else
 		{
 			mbegA = mach_absolute_time();
-			executeCL(min_index, N, local_size, 0, k);
+			executeCL(min_index, N, local_size, 0, k, N, D);
 			mendA = mach_absolute_time();
 		}
 		
@@ -467,7 +464,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		else
 		{
 			mbegM = mach_absolute_time();
-			executeCL(NULL, k * D, local_size, 1, k);
+			executeCL(NULL, k * D, local_size, 1, k, N, D);
 			mendM = mach_absolute_time();
 		}
 		
@@ -536,7 +533,7 @@ char * load_program_source(const char *filename)
 
 #pragma mark -
 #pragma mark Main OpenCL Routine
-int setupCL()
+int setupCL(float *data, int N, int D)
 {	
 #pragma mark Device Information
 	{
@@ -626,7 +623,7 @@ int setupCL()
 	return CL_SUCCESS;
 }
 
-int executeCL(void *return_value, int global_size, int local_size, int kern, int k)
+int executeCL(void *return_value, int global_size, int local_size, int kern, int k, int N, int D)
 {
 	
 #pragma mark Kernel Arguments
