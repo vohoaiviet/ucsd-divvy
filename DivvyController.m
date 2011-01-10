@@ -28,19 +28,23 @@
   safe = FALSE;
     
   curTrial = 1;
-	
-  [self nextTrial:nil];
-	
+  forceMethod = 1;
+  startup = 1;	
+  
 	k = [kSliderkMeans intValue];
 	sigma = [sigmaSlider floatValue];
   skew = [skewSliderkMeans floatValue];
 	
 	int *assignment = NULL;
 	//int *knn = [model knn:k];
-
+  
+  [self nextTrial:nil];
+  
 	[glView setAssignment:assignment];
 	//[glView setKNN:knn];
 	[glView setData:viewData setN:N];
+  
+  startup = 0;
 }
 
 -(IBAction)recompute:(id)sender {
@@ -67,7 +71,9 @@
   fclose(detail);
 	[glView setAssignment:assignment];
 	printf("Drawing...\n");
-	[glView drawRect:[glView bounds]];
+  
+  if(startup == 0)
+    [glView drawRect:[glView bounds]];
 }
 
 -(IBAction)changeK:(id)sender {
@@ -85,7 +91,18 @@
 }
 
 -(IBAction)nextTrial:(id)sender {
-  if(curTrial == 11) {
+  if([satisfiedPopUpButton indexOfSelectedItem] == 0 && curTrial > 1)
+  {
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:@"You must indicate your satisfaction with the grouping."];
+    //[alert setInformativeText:@"Deleted records cannot be restored."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:[glView window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    return;
+  }
+  
+  if(curTrial == 11 && forceMethod == 1) {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:@"From here on out, after choosing A or B, you cannot change your choice until the next trial."];
@@ -103,23 +120,34 @@
   if(curTrial > 1 && curTrial < 22 && ([methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]] != 1))
   {
     summary = fopen("summary.txt", "a");
-    fprintf(summary, "%d\t%d\t%d\t%f\n", trialOrder[curTrial - 2], (int)[methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]], k, skew);
+    fprintf(summary, "%d\t%d\t%d\t%d\t%f\n", trialOrder[curTrial - 2], (int)[methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]], (int)[satisfiedPopUpButton indexOfSelectedItem], k, skew);
     fclose(summary);
   }    
   if(curTrial <= 20 && ([methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]] != 1 || sender == nil)) {
-    [self loadData:trialOrder[curTrial++ - 1]];
-    [model setData:data setN:N setD:D];
-    [glView setData:viewData setN:N];
-    safe = TRUE;
-    [methodTabView selectTabViewItemAtIndex:1]; // This calls recompute since you can't get in here unless it is != 1
-    safe = FALSE;
-    //if(sender != nil)
-    //  [self recompute:nil];
+    if(curTrial < 12 && forceMethod == 0) {
+      safe = TRUE;
+      [methodTabView selectTabViewItemAtIndex:2];
+      safe = FALSE;
+      forceMethod = 1;
+    } else {
+      forceMethod = 0;
+      [self loadData:trialOrder[curTrial++ - 1]];
+      [model setData:data setN:N setD:D];
+      [glView setData:viewData setN:N];
+      safe = TRUE;
+      if(curTrial < 12)
+        [methodTabView selectTabViewItemAtIndex:0]; // This calls recompute since you can't get in here unless it is != 1
+      else
+        [methodTabView selectTabViewItemAtIndex:1];
+      safe = FALSE;
+    }
   }
+  
+  [satisfiedPopUpButton selectItemAtIndex:0];
 }
 
 -(BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem {
-  if(!safe && curTrial > 11 && [methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]] != 1)
+  if(!safe && [methodTabView indexOfTabViewItem:[methodTabView selectedTabViewItem]] != 1)
     return NO;
   else
     return YES;

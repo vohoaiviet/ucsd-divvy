@@ -21,8 +21,8 @@
 #include <vecLib/clapack.h>
 #include <omp.h>
 
-#include "distance.h"
-#include "linkage.h"
+//#include "distance.h"
+//#include "linkage.h"
 
 
 @interface DivvyModel : NSObject {
