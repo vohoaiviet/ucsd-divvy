@@ -29,12 +29,16 @@
 	IBOutlet NSSlider *skewSliderLinkage;
 	
 	IBOutlet NSTabView	*methodTabView;
+  
+  IBOutlet NSPopUpButton	*satisfiedPopUpButton;
 	
 	unsigned int N;
   unsigned int D;
 	unsigned int k;
   
   unsigned int curTrial;
+  unsigned int forceMethod;
+  unsigned int startup;
 	
 	float sigma;
 	float skew;
