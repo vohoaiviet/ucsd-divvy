@@ -2,7 +2,7 @@
 
 = SVN =
 
-For Xcode projects, add "`*`.pbxuser `*`.mode1v3 build" to the global-ignores line in ~/.subversion/config. This removes user-specific settings in the project file and build files from svn status, etc.
+For Xcode projects, add "`*`.pbxuser `*`.mode1v3 build" to the global-ignores line in ~/.subversion/config. This removes user-specific settings in the project file as well as build files from svn status, etc.
 
 After adding a repository, the initial checkout, opening the associated project, and configuring SCM, Xcode doesn't show the full SCM menu until Xcode is restarted.
 
