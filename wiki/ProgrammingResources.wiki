@@ -3,6 +3,7 @@
 === C Reference ===
 
 [http://proquest.safaribooksonline.com/1-56592-306-5/ Practical C Programming]
+[http://proquest.safaribooksonline.com/book/programming/cocoa/9780596809812 Cocoa and Objective-C: Up and Running]
 
 === Style Guides ===
 
@@ -11,3 +12,5 @@
 [http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml Google C++ Style Guide]
 
 [http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml Google Objective-C Style Guide]
+
+[http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html Apple Cocoa Coding Guidelines]
