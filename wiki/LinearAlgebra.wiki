@@ -5,3 +5,5 @@
 [http://www.netlib.org/blas/blast-forum/blas-report.pdf BLAS Documentation]
 
 = MAGMA =
+
+[http://icl.cs.utk.edu/magma/ Home page]
