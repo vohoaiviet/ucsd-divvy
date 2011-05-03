@@ -5,3 +5,7 @@
 [http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clGetDeviceInfo.html Reference for clGetDeviceInfo]
 
 [http://developer.apple.com/library/mac/#documentation/Performance/Conceptual/OpenCL_MacProgGuide/TheOpenCLWorkflow/TheOpenCLWorkflow.html Section on querying available compute devices]
+
+=== Notes ===
+
+So fare we've noticed that clGetDeviceInfo often returns incorrect CPU and GPU details. OpenCL issue?
