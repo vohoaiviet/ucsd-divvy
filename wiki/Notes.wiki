@@ -1,0 +1,11 @@
+#summary Things that we've learned the hard way and don't want to forget.
+
+= SVN =
+
+For Xcode projects, "add *.pbxuser *.mode1v3 build" to the global-ignores line in ~/.subversion/config. This removes user-specific settings in the project file and build files from svn status, etc.
+
+After adding a repository, the initial checkout, opening the associated project, and configuring SCM, Xcode doesn't show the full SCM menu until Xcode is restarted.
+
+= OpenCL =
+
+clGetDeviceInfo often returns incorrect CPU and GPU details, such as CPU count & GPU memory stats.
