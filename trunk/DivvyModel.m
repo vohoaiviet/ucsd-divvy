@@ -139,7 +139,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 	
 	int blockSize;
 	
-	float norm;
+//	float norm;
 	float min;
 	int hold;
 	int a, b, akIndex, bkIndex;
@@ -199,7 +199,7 @@ void assign(int *dendrite, int line, int k, int N, int *assignment) {
 		}
 		else {
 			blockSize = 10;
-			#pragma omp parallel private(i, j, l, o, norm)
+			#pragma omp parallel private(i, j, l, o) //, norm)
 			{
 				float *copy = (float *)malloc(sizeof(float) * D);
 				#pragma omp for nowait

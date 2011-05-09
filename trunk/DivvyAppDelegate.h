@@ -8,10 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DivvyAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow *window;
-}
+@interface DivvyAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+
+- (IBAction)saveAction:sender;
 
 @end
