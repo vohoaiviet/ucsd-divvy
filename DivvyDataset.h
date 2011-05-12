@@ -16,17 +16,9 @@
 @property (nonatomic, retain) NSNumber * d;
 @property (nonatomic, retain) NSData * data;
 @property (nonatomic, retain) NSNumber * n;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * uniqueID;
-@property (nonatomic, retain) NSSet * pointVisualizer;
+
++ (id) datasetInDefaultContextWithFile:(NSString *)file;
 
 @end
-
-
-@interface DivvyDataset (CoreDataGeneratedAccessors)
-- (void)addPointVisualizerObject:(NSManagedObject *)value;
-- (void)removePointVisualizerObject:(NSManagedObject *)value;
-- (void)addPointVisualizer:(NSSet *)value;
-- (void)removePointVisualizer:(NSSet *)value;
-
-@end
-

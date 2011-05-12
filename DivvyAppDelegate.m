@@ -7,8 +7,12 @@
 //
 
 #import "DivvyAppDelegate.h"
+#import "DivvyDataset.h"
+#import "DivvyDatasetsPanel.h"
 
 @implementation DivvyAppDelegate
+
+@synthesize datasetsPanelController;
 
 @synthesize window;
 
@@ -16,8 +20,49 @@
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
 
+- (IBAction) openDatasets:(id)sender {
+  int result;
+  NSArray *fileTypes = [NSArray arrayWithObject:@"bin"];
+  NSOpenPanel *oPanel = [NSOpenPanel openPanel];
+  
+  [oPanel setAllowsMultipleSelection:YES];
+  result = [oPanel runModalForDirectory:NSHomeDirectory()
+                                   file:nil types:fileTypes];
+  if (result == NSOKButton) {
+    NSArray *filesToOpen = [oPanel filenames];
+    int i, count = [filesToOpen count];
+    for (i=0; i<count; i++) {
+      NSString *aFile = [filesToOpen objectAtIndex:i];
+      [DivvyDataset datasetInDefaultContextWithFile:aFile];
+    }
+  }
+}
+
+- (IBAction) editDatasets:(id)sender {
+  NSInteger selectedSegment = [sender selectedSegment];
+  NSInteger clickedSegmentTag = [[sender cell] tagForSegment:selectedSegment];
+  
+  if (clickedSegmentTag == 0)
+    [self openDatasets:sender];
+  else {
+    NSTableView *datasetsTable = [datasetsPanelController datasetsTable];
+    NSInteger selection = datasetsTable.selectedRow;
+    NSArray *datasets = [[datasetsPanelController datasetsArrayController] arrangedObjects];
+    
+    DivvyDataset *selectedDataset = [datasets objectAtIndex:selection];
+    [managedObjectContext deleteObject:selectedDataset];
+  }
+
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Insert code here to initialize your application 
+	// Insert code here to initialize your application
+  DivvyDatasetsPanel *panelController;
+  panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetPanel"];
+  [panelController showWindow:nil];
+  
+  self.datasetsPanelController = panelController;
+  [panelController release];
 }
 
 /**
