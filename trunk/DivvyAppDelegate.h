@@ -22,7 +22,6 @@
 
 - (IBAction)saveAction:sender;
 - (IBAction)openDatasets:sender;
-
-- (IBAction)editDatasets:sender;
+- (IBAction)closeDatasets:sender;
 
 @end

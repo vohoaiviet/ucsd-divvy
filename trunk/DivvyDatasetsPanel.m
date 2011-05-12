@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "DivvyAppDelegate.h"
 #import "DivvyDatasetsPanel.h"
 #import "DivvyDataset.h"
 
@@ -16,6 +17,16 @@
 
 - (void) loadWindow {
   [super loadWindow];
+}
+
+- (IBAction) editDatasets:(id)sender {
+  NSInteger selectedSegment = [sender selectedSegment];
+  NSInteger clickedSegmentTag = [[sender cell] tagForSegment:selectedSegment];
+  
+  if (clickedSegmentTag == 0) // Add button
+    [[NSApp delegate] openDatasets:sender];
+  else // Remove button
+    [[NSApp delegate] closeDatasets:sender];
 }
 
 - (void) dealloc {

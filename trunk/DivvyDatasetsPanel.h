@@ -14,4 +14,6 @@
 @property (retain) IBOutlet NSTableView *datasetsTable;
 @property (retain) IBOutlet NSArrayController *datasetsArrayController;
 
+-(IBAction)editDatasets:sender;
+
 @end
