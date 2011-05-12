@@ -20,16 +20,25 @@
 @dynamic title;
 @dynamic uniqueID;
 
-+ (id) datasetInDefaultContextWithFile:(NSString *)file {
++ (id) datasetInDefaultContextWithFile:(NSString *)path {
   NSManagedObjectContext * context = [[NSApp delegate] managedObjectContext];
   
   DivvyDataset * newItem;
   newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Dataset"
                                           inManagedObjectContext:context];
   
-  newItem.title = [file lastPathComponent];
-  newItem.n = [NSNumber numberWithUnsignedInt:100];
-  newItem.d = [NSNumber numberWithUnsignedInt:5];
+  newItem.title = [path lastPathComponent];
+  
+  newItem.data = [NSData dataWithContentsOfFile:path];
+  
+  unsigned int n;
+  unsigned int d;
+  
+  [newItem.data getBytes:&n range:NSMakeRange(0, 4)];
+  [newItem.data getBytes:&d range:NSMakeRange(4, 4)];
+  
+  newItem.n = [NSNumber numberWithUnsignedInt:n];
+  newItem.d = [NSNumber numberWithUnsignedInt:d];
 
   return newItem;
 }

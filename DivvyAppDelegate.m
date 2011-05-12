@@ -38,27 +38,21 @@
   }
 }
 
-- (IBAction) editDatasets:(id)sender {
-  NSInteger selectedSegment = [sender selectedSegment];
-  NSInteger clickedSegmentTag = [[sender cell] tagForSegment:selectedSegment];
+- (IBAction) closeDatasets:(id)sender {
+  DivvyDatasetsPanel *panelController = self.datasetsPanelController;
+  NSTableView *datasetsTable = [panelController datasetsTable];
+  NSIndexSet *selections = datasetsTable.selectedRowIndexes;
+  NSArray *datasets = [[datasetsPanelController datasetsArrayController] arrangedObjects];
   
-  if (clickedSegmentTag == 0)
-    [self openDatasets:sender];
-  else {
-    NSTableView *datasetsTable = [datasetsPanelController datasetsTable];
-    NSInteger selection = datasetsTable.selectedRow;
-    NSArray *datasets = [[datasetsPanelController datasetsArrayController] arrangedObjects];
-    
-    DivvyDataset *selectedDataset = [datasets objectAtIndex:selection];
-    [managedObjectContext deleteObject:selectedDataset];
-  }
-
+  NSArray *selectedDatasets = [datasets objectsAtIndexes:selections];
+  for (id dataset in selectedDatasets)
+    [managedObjectContext deleteObject:dataset];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Insert code here to initialize your application
+  
   DivvyDatasetsPanel *panelController;
-  panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetPanel"];
+  panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
   [panelController showWindow:nil];
   
   self.datasetsPanelController = panelController;
@@ -252,6 +246,8 @@
  */
 
 - (void)dealloc {
+  
+  [datasetsPanelController release];
   
   [window release];
   [managedObjectContext release];
