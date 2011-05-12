@@ -8,7 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DivvyDatasetsPanel;
+
 @interface DivvyAppDelegate : NSObject <NSApplicationDelegate>
+
+@property (retain) DivvyDatasetsPanel *datasetsPanelController;
 
 @property (assign) IBOutlet NSWindow *window;
 
@@ -17,5 +21,8 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)saveAction:sender;
+- (IBAction)openDatasets:sender;
+
+- (IBAction)editDatasets:sender;
 
 @end

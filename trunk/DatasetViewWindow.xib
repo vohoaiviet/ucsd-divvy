@@ -232,8 +232,8 @@
 							<bool key="animates">NO</bool>
 							<bool key="allowsReordering">NO</bool>
 							<bool key="allowsMultipleSelection">YES</bool>
-							<float key="cellWidth">100</float>
-							<float key="cellHeight">100</float>
+							<float key="cellWidth">297</float>
+							<float key="cellHeight">297</float>
 							<reference key="dataSource"/>
 							<reference key="delegate"/>
 						</object>
@@ -317,9 +317,9 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{482, 371}, {1024, 768}}</string>
+					<string>{{113, 179}, {1024, 768}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{482, 371}, {1024, 768}}</string>
+					<string>{{113, 179}, {1024, 768}}</string>
 					<integer value="1"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>

@@ -15,13 +15,14 @@
 		D72E1D0E116FC6F8000D3D95 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */; };
 		D7764EF413788C9A00F7F49F /* Divvy_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */; };
 		D7764F2F1378B40400F7F49F /* ClustererPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F2E1378B40400F7F49F /* ClustererPanel.xib */; };
-		D7764F371378B65A00F7F49F /* DatasetPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F361378B65A00F7F49F /* DatasetPanel.xib */; };
+		D7764F371378B65A00F7F49F /* DatasetsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F361378B65A00F7F49F /* DatasetsPanel.xib */; };
 		D7764F46137B4A9900F7F49F /* DivvyDataset.m in Sources */ = {isa = PBXBuildFile; fileRef = D7764F45137B4A9900F7F49F /* DivvyDataset.m */; };
 		D7764F5D137B4CDE00F7F49F /* DatasetViewWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F5C137B4CDE00F7F49F /* DatasetViewWindow.xib */; };
 		D77DF784118636A2009C1946 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77DF783118636A2009C1946 /* Accelerate.framework */; };
 		D7B78C68116A8D2100D363A2 /* DivvyController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B78C67116A8D2100D363A2 /* DivvyController.m */; };
 		D7B78CBE116A8FEE00D363A2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B78CBD116A8FEE00D363A2 /* QuartzCore.framework */; };
 		D7BC2DB211790CE700A37DF2 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BC2DB111790CE700A37DF2 /* OpenCL.framework */; };
+		D7DD89C4137C70A400DADC35 /* DivvyDatasetsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD89C3137C70A400DADC35 /* DivvyDatasetsPanel.m */; };
 		D7EF07981173C5BB007FFCD1 /* DivvyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EF07971173C5BB007FFCD1 /* DivvyModel.m */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +42,7 @@
 		D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Divvy_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		D7764F2E1378B40400F7F49F /* ClustererPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClustererPanel.xib; sourceTree = "<group>"; };
-		D7764F361378B65A00F7F49F /* DatasetPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatasetPanel.xib; sourceTree = "<group>"; };
+		D7764F361378B65A00F7F49F /* DatasetsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatasetsPanel.xib; sourceTree = "<group>"; };
 		D7764F44137B4A9900F7F49F /* DivvyDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDataset.h; sourceTree = "<group>"; };
 		D7764F45137B4A9900F7F49F /* DivvyDataset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDataset.m; sourceTree = "<group>"; };
 		D7764F5C137B4CDE00F7F49F /* DatasetViewWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatasetViewWindow.xib; sourceTree = "<group>"; };
@@ -52,6 +53,8 @@
 		D7BC2CFA1178FF2000A37DF2 /* assignment.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = assignment.cl; sourceTree = "<group>"; };
 		D7BC2CFB1178FF2000A37DF2 /* move.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = move.cl; sourceTree = "<group>"; };
 		D7BC2DB111790CE700A37DF2 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+		D7DD89C2137C70A400DADC35 /* DivvyDatasetsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDatasetsPanel.h; sourceTree = "<group>"; };
+		D7DD89C3137C70A400DADC35 /* DivvyDatasetsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDatasetsPanel.m; sourceTree = "<group>"; };
 		D7EF07961173C5BB007FFCD1 /* DivvyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyModel.h; sourceTree = "<group>"; };
 		D7EF07971173C5BB007FFCD1 /* DivvyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +78,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D7DD89C2137C70A400DADC35 /* DivvyDatasetsPanel.h */,
+				D7DD89C3137C70A400DADC35 /* DivvyDatasetsPanel.m */,
 				D7764F44137B4A9900F7F49F /* DivvyDataset.h */,
 				D7764F45137B4A9900F7F49F /* DivvyDataset.m */,
 				256AC3D80F4B6AC300CF3369 /* DivvyAppDelegate.h */,
@@ -148,7 +153,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				D7764F2E1378B40400F7F49F /* ClustererPanel.xib */,
-				D7764F361378B65A00F7F49F /* DatasetPanel.xib */,
+				D7764F361378B65A00F7F49F /* DatasetsPanel.xib */,
 				D7764F5C137B4CDE00F7F49F /* DatasetViewWindow.xib */,
 			);
 			name = Resources;
@@ -224,7 +229,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				D7764F2F1378B40400F7F49F /* ClustererPanel.xib in Resources */,
-				D7764F371378B65A00F7F49F /* DatasetPanel.xib in Resources */,
+				D7764F371378B65A00F7F49F /* DatasetsPanel.xib in Resources */,
 				D7764F5D137B4CDE00F7F49F /* DatasetViewWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +247,7 @@
 				D7EF07981173C5BB007FFCD1 /* DivvyModel.m in Sources */,
 				D7764EF413788C9A00F7F49F /* Divvy_DataModel.xcdatamodel in Sources */,
 				D7764F46137B4A9900F7F49F /* DivvyDataset.m in Sources */,
+				D7DD89C4137C70A400DADC35 /* DivvyDatasetsPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

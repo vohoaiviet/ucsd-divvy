@@ -12,4 +12,6 @@
 
 }
 
+- (void)addDatasetWithPath:(NSString *)path;
+
 @end
