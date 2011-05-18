@@ -8,13 +8,17 @@
 
 #import "DivvyAppDelegate.h"
 #import "DivvyDataset.h"
+#import "DivvyClustererPanel.h"
 #import "DivvyDatasetsPanel.h"
+#import "DivvyDatasetWindow.h"
 
 @implementation DivvyAppDelegate
 
+@synthesize clustererPanelController;
 @synthesize datasetsPanelController;
+@synthesize datasetWindowController;
 
-@synthesize window;
+@synthesize selectedDataset;
 
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
@@ -45,18 +49,32 @@
   NSArray *datasets = [[datasetsPanelController datasetsArrayController] arrangedObjects];
   
   NSArray *selectedDatasets = [datasets objectsAtIndexes:selections];
-  for (id dataset in selectedDatasets)
+  for (id dataset in selectedDatasets) {
+    for (id datasetView in [[dataset datasetViews] allObjects])
+      [managedObjectContext deleteObject:datasetView];
     [managedObjectContext deleteObject:dataset];
+  }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   
   DivvyDatasetsPanel *panelController;
   panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
-  [panelController showWindow:nil];
-  
+  [panelController showWindow:nil];  
   self.datasetsPanelController = panelController;
   [panelController release];
+
+  DivvyClustererPanel *panelController2;
+  panelController2 = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"ClustererPanel"];
+  [panelController2 showWindow:nil];  
+  self.clustererPanelController = panelController2;
+  [panelController2 release];  
+  
+  DivvyDatasetWindow *windowController;
+  windowController = [[DivvyDatasetWindow alloc] initWithWindowNibName:@"DatasetWindow"];
+  [windowController showWindow:nil];  
+  self.datasetWindowController = windowController;
+  [windowController release];
 }
 
 /**
@@ -247,13 +265,13 @@
 
 - (void)dealloc {
   
-  [datasetsPanelController release];
-  
-  [window release];
   [managedObjectContext release];
   [persistentStoreCoordinator release];
   [managedObjectModel release];
 	
+  [datasetsPanelController release];
+  [datasetWindowController release];
+  
   [super dealloc];
 }
 

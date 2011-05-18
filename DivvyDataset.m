@@ -8,10 +8,6 @@
 
 #import "DivvyDataset.h"
 
-@interface DivvyDataset ()
-- (void) generateUniqueID;
-@end
-
 @implementation DivvyDataset 
 
 @dynamic d;
@@ -19,6 +15,8 @@
 @dynamic n;
 @dynamic title;
 @dynamic uniqueID;
+
+@dynamic datasetViews;
 
 + (id) datasetInDefaultContextWithFile:(NSString *)path {
   NSManagedObjectContext * context = [[NSApp delegate] managedObjectContext];
@@ -41,16 +39,6 @@
   newItem.d = [NSNumber numberWithUnsignedInt:d];
 
   return newItem;
-}
-
-- (void) awakeFromInsert {
-  [self generateUniqueID];
-}
-
-- (void) generateUniqueID {
-  NSString * unqiueID = self.uniqueID;
-  if(unqiueID != nil) return;
-  self.uniqueID = [[NSProcessInfo processInfo] globallyUniqueString];
 }
 
 - (void) dealloc {

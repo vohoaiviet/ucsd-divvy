@@ -29,6 +29,22 @@
     [[NSApp delegate] closeDatasets:sender];
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+  
+  NSTableView* table     = [notification object];
+  NSInteger    selection = table.selectedRow;
+  
+  if(selection == -1) {
+    [[NSApp delegate] setValue:nil forKey:@"selectedDataset"];
+  }
+  else {
+    NSArray *datasets = [self.datasetsArrayController arrangedObjects];
+    
+    DivvyDataset *dataset = [datasets objectAtIndex:selection];
+    [[NSApp delegate] setValue:dataset forKey:@"selectedDataset"];
+  }
+}
+
 - (void) dealloc {
   
   [self.datasetsTable release];

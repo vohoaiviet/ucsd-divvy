@@ -8,13 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DivvyDataset;
+@class DivvyClustererPanel;
 @class DivvyDatasetsPanel;
+@class DivvyDatasetWindow;
 
 @interface DivvyAppDelegate : NSObject <NSApplicationDelegate>
 
+@property (retain) DivvyClustererPanel *clustererPanelController;
 @property (retain) DivvyDatasetsPanel *datasetsPanelController;
+@property (retain) DivvyDatasetWindow *datasetWindowController;
 
-@property (assign) IBOutlet NSWindow *window;
+@property (retain) DivvyDataset *selectedDataset;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
