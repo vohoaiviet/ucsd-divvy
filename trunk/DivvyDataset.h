@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * uniqueID;
 
+@property (nonatomic, retain) NSSet * datasetViews;
+
 + (id) datasetInDefaultContextWithFile:(NSString *)file;
 
 @end
