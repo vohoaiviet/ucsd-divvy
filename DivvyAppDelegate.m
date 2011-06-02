@@ -72,6 +72,10 @@
   return defaultPointVisualizer;
 }
 
+- (NSArray *)defaultSortDescriptors {
+  return [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]];
+}
+
 - (IBAction) openDatasets:(id)sender {
   int result;
   NSArray *fileTypes = [NSArray arrayWithObject:@"bin"];

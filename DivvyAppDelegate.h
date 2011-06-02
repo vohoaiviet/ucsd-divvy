@@ -33,4 +33,6 @@
 - (IBAction)openDatasets:sender;
 - (IBAction)closeDatasets:sender;
 
+- (NSArray *)defaultSortDescriptors;
+
 @end
