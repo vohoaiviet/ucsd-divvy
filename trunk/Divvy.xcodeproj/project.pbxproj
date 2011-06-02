@@ -23,6 +23,10 @@
 		D77DF784118636A2009C1946 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77DF783118636A2009C1946 /* Accelerate.framework */; };
 		D7B1944013981BF200BF1EC7 /* DivvyPointVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1943F13981BF200BF1EC7 /* DivvyPointVisualizer.m */; };
 		D7B1946913981F5B00BF1EC7 /* DivvyZhu.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */; };
+		D7B1956C13983CDA00BF1EC7 /* DivvyClusterer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1956B13983CDA00BF1EC7 /* DivvyClusterer.m */; };
+		D7B1956F13983D4C00BF1EC7 /* DivvyKMeans.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */; };
+		D7B1957513983DC200BF1EC7 /* DivvyReducer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1957413983DC200BF1EC7 /* DivvyReducer.m */; };
+		D7B1957813983DE500BF1EC7 /* DivvyPCA.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1957713983DE500BF1EC7 /* DivvyPCA.m */; };
 		D7B78C68116A8D2100D363A2 /* DivvyController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B78C67116A8D2100D363A2 /* DivvyController.m */; };
 		D7B78CBE116A8FEE00D363A2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B78CBD116A8FEE00D363A2 /* QuartzCore.framework */; };
 		D7BC2DB211790CE700A37DF2 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BC2DB111790CE700A37DF2 /* OpenCL.framework */; };
@@ -63,6 +67,14 @@
 		D7B1943F13981BF200BF1EC7 /* DivvyPointVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyPointVisualizer.m; sourceTree = "<group>"; };
 		D7B1946713981F5B00BF1EC7 /* DivvyZhu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyZhu.h; sourceTree = "<group>"; };
 		D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyZhu.m; sourceTree = "<group>"; };
+		D7B1956A13983CDA00BF1EC7 /* DivvyClusterer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyClusterer.h; sourceTree = "<group>"; };
+		D7B1956B13983CDA00BF1EC7 /* DivvyClusterer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyClusterer.m; sourceTree = "<group>"; };
+		D7B1956D13983D4C00BF1EC7 /* DivvyKMeans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyKMeans.h; sourceTree = "<group>"; };
+		D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyKMeans.m; sourceTree = "<group>"; };
+		D7B1957313983DC200BF1EC7 /* DivvyReducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyReducer.h; sourceTree = "<group>"; };
+		D7B1957413983DC200BF1EC7 /* DivvyReducer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyReducer.m; sourceTree = "<group>"; };
+		D7B1957613983DE500BF1EC7 /* DivvyPCA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyPCA.h; sourceTree = "<group>"; };
+		D7B1957713983DE500BF1EC7 /* DivvyPCA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyPCA.m; sourceTree = "<group>"; };
 		D7B78C66116A8D2100D363A2 /* DivvyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyController.h; sourceTree = "<group>"; };
 		D7B78C67116A8D2100D363A2 /* DivvyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyController.m; sourceTree = "<group>"; };
 		D7B78CBD116A8FEE00D363A2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -122,6 +134,10 @@
 				D7EF07971173C5BB007FFCD1 /* DivvyModel.m */,
 				D7B1943E13981BF200BF1EC7 /* DivvyPointVisualizer.h */,
 				D7B1943F13981BF200BF1EC7 /* DivvyPointVisualizer.m */,
+				D7B1956A13983CDA00BF1EC7 /* DivvyClusterer.h */,
+				D7B1956B13983CDA00BF1EC7 /* DivvyClusterer.m */,
+				D7B1957313983DC200BF1EC7 /* DivvyReducer.h */,
+				D7B1957413983DC200BF1EC7 /* DivvyReducer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -211,6 +227,10 @@
 				D7716141138C409500C70C36 /* DivvyScatterPlot.m */,
 				D7B1946713981F5B00BF1EC7 /* DivvyZhu.h */,
 				D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */,
+				D7B1956D13983D4C00BF1EC7 /* DivvyKMeans.h */,
+				D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */,
+				D7B1957613983DE500BF1EC7 /* DivvyPCA.h */,
+				D7B1957713983DE500BF1EC7 /* DivvyPCA.m */,
 			);
 			name = Implementers;
 			sourceTree = "<group>";
@@ -302,6 +322,10 @@
 				D7716142138C409500C70C36 /* DivvyScatterPlot.m in Sources */,
 				D7B1944013981BF200BF1EC7 /* DivvyPointVisualizer.m in Sources */,
 				D7B1946913981F5B00BF1EC7 /* DivvyZhu.m in Sources */,
+				D7B1956C13983CDA00BF1EC7 /* DivvyClusterer.m in Sources */,
+				D7B1956F13983D4C00BF1EC7 /* DivvyKMeans.m in Sources */,
+				D7B1957513983DC200BF1EC7 /* DivvyReducer.m in Sources */,
+				D7B1957813983DE500BF1EC7 /* DivvyPCA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +392,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
