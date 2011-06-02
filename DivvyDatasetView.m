@@ -8,9 +8,9 @@
 
 #import "DivvyDatasetView.h"
 #import "DivvyDataset.h"
+#import "DivvyDatasetVisualizer.h"
+#import "DivvyPointVisualizer.h"
 #import <Quartz/Quartz.h>
-
-#include "stdlib.h"
 
 @interface DivvyDatasetView ()
 @property (retain) NSImage *renderedImage;
@@ -22,10 +22,13 @@
 @dynamic uniqueID;
 
 @dynamic dataset;
+@dynamic datasetVisualizer;
+@dynamic pointVisualizer;
 
 @synthesize renderedImage;
 
-+ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset {
++ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
+                        withDatasetVisualizer:(DivvyDatasetVisualizer *)datasetVisualizer {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
   
@@ -34,58 +37,28 @@
                                           inManagedObjectContext:context];
   
   newItem.dataset = dataset;
+  newItem.datasetVisualizer = datasetVisualizer;
+  newItem.pointVisualizer = nil;
   
   return newItem;
 }
 
-- (NSImage*) image {
+- (NSImage *) image {
   
   if ( self.renderedImage ) return self.renderedImage;
   
   NSSize      size  = NSMakeSize( 1024, 1024 );
   NSImage*    image = [[NSImage alloc] initWithSize:size];
   
-  [image lockFocus];
+  [[self datasetVisualizer] drawImage: image
+                          withDataset:[self dataset]];
   
-  NSColor* black = [NSColor blackColor];
-  NSColor* white = [NSColor whiteColor];
-  
-  NSRect oval;
-  NSBezierPath *ovalPath;
-  float x, y, ovalSize;
-  ovalSize = 20.0f;
-  
-  // get the view geometry and fill the background.
-  
-  NSRect bounds = image.alignmentRect;    
-  [black set];
-  NSRectFill ( bounds );
-  
-  bounds = NSInsetRect(bounds, ovalSize, ovalSize);
-  
-  for(int i = 0; i < 200; i++) {
-    x = (float)rand() / RAND_MAX;
-    y = (float)rand() / RAND_MAX;
+  if([self pointVisualizer])
+    [[self pointVisualizer] drawImage: image
+                          withDataset:[self dataset]];
     
-    x = bounds.size.width * x;
-    y = bounds.size.height * y;
-    
-    oval.origin.x = x;
-    oval.origin.y = y;
-    oval.size.width = ovalSize;
-    oval.size.height = ovalSize;
-    
-    ovalPath = [NSBezierPath bezierPathWithOvalInRect:oval];
-    
-    [white set];
-    [ovalPath fill];
-  }
-  
-  [image unlockFocus];
   
   self.renderedImage = image;
-  
-  [image release];
   
   return self.renderedImage;
 }

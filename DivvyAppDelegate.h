@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @class DivvyDataset;
+@class DivvyDatasetVisualizer;
+@class DivvyPointVisualizer;
 @class DivvyClustererPanel;
 @class DivvyDatasetsPanel;
 @class DivvyDatasetWindow;
@@ -20,6 +22,8 @@
 @property (retain) DivvyDatasetWindow *datasetWindowController;
 
 @property (retain) DivvyDataset *selectedDataset;
+@property (retain) DivvyDatasetVisualizer *defaultDatasetVisualizer;
+@property (retain) DivvyPointVisualizer *defaultPointVisualizer;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
