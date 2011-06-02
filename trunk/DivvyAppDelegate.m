@@ -11,6 +11,10 @@
 #import "DivvyClustererPanel.h"
 #import "DivvyDatasetsPanel.h"
 #import "DivvyDatasetWindow.h"
+#import "DivvyDatasetVisualizer.h"
+#import "DivvyScatterPlot.h"
+#import "DivvyPointVisualizer.h"
+#import "DivvyZhu.h"
 
 @implementation DivvyAppDelegate
 
@@ -19,10 +23,54 @@
 @synthesize datasetWindowController;
 
 @synthesize selectedDataset;
+@synthesize defaultDatasetVisualizer;
+@synthesize defaultPointVisualizer;
 
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
+
+- (DivvyDatasetVisualizer *)defaultDatasetVisualizer {
+  if (defaultDatasetVisualizer) return defaultDatasetVisualizer;
+  
+  NSManagedObjectContext *moc = [self managedObjectContext];
+  NSEntityDescription *entityDescription = [NSEntityDescription
+                                            entityForName:@"ScatterPlot" inManagedObjectContext:moc];
+  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+  [request setEntity:entityDescription];
+  
+  NSError *error = nil;
+  NSArray *array = [moc executeFetchRequest:request error:&error];
+  if (array == nil || array.count == 0) {
+    self.defaultDatasetVisualizer = [DivvyScatterPlot scatterPlotInDefaultContext];
+  }
+  else {
+    self.defaultDatasetVisualizer = (DivvyDatasetVisualizer *)[array objectAtIndex:0];
+  }
+  
+  return defaultDatasetVisualizer;
+}
+
+- (DivvyPointVisualizer *)defaultPointVisualizer {
+  if (defaultPointVisualizer) return defaultPointVisualizer;
+  
+  NSManagedObjectContext *moc = [self managedObjectContext];
+  NSEntityDescription *entityDescription = [NSEntityDescription
+                                            entityForName:@"Zhu" inManagedObjectContext:moc];
+  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+  [request setEntity:entityDescription];
+  
+  NSError *error = nil;
+  NSArray *array = [moc executeFetchRequest:request error:&error];
+  if (array == nil || array.count == 0) {
+    self.defaultPointVisualizer = [DivvyZhu zhuInDefaultContext];
+  }
+  else {
+    self.defaultPointVisualizer = (DivvyPointVisualizer *)[array objectAtIndex:0];
+  }
+  
+  return defaultPointVisualizer;
+}
 
 - (IBAction) openDatasets:(id)sender {
   int result;

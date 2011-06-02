@@ -289,7 +289,7 @@
 											<bool key="cellsHaveTitle">NO</bool>
 											<bool key="outlinesCells">NO</bool>
 											<bool key="shadowsCells">YES</bool>
-											<bool key="animates">NO</bool>
+											<bool key="animates">YES</bool>
 											<bool key="allowsReordering">NO</bool>
 											<bool key="allowsMultipleSelection">YES</bool>
 											<float key="cellWidth">212</float>
@@ -626,9 +626,9 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{-2496, 35}, {1024, 768}}</string>
+					<string>{{0, 628}, {1024, 768}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{-2496, 35}, {1024, 768}}</string>
+					<string>{{0, 628}, {1024, 768}}</string>
 					<integer value="1"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>

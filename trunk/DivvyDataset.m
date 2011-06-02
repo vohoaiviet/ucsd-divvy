@@ -14,7 +14,6 @@
 @dynamic data;
 @dynamic n;
 @dynamic title;
-@dynamic uniqueID;
 
 @dynamic datasetViews;
 
@@ -25,7 +24,7 @@
   newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Dataset"
                                           inManagedObjectContext:context];
   
-  newItem.title = [path lastPathComponent];
+  newItem.title = [[path lastPathComponent] stringByDeletingPathExtension];
   
   newItem.data = [NSData dataWithContentsOfFile:path];
   
@@ -39,6 +38,10 @@
   newItem.d = [NSNumber numberWithUnsignedInt:d];
 
   return newItem;
+}
+
+- (float *) floatData {
+  return (float *)(self.data.bytes + 8); // Offset by 8 bytes to avoid header info
 }
 
 - (void) dealloc {

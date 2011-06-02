@@ -41,7 +41,7 @@
 			<object class="NSWindowTemplate" id="5762896">
 				<int key="NSWindowStyleMask">23</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{1795, 157}, {276, 315}}</string>
+				<string key="NSWindowRect">{{1814, 865}, {276, 315}}</string>
 				<int key="NSWTFlags">-1535639552</int>
 				<string key="NSWindowTitle">k-means</string>
 				<string key="NSWindowClass">NSPanel</string>
@@ -812,9 +812,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{-1435, 494}, {276, 315}}</string>
+					<string>{{1814, 865}, {276, 315}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{-1435, 494}, {276, 315}}</string>
+					<string>{{1814, 865}, {276, 315}}</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

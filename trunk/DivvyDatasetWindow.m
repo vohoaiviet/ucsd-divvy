@@ -9,7 +9,10 @@
 #import "DivvyDatasetWindow.h"
 #import "DivvyDataset.h"
 #import "DivvyDatasetView.h"
+#import "DivvyDatasetVisualizer.h"
 #import "DivvyAppDelegate.h"
+
+#import "DivvyZhu.h" // Temp hack
 
 
 @implementation DivvyDatasetWindow
@@ -23,7 +26,10 @@
 
 - (IBAction)addDatasetViewAction:(id)sender {
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
-  [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset];
+  DivvyDatasetVisualizer *datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
+  DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
+                                                              withDatasetVisualizer:datasetVisualizer];
+  [view setPointVisualizer:[[NSApp delegate] defaultPointVisualizer]];
 }
 
 @end
