@@ -21,10 +21,13 @@
 @property (retain) DivvyDataset *dataset;
 @property (retain) DivvyDatasetVisualizer *datasetVisualizer;
 @property (retain) DivvyPointVisualizer *pointVisualizer;
+@property (retain) NSData *assignment;
+@property (retain) NSData *reducedData;
+@property (retain) NSData *exemplarList;
 
 @property (readonly) NSImage *image;
 
 + (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
-                               withDatasetVisualizer:(DivvyDatasetVisualizer *)datasetVisualizer;
+                            datasetVisualizer:(DivvyDatasetVisualizer *)datasetVisualizer;
 
 @end

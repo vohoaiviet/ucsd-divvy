@@ -23,9 +23,10 @@
 }
 
 - (void) drawImage:(NSImage *) image 
-       withDataset:(DivvyDataset *)dataset {
+       reducedData:(NSData *)reducedData
+           dataset:(DivvyDataset *)dataset {
   
-  float *data = [dataset floatData];
+  float *data = (float *)[reducedData bytes];
   unsigned int n = [[dataset n] unsignedIntValue];
 
   [image lockFocus];
@@ -36,7 +37,7 @@
   NSRect rect;
 
   float x, y, rectSize;
-  rectSize = 3.0f;
+  rectSize = 5.0f;
 
   // get the view geometry and fill the background.
 
@@ -46,30 +47,15 @@
 
   bounds = NSInsetRect(bounds, rectSize, rectSize);
 
-
-  // Some temp code to make sure things draw in bounds, in the future calculate
-  // this just once
-  float minX, minY, maxX, maxY;
-  minX = minY = FLT_MAX;
-  maxX = maxY = FLT_MIN;
-  for(int i = 0; i < n; i++) {
-    x = data[i * 2];
-    y = data[i * 2 + 1];
-
-    if(x < minX) minX = x;
-    if(x > maxX) maxX = x;
-    if(y < minY) minY = y;
-    if(y > maxY) maxY = y;
-  }
-
   [white set];
   rect.size.width = rectSize;
   rect.size.height = rectSize;
 
   for(int i = 0; i < n; i++) {
-    x = (data[i * 2] - minX) / (maxX - minX);
-    y = (data[i * 2 + 1] - minY) / (maxY - minY);
+    x = data[i * 2];
+    y = data[i * 2 + 1];
 
+    // x and y are guaranteed to be between 0 and 1
     x = bounds.size.width * x;
     y = bounds.size.height * y;
 

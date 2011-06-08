@@ -14,6 +14,8 @@
 @interface DivvyPointVisualizer : NSManagedObject
 
 - (void) drawImage:(NSImage *) image
-       withDataset:(DivvyDataset *)dataset;
+       reducedData:(NSData *)reducedData
+      exemplarList:(NSData *)exemplarList
+           dataset:(DivvyDataset *)dataset;
 
 @end

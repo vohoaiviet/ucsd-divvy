@@ -265,6 +265,10 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
   
+  // Stops a bunch of CoreGraphics errors from the binding between the dataset window
+  // title and the selected dataset title. There's probably a better way to fix them though.
+  self.selectedDataset = nil;
+  
   if (!managedObjectContext) return NSTerminateNow;
   
   if (![managedObjectContext commitEditing]) {
@@ -320,8 +324,9 @@
   [managedObjectContext release];
   [persistentStoreCoordinator release];
   [managedObjectModel release];
-	
+  
   [datasetsPanelController release];
+  [clustererPanelController release];
   [datasetWindowController release];
   
   [super dealloc];
