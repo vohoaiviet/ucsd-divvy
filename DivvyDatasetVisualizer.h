@@ -13,6 +13,7 @@
 @interface DivvyDatasetVisualizer : NSManagedObject
 
 - (void) drawImage:(NSImage *) image
-             withDataset:(DivvyDataset *)dataset;
+       reducedData:(NSData *)reducedData
+           dataset:(DivvyDataset *)dataset;
 
 @end

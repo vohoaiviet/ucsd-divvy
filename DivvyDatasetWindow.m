@@ -28,7 +28,7 @@
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
   DivvyDatasetVisualizer *datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
   DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
-                                                              withDatasetVisualizer:datasetVisualizer];
+                                                                  datasetVisualizer:datasetVisualizer];
   [view setPointVisualizer:[[NSApp delegate] defaultPointVisualizer]];
 }
 

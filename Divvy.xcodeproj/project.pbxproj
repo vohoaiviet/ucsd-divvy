@@ -176,6 +176,8 @@
 		29B97314FDCFA39411CA2CEA /* Divvy */ = {
 			isa = PBXGroup;
 			children = (
+				D7B6E3E1139840610023D426 /* C Implementers */,
+				D7B6E3E01398404E0023D426 /* OpenCL Implementers */,
 				D771613B138C3FCA00C70C36 /* Implementers */,
 				D7764EEE13788C3100F7F49F /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -190,8 +192,6 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D7BC2CFA1178FF2000A37DF2 /* assignment.cl */,
-				D7BC2CFB1178FF2000A37DF2 /* move.cl */,
 				256AC3F00F4B6AF500CF3369 /* Divvy_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -241,6 +241,22 @@
 				D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		D7B6E3E01398404E0023D426 /* OpenCL Implementers */ = {
+			isa = PBXGroup;
+			children = (
+				D7BC2CFA1178FF2000A37DF2 /* assignment.cl */,
+				D7BC2CFB1178FF2000A37DF2 /* move.cl */,
+			);
+			name = "OpenCL Implementers";
+			sourceTree = "<group>";
+		};
+		D7B6E3E1139840610023D426 /* C Implementers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "C Implementers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
