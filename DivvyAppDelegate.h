@@ -11,6 +11,7 @@
 @class DivvyDataset;
 @class DivvyDatasetVisualizer;
 @class DivvyPointVisualizer;
+@class DivvyClusterer;
 @class DivvyClustererPanel;
 @class DivvyDatasetsPanel;
 @class DivvyDatasetWindow;
@@ -24,6 +25,7 @@
 @property (retain) DivvyDataset *selectedDataset;
 @property (retain) DivvyDatasetVisualizer *defaultDatasetVisualizer;
 @property (retain) DivvyPointVisualizer *defaultPointVisualizer;
+@property (retain) DivvyClusterer *defaultClusterer;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

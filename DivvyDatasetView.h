@@ -9,6 +9,7 @@
 @class DivvyDataset;
 @class DivvyDatasetVisualizer;
 @class DivvyPointVisualizer;
+@class DivvyClusterer;
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
@@ -21,6 +22,7 @@
 @property (retain) DivvyDataset *dataset;
 @property (retain) DivvyDatasetVisualizer *datasetVisualizer;
 @property (retain) DivvyPointVisualizer *pointVisualizer;
+@property (retain) DivvyClusterer *clusterer;
 @property (retain) NSData *assignment;
 @property (retain) NSData *reducedData;
 @property (retain) NSData *exemplarList;

@@ -13,6 +13,7 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D72E1D0E116FC6F8000D3D95 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */; };
+		D76454F113A6A333000B4038 /* kmeans.c in Sources */ = {isa = PBXBuildFile; fileRef = D76454F013A6A333000B4038 /* kmeans.c */; };
 		D7716126138C3D1200C70C36 /* DivvyDatasetVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7716125138C3D1200C70C36 /* DivvyDatasetVisualizer.m */; };
 		D7716142138C409500C70C36 /* DivvyScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = D7716141138C409500C70C36 /* DivvyScatterPlot.m */; };
 		D7764EF413788C9A00F7F49F /* Divvy_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */; };
@@ -52,6 +53,8 @@
 		8D1107310486CEB800E47090 /* Divvy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Divvy-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Divvy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Divvy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		D76454EF13A6A333000B4038 /* kmeans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kmeans.h; sourceTree = "<group>"; };
+		D76454F013A6A333000B4038 /* kmeans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kmeans.c; sourceTree = "<group>"; };
 		D7716124138C3D1200C70C36 /* DivvyDatasetVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDatasetVisualizer.h; sourceTree = "<group>"; };
 		D7716125138C3D1200C70C36 /* DivvyDatasetVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDatasetVisualizer.m; sourceTree = "<group>"; };
 		D7716140138C409500C70C36 /* DivvyScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyScatterPlot.h; sourceTree = "<group>"; };
@@ -255,6 +258,8 @@
 		D7B6E3E1139840610023D426 /* C Implementers */ = {
 			isa = PBXGroup;
 			children = (
+				D76454EF13A6A333000B4038 /* kmeans.h */,
+				D76454F013A6A333000B4038 /* kmeans.c */,
 			);
 			name = "C Implementers";
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				D7B1956F13983D4C00BF1EC7 /* DivvyKMeans.m in Sources */,
 				D7B1957513983DC200BF1EC7 /* DivvyReducer.m in Sources */,
 				D7B1957813983DE500BF1EC7 /* DivvyPCA.m in Sources */,
+				D76454F113A6A333000B4038 /* kmeans.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

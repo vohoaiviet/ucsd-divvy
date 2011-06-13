@@ -30,6 +30,7 @@
   DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
                                                                   datasetVisualizer:datasetVisualizer];
   [view setPointVisualizer:[[NSApp delegate] defaultPointVisualizer]];
+  [view setClusterer:[[NSApp delegate] defaultClusterer]];
 }
 
 @end
