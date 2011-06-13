@@ -9,7 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "DivvyClusterer.h"
 
-
 @interface DivvyKMeans : DivvyClusterer
+
++ (id) kMeansInDefaultContext;
 
 @end

@@ -15,6 +15,8 @@
 #import "DivvyScatterPlot.h"
 #import "DivvyPointVisualizer.h"
 #import "DivvyZhu.h"
+#import "DivvyClusterer.h"
+#import "DivvyKMeans.h"
 
 @implementation DivvyAppDelegate
 
@@ -25,6 +27,7 @@
 @synthesize selectedDataset;
 @synthesize defaultDatasetVisualizer;
 @synthesize defaultPointVisualizer;
+@synthesize defaultClusterer;
 
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
@@ -70,6 +73,27 @@
   }
   
   return defaultPointVisualizer;
+}
+
+- (DivvyClusterer *)defaultClusterer {
+  if (defaultClusterer) return defaultClusterer;
+  
+  NSManagedObjectContext *moc = [self managedObjectContext];
+  NSEntityDescription *entityDescription = [NSEntityDescription
+                                            entityForName:@"KMeans" inManagedObjectContext:moc];
+  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+  [request setEntity:entityDescription];
+  
+  NSError *error = nil;
+  NSArray *array = [moc executeFetchRequest:request error:&error];
+  if (array == nil || array.count == 0) {
+    self.defaultClusterer = [DivvyKMeans kMeansInDefaultContext];
+  }
+  else {
+    self.defaultClusterer = (DivvyClusterer *)[array objectAtIndex:0];
+  }
+  
+  return defaultClusterer;
 }
 
 - (NSArray *)defaultSortDescriptors {

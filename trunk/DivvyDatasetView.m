@@ -10,6 +10,7 @@
 #import "DivvyDataset.h"
 #import "DivvyDatasetVisualizer.h"
 #import "DivvyPointVisualizer.h"
+#import "DivvyClusterer.h"
 #import <Quartz/Quartz.h>
 
 @interface DivvyDatasetView ()
@@ -24,6 +25,7 @@
 @dynamic dataset;
 @dynamic datasetVisualizer;
 @dynamic pointVisualizer;
+@dynamic clusterer;
 @dynamic assignment;
 @dynamic reducedData;
 @dynamic exemplarList;
@@ -42,6 +44,7 @@
   newItem.dataset = dataset;
   newItem.datasetVisualizer = datasetVisualizer;
   newItem.pointVisualizer = nil;
+  newItem.clusterer = nil;
   
   unsigned int n = [[dataset n] unsignedIntValue];
   unsigned int d = [[dataset d] unsignedIntValue];
@@ -63,18 +66,23 @@
   }
   
   unsigned int numBytes = sizeof(float) * n * 2;
-  float *reduced = malloc(numBytes);
+  float *newReducedData = malloc(numBytes);
   
   for(int i = 0; i < n; i++) {
-    reduced[i * 2] = (data[i * d] - min) / (max - min);
-    reduced[i * 2 + 1] = (data[i * d + 1] - min) / (max - min);
+    newReducedData[i * 2] = (data[i * d] - min) / (max - min);
+    newReducedData[i * 2 + 1] = (data[i * d + 1] - min) / (max - min);
   }
   
-  newItem.reducedData = [NSData dataWithBytesNoCopy:reduced
+  newItem.reducedData = [NSData dataWithBytesNoCopy:newReducedData
                                              length:numBytes
                                        freeWhenDone:YES]; // Hands responsibility for freeing reduced to the NSData object
   newItem.exemplarList = nil;
-  newItem.assignment = nil;
+  
+  numBytes = sizeof(int) * n;
+  int *newAssignment = malloc(numBytes);
+  newItem.assignment = [NSData dataWithBytesNoCopy:newAssignment
+                                            length:numBytes
+                                      freeWhenDone:YES];
   
   return newItem;
 }
@@ -86,12 +94,18 @@
   NSSize      size  = NSMakeSize( 1024, 1024 );
   NSImage*    image = [[NSImage alloc] initWithSize:size];
   
-  [[self datasetVisualizer] drawImage: image
+  if([self clusterer])
+    [[self clusterer] clusterDataset:[self dataset]
+                          parameters:nil
+                          assignment:[self assignment]];
+  
+  [[self datasetVisualizer] drawImage:image
                           reducedData:[self reducedData]
-                              dataset:[self dataset]];
+                              dataset:[self dataset]
+                           assignment:[self assignment]];
   
   if([self pointVisualizer])
-    [[self pointVisualizer] drawImage: image
+    [[self pointVisualizer] drawImage:image
                           reducedData:[self reducedData]
                          exemplarList:[self exemplarList]
                               dataset:[self dataset]];

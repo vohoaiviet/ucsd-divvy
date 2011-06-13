@@ -24,15 +24,21 @@
 
 - (void) drawImage:(NSImage *) image 
        reducedData:(NSData *)reducedData
-           dataset:(DivvyDataset *)dataset {
+           dataset:(DivvyDataset *)dataset
+        assignment:(NSData *)assignment {
   
   float *data = (float *)[reducedData bytes];
+  int *cluster_assignment = (int *)[assignment bytes];
   unsigned int n = [[dataset n] unsignedIntValue];
 
   [image lockFocus];
    
   NSColor* black = [NSColor blackColor];
   NSColor* white = [NSColor whiteColor];
+  
+  NSArray* clusterColors = [[NSArray alloc] initWithObjects:[NSColor blueColor], 
+                            [NSColor redColor], [NSColor greenColor], 
+                            [NSColor yellowColor], [NSColor magentaColor], nil];
 
   NSRect rect;
 
@@ -62,6 +68,7 @@
     rect.origin.x = x;
     rect.origin.y = y;
 
+    [(NSColor *)[clusterColors objectAtIndex:cluster_assignment[i]] set];
     NSRectFill(rect); // Make this a NSRectFillListWithColors in the future
   }
 
