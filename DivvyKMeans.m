@@ -14,6 +14,10 @@
 
 @implementation DivvyKMeans
 
+@dynamic k;
+@dynamic numRestarts;
+@dynamic initCentroidsFromPointsInDataset;
+
 + (id) kMeansInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
@@ -26,13 +30,12 @@
 }
 
 - (void) clusterDataset:(DivvyDataset *)dataset
-             parameters:(NSArray *)parameters
              assignment:(NSData *)assignment {
   
   kmeans([dataset floatData], 
          [[dataset n] unsignedIntValue], 
          [[dataset d] unsignedIntValue], 
-         5, // Temp
+         [[self k] unsignedIntValue],
          (int *)[assignment bytes]);
 }
 

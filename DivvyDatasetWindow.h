@@ -17,4 +17,6 @@
 
 - (IBAction)addDatasetViewAction:sender;
 
+- (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser;
+
 @end

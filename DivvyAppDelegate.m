@@ -25,6 +25,8 @@
 @synthesize datasetWindowController;
 
 @synthesize selectedDataset;
+@synthesize selectedDatasetView;
+
 @synthesize defaultDatasetVisualizer;
 @synthesize defaultPointVisualizer;
 @synthesize defaultClusterer;
@@ -32,6 +34,12 @@
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
+
+
+- (void) clustererChanged {
+  [[self selectedDatasetView] clustererChanged];
+  [[[self datasetWindowController] datasetViewsBrowser] reloadData];
+}
 
 - (DivvyDatasetVisualizer *)defaultDatasetVisualizer {
   if (defaultDatasetVisualizer) return defaultDatasetVisualizer;
@@ -76,24 +84,7 @@
 }
 
 - (DivvyClusterer *)defaultClusterer {
-  if (defaultClusterer) return defaultClusterer;
-  
-  NSManagedObjectContext *moc = [self managedObjectContext];
-  NSEntityDescription *entityDescription = [NSEntityDescription
-                                            entityForName:@"KMeans" inManagedObjectContext:moc];
-  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-  [request setEntity:entityDescription];
-  
-  NSError *error = nil;
-  NSArray *array = [moc executeFetchRequest:request error:&error];
-  if (array == nil || array.count == 0) {
-    self.defaultClusterer = [DivvyKMeans kMeansInDefaultContext];
-  }
-  else {
-    self.defaultClusterer = (DivvyClusterer *)[array objectAtIndex:0];
-  }
-  
-  return defaultClusterer;
+  return [DivvyKMeans kMeansInDefaultContext];
 }
 
 - (NSArray *)defaultSortDescriptors {
@@ -141,7 +132,7 @@
   [panelController release];
 
   DivvyClustererPanel *panelController2;
-  panelController2 = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"ClustererPanel"];
+  panelController2 = [[DivvyClustererPanel alloc] initWithWindowNibName:@"ClustererPanel"];
   [panelController2 showWindow:nil];  
   self.clustererPanelController = panelController2;
   [panelController2 release];  

@@ -21,6 +21,7 @@
 @implementation DivvyDatasetView
 
 @dynamic uniqueID;
+@dynamic version;
 
 @dynamic dataset;
 @dynamic datasetVisualizer;
@@ -87,6 +88,13 @@
   return newItem;
 }
 
+- (void) clustererChanged {
+  self.renderedImage = nil;
+  NSNumber *newVersion = [NSNumber numberWithInt:[[self version] intValue] + 1];
+  self.version = nil;
+  self.version = newVersion;
+}
+
 - (NSImage *) image {
   
   if ( self.renderedImage ) return self.renderedImage;
@@ -96,7 +104,6 @@
   
   if([self clusterer])
     [[self clusterer] clusterDataset:[self dataset]
-                          parameters:nil
                           assignment:[self assignment]];
   
   [[self datasetVisualizer] drawImage:image
@@ -147,6 +154,10 @@
 
 - (id) imageRepresentation {
   return self.image;
+}
+
+- (NSUInteger) imageVersion {
+  return [[self version] unsignedIntValue];
 }
 
 #pragma mark -
