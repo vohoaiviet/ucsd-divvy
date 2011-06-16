@@ -12,7 +12,6 @@
 @implementation DivvyClusterer
 
 - (void) clusterDataset:(DivvyDataset *)dataset
-             parameters:(NSArray *)parameters
              assignment:(NSData *)assignment {
   // Abstract method
 }

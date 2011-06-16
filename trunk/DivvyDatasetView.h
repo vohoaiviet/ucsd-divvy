@@ -18,6 +18,7 @@
 @interface DivvyDatasetView : NSManagedObject
 
 @property (retain) NSString *uniqueID;
+@property (retain) NSNumber *version;
 
 @property (retain) DivvyDataset *dataset;
 @property (retain) DivvyDatasetVisualizer *datasetVisualizer;
@@ -31,5 +32,7 @@
 
 + (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
                             datasetVisualizer:(DivvyDatasetVisualizer *)datasetVisualizer;
+
+- (void) clustererChanged;
 
 @end

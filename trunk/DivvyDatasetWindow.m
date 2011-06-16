@@ -33,4 +33,18 @@
   [view setClusterer:[[NSApp delegate] defaultClusterer]];
 }
 
+- (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser {
+  NSIndexSet *selectionIndexes = [aBrowser selectionIndexes];
+
+  if(selectionIndexes.count == 0) {
+    [[NSApp delegate] setValue:nil forKey:@"selectedDatasetView"];
+  }
+  else {
+    NSArray *datasetViews = [self.datasetViewsArrayController arrangedObjects];
+    
+    DivvyDatasetView *datasetView = [datasetViews objectAtIndex:[selectionIndexes lastIndex]];
+    [[NSApp delegate] setValue:datasetView forKey:@"selectedDatasetView"];
+  }
+}
+
 @end

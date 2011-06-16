@@ -7,8 +7,12 @@
 //
 
 #import "DivvyClustererPanel.h"
-
+#import "DivvyAppDelegate.h"
 
 @implementation DivvyClustererPanel
+
+-(IBAction) changeK:(id)sender {
+  [(DivvyAppDelegate *)[NSApp delegate] clustererChanged];
+}
 
 @end

@@ -38,7 +38,10 @@
   
   NSArray* clusterColors = [[NSArray alloc] initWithObjects:[NSColor blueColor], 
                             [NSColor redColor], [NSColor greenColor], 
-                            [NSColor yellowColor], [NSColor magentaColor], nil];
+                            [NSColor yellowColor], [NSColor magentaColor],
+                            [NSColor brownColor], [NSColor grayColor],
+                            [NSColor orangeColor], [NSColor cyanColor],
+                            [NSColor purpleColor], [NSColor whiteColor], nil];
 
   NSRect rect;
 

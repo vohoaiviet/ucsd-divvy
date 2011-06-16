@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class DivvyDataset;
+@class DivvyDatasetView;
 @class DivvyDatasetVisualizer;
 @class DivvyPointVisualizer;
 @class DivvyClusterer;
@@ -23,6 +24,8 @@
 @property (retain) DivvyDatasetWindow *datasetWindowController;
 
 @property (retain) DivvyDataset *selectedDataset;
+@property (retain) DivvyDatasetView *selectedDatasetView;
+
 @property (retain) DivvyDatasetVisualizer *defaultDatasetVisualizer;
 @property (retain) DivvyPointVisualizer *defaultPointVisualizer;
 @property (retain) DivvyClusterer *defaultClusterer;
@@ -36,5 +39,7 @@
 - (IBAction)closeDatasets:sender;
 
 - (NSArray *)defaultSortDescriptors;
+
+- (void) clustererChanged;
 
 @end

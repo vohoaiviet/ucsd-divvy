@@ -10,4 +10,7 @@
 
 
 @interface DivvyClustererPanel : NSWindowController
+
+-(IBAction) changeK:(id)sender;
+
 @end

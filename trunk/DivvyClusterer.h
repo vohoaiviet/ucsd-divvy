@@ -13,7 +13,6 @@
 @interface DivvyClusterer : NSManagedObject
 
 - (void) clusterDataset:(DivvyDataset *)dataset
-             parameters:(NSArray *)parameters
              assignment:(NSData *)assignment;
 
 @end
