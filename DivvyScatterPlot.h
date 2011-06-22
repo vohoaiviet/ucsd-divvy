@@ -10,8 +10,8 @@
 #import "DivvyDatasetVisualizer.h"
 
 
-@interface DivvyScatterPlot : DivvyDatasetVisualizer
+@interface DivvyScatterPlot : NSManagedObject <DivvyDatasetVisualizer>
 
-+ (id) scatterPlotInDefaultContext;
++ (id <DivvyDatasetVisualizer>) scatterPlotInDefaultContext;
 
 @end

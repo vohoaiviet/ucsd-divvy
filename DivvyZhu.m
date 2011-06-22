@@ -11,7 +11,7 @@
 
 @implementation DivvyZhu
 
-+ (id) zhuInDefaultContext {
++ (id <DivvyPointVisualizer>) zhuInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
   

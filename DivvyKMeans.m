@@ -18,7 +18,7 @@
 @dynamic numRestarts;
 @dynamic initCentroidsFromPointsInDataset;
 
-+ (id) kMeansInDefaultContext {
++ (id <DivvyClusterer>) kMeansInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
   

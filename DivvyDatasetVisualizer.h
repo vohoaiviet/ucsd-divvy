@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-@class DivvyDataset;
-
 #import <Cocoa/Cocoa.h>
 
-@interface DivvyDatasetVisualizer : NSManagedObject
+@class DivvyDataset;
+
+@protocol DivvyDatasetVisualizer
 
 - (void) drawImage:(NSImage *) image
        reducedData:(NSData *)reducedData

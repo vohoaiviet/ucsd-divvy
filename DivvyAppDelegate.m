@@ -41,7 +41,7 @@
   [[[self datasetWindowController] datasetViewsBrowser] reloadData];
 }
 
-- (DivvyDatasetVisualizer *)defaultDatasetVisualizer {
+- (id <DivvyDatasetVisualizer>)defaultDatasetVisualizer {
   if (defaultDatasetVisualizer) return defaultDatasetVisualizer;
   
   NSManagedObjectContext *moc = [self managedObjectContext];
@@ -56,13 +56,13 @@
     self.defaultDatasetVisualizer = [DivvyScatterPlot scatterPlotInDefaultContext];
   }
   else {
-    self.defaultDatasetVisualizer = (DivvyDatasetVisualizer *)[array objectAtIndex:0];
+    self.defaultDatasetVisualizer = (id <DivvyDatasetVisualizer>)[array objectAtIndex:0];
   }
   
   return defaultDatasetVisualizer;
 }
 
-- (DivvyPointVisualizer *)defaultPointVisualizer {
+- (id <DivvyPointVisualizer>)defaultPointVisualizer {
   if (defaultPointVisualizer) return defaultPointVisualizer;
   
   NSManagedObjectContext *moc = [self managedObjectContext];
@@ -77,13 +77,13 @@
     self.defaultPointVisualizer = [DivvyZhu zhuInDefaultContext];
   }
   else {
-    self.defaultPointVisualizer = (DivvyPointVisualizer *)[array objectAtIndex:0];
+    self.defaultPointVisualizer = (id <DivvyPointVisualizer>)[array objectAtIndex:0];
   }
   
   return defaultPointVisualizer;
 }
 
-- (DivvyClusterer *)defaultClusterer {
+- (id <DivvyClusterer>)defaultClusterer {
   return [DivvyKMeans kMeansInDefaultContext];
 }
 

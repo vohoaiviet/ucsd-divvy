@@ -8,7 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DivvyDataset;
 
-@interface DivvyReducer : NSManagedObject
+@protocol DivvyReducer
+
+- (void) reduceDataset:(DivvyDataset *)dataset
+             reducedData:(NSData *)reducedData;
 
 @end

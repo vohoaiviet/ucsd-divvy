@@ -2,7 +2,7 @@
 //  DivvyClusterer.h
 //  Divvy
 //
-//  Created by Joshua Lewis on 6/2/11.
+//  Created by Joshua Lewis on 6/22/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @class DivvyDataset;
 
-@interface DivvyClusterer : NSManagedObject
+@protocol DivvyClusterer
 
 - (void) clusterDataset:(DivvyDataset *)dataset
              assignment:(NSData *)assignment;

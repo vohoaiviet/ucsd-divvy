@@ -8,9 +8,11 @@
 
 #import "DivvyDatasetView.h"
 #import "DivvyDataset.h"
+
+#import "DivvyClusterer.h"
 #import "DivvyDatasetVisualizer.h"
 #import "DivvyPointVisualizer.h"
-#import "DivvyClusterer.h"
+
 #import <Quartz/Quartz.h>
 
 @interface DivvyDatasetView ()
@@ -34,7 +36,7 @@
 @synthesize renderedImage;
 
 + (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
-                            datasetVisualizer:(DivvyDatasetVisualizer *)datasetVisualizer {
+                            datasetVisualizer:(id <DivvyDatasetVisualizer>)datasetVisualizer {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
   

@@ -11,7 +11,7 @@
 
 @implementation DivvyScatterPlot
 
-+ (id) scatterPlotInDefaultContext {
++ (id <DivvyDatasetVisualizer>) scatterPlotInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
   

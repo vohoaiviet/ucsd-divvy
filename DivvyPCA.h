@@ -10,6 +10,6 @@
 #import "DivvyReducer.h"
 
 
-@interface DivvyPCA : DivvyReducer
+@interface DivvyPCA : NSManagedObject <DivvyReducer>
 
 @end
