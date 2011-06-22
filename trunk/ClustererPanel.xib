@@ -130,13 +130,13 @@
 						<object class="NSTextField" id="587273800">
 							<reference key="NSNextResponder" ref="329074452"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{119, 218}, {38, 17}}</string>
+							<string key="NSFrame">{{111, 216}, {54, 17}}</string>
 							<reference key="NSSuperview" ref="329074452"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="21409802">
 								<int key="NSCellFlags">68288064</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">Label</string>
+								<int key="NSCellFlags2">138413056</int>
+								<string key="NSContents">k</string>
 								<reference key="NSSupport" ref="957221856"/>
 								<reference key="NSControlView" ref="587273800"/>
 								<object class="NSColor" key="NSBackgroundColor" id="501081357">
@@ -196,13 +196,13 @@
 						<object class="NSTextField" id="801951847">
 							<reference key="NSNextResponder" ref="329074452"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{119, 131}, {38, 17}}</string>
+							<string key="NSFrame">{{111, 131}, {54, 17}}</string>
 							<reference key="NSSuperview" ref="329074452"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="243663094">
 								<int key="NSCellFlags">68288064</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">Label</string>
+								<int key="NSCellFlags2">138413056</int>
+								<string key="NSContents">r</string>
 								<reference key="NSSupport" ref="957221856"/>
 								<reference key="NSControlView" ref="801951847"/>
 								<reference key="NSBackgroundColor" ref="501081357"/>
@@ -507,11 +507,35 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">takeIntegerValueFrom:</string>
+						<reference key="source" ref="801951847"/>
+						<reference key="destination" ref="151478888"/>
+					</object>
+					<int key="connectionID">44</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">changeK:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="643056588"/>
 					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: delegate.selectedDatasetView.clusterer.k</string>
+						<reference key="source" ref="587273800"/>
+						<reference key="destination" ref="1004"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="587273800"/>
+							<reference key="NSDestination" ref="1004"/>
+							<string key="NSLabel">value: delegate.selectedDatasetView.clusterer.k</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">delegate.selectedDatasetView.clusterer.k</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">51</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -560,13 +584,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="707625159"/>
 							<reference ref="466593556"/>
 							<reference ref="151478888"/>
-							<reference ref="801951847"/>
 							<reference ref="747222485"/>
 							<reference ref="390742456"/>
 							<reference ref="892918954"/>
 							<reference ref="700760545"/>
 							<reference ref="368586614"/>
 							<reference ref="587273800"/>
+							<reference ref="801951847"/>
 						</object>
 						<reference key="parent" ref="5762896"/>
 					</object>
@@ -810,7 +834,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC7gAAw2kAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC1AAAw2kAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -824,7 +848,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC+AAAw5GAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC/gAAwxIAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
@@ -892,7 +916,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">51</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

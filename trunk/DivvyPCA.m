@@ -11,4 +11,8 @@
 
 @implementation DivvyPCA
 
+- (void) reduceDataset:(DivvyDataset *)dataset
+           reducedData:(NSData *)reducedData {
+}
+
 @end

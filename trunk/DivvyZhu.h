@@ -10,8 +10,8 @@
 #import "DivvyPointVisualizer.h"
 
 
-@interface DivvyZhu : DivvyPointVisualizer
+@interface DivvyZhu : NSManagedObject <DivvyPointVisualizer>
 
-+ (id) zhuInDefaultContext;
++ (id <DivvyPointVisualizer>) zhuInDefaultContext;
 
 @end

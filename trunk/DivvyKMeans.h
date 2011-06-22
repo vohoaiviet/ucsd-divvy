@@ -9,13 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "DivvyClusterer.h"
 
-@interface DivvyKMeans : DivvyClusterer
+@interface DivvyKMeans : NSManagedObject <DivvyClusterer>
 
 // Core Data Accessors
 @property (nonatomic, retain) NSNumber *k;
 @property (nonatomic, retain) NSNumber *numRestarts;
 @property (nonatomic, retain) NSNumber *initCentroidsFromPointsInDataset;
 
-+ (id) kMeansInDefaultContext;
++ (id <DivvyClusterer>) kMeansInDefaultContext;
 
 @end
