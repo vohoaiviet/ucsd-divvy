@@ -9,3 +9,7 @@ After adding a repository, the initial checkout, opening the associated project,
 = OpenCL =
 
 clGetDeviceInfo often returns incorrect CPU and GPU details, such as CPU count & GPU memory stats.
+
+= Xcode =
+
+C source in a separate bundle/plugin target blows up by default. For now we're including Divvy_Prefix.pch in the DivvyPlugin framework and using that as the precompiled header for all bundles. Alternatively one can mark the c file as objc as described in [http://lists.apple.com/archives/xcode-users/2009/Mar/msg00199.html this thread].
