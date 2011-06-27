@@ -26,12 +26,19 @@
 @dynamic version;
 
 @dynamic dataset;
-@dynamic datasetVisualizer;
-@dynamic pointVisualizer;
-@dynamic clusterer;
+
+@dynamic datasetVisualizerID;
+@dynamic pointVisualizerID;
+@dynamic clustererID;
+@dynamic reducerID;
+
 @dynamic assignment;
 @dynamic reducedData;
 @dynamic exemplarList;
+
+@synthesize datasetVisualizer;
+@synthesize pointVisualizer;
+@synthesize clusterer;
 
 @synthesize renderedImage;
 
@@ -45,9 +52,15 @@
                                           inManagedObjectContext:context];
   
   newItem.dataset = dataset;
+  
   newItem.datasetVisualizer = datasetVisualizer;
+  newItem.datasetVisualizerID = [datasetVisualizer uniqueID];
+  
   newItem.pointVisualizer = nil;
+  newItem.pointVisualizerID = nil;
+  
   newItem.clusterer = nil;
+  newItem.clustererID = nil;
   
   unsigned int n = [[dataset n] unsignedIntValue];
   unsigned int d = [[dataset d] unsignedIntValue];
@@ -82,7 +95,7 @@
   newItem.exemplarList = nil;
   
   numBytes = sizeof(int) * n;
-  int *newAssignment = malloc(numBytes);
+  int *newAssignment = calloc(numBytes, sizeof(int));
   newItem.assignment = [NSData dataWithBytesNoCopy:newAssignment
                                             length:numBytes
                                       freeWhenDone:YES];

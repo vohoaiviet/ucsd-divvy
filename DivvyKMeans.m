@@ -14,20 +14,10 @@
 
 @implementation DivvyKMeans
 
+@dynamic uniqueID;
 @dynamic k;
 @dynamic numRestarts;
 @dynamic initCentroidsFromPointsInDataset;
-
-+ (id <DivvyClusterer>) kMeansInDefaultContext {
-  
-  NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
-  
-  DivvyKMeans *newItem;    
-  newItem = [NSEntityDescription insertNewObjectForEntityForName:@"KMeans"
-                                          inManagedObjectContext:context];
-  
-  return newItem;
-}
 
 - (void) clusterDataset:(DivvyDataset *)dataset
              assignment:(NSData *)assignment {

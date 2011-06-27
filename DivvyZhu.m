@@ -11,6 +11,10 @@
 
 @implementation DivvyZhu
 
+@dynamic uniqueID;
+
+@dynamic lineWidth;
+
 + (id <DivvyPointVisualizer>) zhuInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
@@ -79,6 +83,5 @@
   
   [image unlockFocus];
 }
-
 
 @end

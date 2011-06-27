@@ -10,7 +10,7 @@
 
 @class DivvyDataset;
 @class DivvyDatasetView;
-@class DivvyClustererPanel;
+@class DivvyDatasetViewPanel;
 @class DivvyDatasetsPanel;
 @class DivvyDatasetWindow;
 
@@ -20,7 +20,7 @@
 
 @interface DivvyAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (retain) DivvyClustererPanel *clustererPanelController;
+@property (retain) DivvyDatasetViewPanel *datasetViewPanelController;
 @property (retain) DivvyDatasetsPanel *datasetsPanelController;
 @property (retain) DivvyDatasetWindow *datasetWindowController;
 
@@ -41,6 +41,9 @@
 
 - (NSArray *)defaultSortDescriptors;
 
+- (void) datasetVisualizerChanged;
+- (void) pointVisualizerChanged;
 - (void) clustererChanged;
+- (void) reducerChanged;
 
 @end

@@ -11,6 +11,12 @@
 
 @implementation DivvyPCA
 
+@dynamic uniqueID;
+
+@dynamic firstAxis;
+@dynamic secondAxis;
+@dynamic rotatedData;
+
 - (void) reduceDataset:(DivvyDataset *)dataset
            reducedData:(NSData *)reducedData {
 }

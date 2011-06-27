@@ -17,18 +17,23 @@
 
 @interface DivvyDatasetView : NSManagedObject
 
-@property (retain) NSString *uniqueID;
-@property (retain) NSNumber *version;
+@property (nonatomic, retain) NSString *uniqueID;
+@property (nonatomic, retain) NSNumber *version;
 
-@property (retain) DivvyDataset *dataset;
+@property (nonatomic, retain) DivvyDataset *dataset;
 
-@property (retain) id <DivvyDatasetVisualizer> datasetVisualizer;
-@property (retain) id <DivvyPointVisualizer> pointVisualizer;
-@property (retain) id <DivvyClusterer> clusterer;
+@property (nonatomic, retain) NSString *datasetVisualizerID;
+@property (nonatomic, retain) NSString *pointVisualizerID;
+@property (nonatomic, retain) NSString *clustererID;
+@property (nonatomic, retain) NSString *reducerID;
 
-@property (retain) NSData *assignment;
-@property (retain) NSData *reducedData;
-@property (retain) NSData *exemplarList;
+@property (nonatomic, retain) NSData *assignment;
+@property (nonatomic, retain) NSData *reducedData;
+@property (nonatomic, retain) NSData *exemplarList;
+
+@property (nonatomic, retain) id <DivvyDatasetVisualizer> datasetVisualizer;
+@property (nonatomic, retain) id <DivvyPointVisualizer> pointVisualizer;
+@property (nonatomic, retain) id <DivvyClusterer> clusterer;
 
 @property (readonly) NSImage *image;
 

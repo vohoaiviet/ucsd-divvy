@@ -13,26 +13,36 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D72E1D0E116FC6F8000D3D95 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */; };
-		D76454F113A6A333000B4038 /* kmeans.c in Sources */ = {isa = PBXBuildFile; fileRef = D76454F013A6A333000B4038 /* kmeans.c */; };
+		D730D24D13B527E800E01F31 /* DivvyClusterer.h in Headers */ = {isa = PBXBuildFile; fileRef = D73A292813B26AC60046EDE1 /* DivvyClusterer.h */; };
+		D730D24E13B527E800E01F31 /* DivvyDatasetVisualizer.h in Headers */ = {isa = PBXBuildFile; fileRef = D7716124138C3D1200C70C36 /* DivvyDatasetVisualizer.h */; };
+		D730D24F13B527E800E01F31 /* DivvyPointVisualizer.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B1943E13981BF200BF1EC7 /* DivvyPointVisualizer.h */; };
+		D730D25013B527E800E01F31 /* DivvyReducer.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B1957313983DC200BF1EC7 /* DivvyReducer.h */; };
+		D730D25113B527EF00E01F31 /* DivvyAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 256AC3D80F4B6AC300CF3369 /* DivvyAppDelegate.h */; };
+		D730D25313B5281E00E01F31 /* DivvyKMeans.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */; };
+		D730D25513B5281E00E01F31 /* DivvyKMeansController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD8D6B13846A7400DADC35 /* DivvyKMeansController.m */; };
+		D730D25813B5281E00E01F31 /* DivvyKMeans.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = D730D22D13B5266500E01F31 /* DivvyKMeans.xcdatamodel */; };
+		D730D27113B5287200E01F31 /* DivvyKMeans.xib in Resources */ = {isa = PBXBuildFile; fileRef = D730D27013B5287200E01F31 /* DivvyKMeans.xib */; };
+		D730D27B13B5298300E01F31 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D730D27713B5297E00E01F31 /* Cocoa.framework */; };
+		D730D28213B52AE200E01F31 /* DivvyDatasetViewPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = D730D28113B52AE200E01F31 /* DivvyDatasetViewPanel.m */; };
+		D730D28A13B52BD500E01F31 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77DF783118636A2009C1946 /* Accelerate.framework */; };
+		D730D28B13B52BE600E01F31 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BC2DB111790CE700A37DF2 /* OpenCL.framework */; };
+		D730D2E513B5307400E01F31 /* kmeans.c in Sources */ = {isa = PBXBuildFile; fileRef = D76454F013A6A333000B4038 /* kmeans.c */; };
+		D730D31313B5334C00E01F31 /* Divvy_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 256AC3F00F4B6AF500CF3369 /* Divvy_Prefix.pch */; };
 		D7716142138C409500C70C36 /* DivvyScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = D7716141138C409500C70C36 /* DivvyScatterPlot.m */; };
 		D7764EF413788C9A00F7F49F /* Divvy_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */; };
-		D7764F2F1378B40400F7F49F /* ClustererPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F2E1378B40400F7F49F /* ClustererPanel.xib */; };
+		D7764F2F1378B40400F7F49F /* DatasetViewPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F2E1378B40400F7F49F /* DatasetViewPanel.xib */; };
 		D7764F371378B65A00F7F49F /* DatasetsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F361378B65A00F7F49F /* DatasetsPanel.xib */; };
 		D7764F46137B4A9900F7F49F /* DivvyDataset.m in Sources */ = {isa = PBXBuildFile; fileRef = D7764F45137B4A9900F7F49F /* DivvyDataset.m */; };
 		D7764F5D137B4CDE00F7F49F /* DatasetWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7764F5C137B4CDE00F7F49F /* DatasetWindow.xib */; };
 		D77DF784118636A2009C1946 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77DF783118636A2009C1946 /* Accelerate.framework */; };
 		D7B1946913981F5B00BF1EC7 /* DivvyZhu.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */; };
-		D7B1956F13983D4C00BF1EC7 /* DivvyKMeans.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */; };
 		D7B1957813983DE500BF1EC7 /* DivvyPCA.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B1957713983DE500BF1EC7 /* DivvyPCA.m */; };
-		D7B78C68116A8D2100D363A2 /* DivvyController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B78C67116A8D2100D363A2 /* DivvyController.m */; };
 		D7B78CBE116A8FEE00D363A2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B78CBD116A8FEE00D363A2 /* QuartzCore.framework */; };
 		D7BC2DB211790CE700A37DF2 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BC2DB111790CE700A37DF2 /* OpenCL.framework */; };
 		D7DD89C4137C70A400DADC35 /* DivvyDatasetsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD89C3137C70A400DADC35 /* DivvyDatasetsPanel.m */; };
 		D7DD8B4F137C9A7200DADC35 /* DivvyDatasetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD8B4E137C9A7200DADC35 /* DivvyDatasetWindow.m */; };
 		D7DD8B6D137C9D6700DADC35 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DD8B6C137C9D6700DADC35 /* Quartz.framework */; };
 		D7DD8BE11381DEBA00DADC35 /* DivvyDatasetView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD8BE01381DEBA00DADC35 /* DivvyDatasetView.m */; };
-		D7DD8D6C13846A7400DADC35 /* DivvyClustererPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DD8D6B13846A7400DADC35 /* DivvyClustererPanel.m */; };
-		D7EF07981173C5BB007FFCD1 /* DivvyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EF07971173C5BB007FFCD1 /* DivvyModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,14 +59,23 @@
 		8D1107310486CEB800E47090 /* Divvy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Divvy-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Divvy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Divvy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72E1D0D116FC6F8000D3D95 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		D730D22D13B5266500E01F31 /* DivvyKMeans.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = DivvyKMeans.xcdatamodel; sourceTree = "<group>"; };
+		D730D23413B526A800E01F31 /* DivvyPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DivvyPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D730D23513B526A800E01F31 /* DivvyPlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DivvyPlugin-Info.plist"; sourceTree = "<group>"; };
+		D730D23F13B5271A00E01F31 /* DivvyKMeans.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DivvyKMeans.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D730D24013B5271A00E01F31 /* DivvyKMeans-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DivvyKMeans-Info.plist"; sourceTree = "<group>"; };
+		D730D27013B5287200E01F31 /* DivvyKMeans.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DivvyKMeans.xib; sourceTree = "<group>"; };
+		D730D27713B5297E00E01F31 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D730D28013B52AE200E01F31 /* DivvyDatasetViewPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDatasetViewPanel.h; sourceTree = "<group>"; };
+		D730D28113B52AE200E01F31 /* DivvyDatasetViewPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDatasetViewPanel.m; sourceTree = "<group>"; };
 		D73A292813B26AC60046EDE1 /* DivvyClusterer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyClusterer.h; sourceTree = "<group>"; };
 		D76454EF13A6A333000B4038 /* kmeans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kmeans.h; sourceTree = "<group>"; };
-		D76454F013A6A333000B4038 /* kmeans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kmeans.c; sourceTree = "<group>"; };
+		D76454F013A6A333000B4038 /* kmeans.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = kmeans.c; sourceTree = "<group>"; };
 		D7716124138C3D1200C70C36 /* DivvyDatasetVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDatasetVisualizer.h; sourceTree = "<group>"; };
 		D7716140138C409500C70C36 /* DivvyScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyScatterPlot.h; sourceTree = "<group>"; };
 		D7716141138C409500C70C36 /* DivvyScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyScatterPlot.m; sourceTree = "<group>"; };
 		D7764EF313788C9A00F7F49F /* Divvy_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Divvy_DataModel.xcdatamodel; sourceTree = "<group>"; };
-		D7764F2E1378B40400F7F49F /* ClustererPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClustererPanel.xib; sourceTree = "<group>"; };
+		D7764F2E1378B40400F7F49F /* DatasetViewPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatasetViewPanel.xib; sourceTree = "<group>"; };
 		D7764F361378B65A00F7F49F /* DatasetsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatasetsPanel.xib; sourceTree = "<group>"; };
 		D7764F44137B4A9900F7F49F /* DivvyDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDataset.h; sourceTree = "<group>"; };
 		D7764F45137B4A9900F7F49F /* DivvyDataset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDataset.m; sourceTree = "<group>"; };
@@ -70,8 +89,6 @@
 		D7B1957313983DC200BF1EC7 /* DivvyReducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyReducer.h; sourceTree = "<group>"; };
 		D7B1957613983DE500BF1EC7 /* DivvyPCA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyPCA.h; sourceTree = "<group>"; };
 		D7B1957713983DE500BF1EC7 /* DivvyPCA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyPCA.m; sourceTree = "<group>"; };
-		D7B78C66116A8D2100D363A2 /* DivvyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyController.h; sourceTree = "<group>"; };
-		D7B78C67116A8D2100D363A2 /* DivvyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyController.m; sourceTree = "<group>"; };
 		D7B78CBD116A8FEE00D363A2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D7BC2CFA1178FF2000A37DF2 /* assignment.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = assignment.cl; sourceTree = "<group>"; };
 		D7BC2CFB1178FF2000A37DF2 /* move.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = move.cl; sourceTree = "<group>"; };
@@ -83,10 +100,8 @@
 		D7DD8B6C137C9D6700DADC35 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		D7DD8BDF1381DEBA00DADC35 /* DivvyDatasetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyDatasetView.h; sourceTree = "<group>"; };
 		D7DD8BE01381DEBA00DADC35 /* DivvyDatasetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyDatasetView.m; sourceTree = "<group>"; };
-		D7DD8D6A13846A7400DADC35 /* DivvyClustererPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyClustererPanel.h; sourceTree = "<group>"; };
-		D7DD8D6B13846A7400DADC35 /* DivvyClustererPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyClustererPanel.m; sourceTree = "<group>"; };
-		D7EF07961173C5BB007FFCD1 /* DivvyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyModel.h; sourceTree = "<group>"; };
-		D7EF07971173C5BB007FFCD1 /* DivvyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyModel.m; sourceTree = "<group>"; };
+		D7DD8D6A13846A7400DADC35 /* DivvyKMeansController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivvyKMeansController.h; sourceTree = "<group>"; };
+		D7DD8D6B13846A7400DADC35 /* DivvyKMeansController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivvyKMeansController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,14 +118,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D730D23213B526A800E01F31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D730D23D13B5271A00E01F31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D730D28B13B52BE600E01F31 /* OpenCL.framework in Frameworks */,
+				D730D28A13B52BD500E01F31 /* Accelerate.framework in Frameworks */,
+				D730D27B13B5298300E01F31 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D7DD8D6A13846A7400DADC35 /* DivvyClustererPanel.h */,
-				D7DD8D6B13846A7400DADC35 /* DivvyClustererPanel.m */,
+				D730D28013B52AE200E01F31 /* DivvyDatasetViewPanel.h */,
+				D730D28113B52AE200E01F31 /* DivvyDatasetViewPanel.m */,
 				D7DD8BDF1381DEBA00DADC35 /* DivvyDatasetView.h */,
 				D7DD8BE01381DEBA00DADC35 /* DivvyDatasetView.m */,
 				D7DD8B4D137C9A7200DADC35 /* DivvyDatasetWindow.h */,
@@ -121,10 +153,6 @@
 				D7764F45137B4A9900F7F49F /* DivvyDataset.m */,
 				256AC3D80F4B6AC300CF3369 /* DivvyAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* DivvyAppDelegate.m */,
-				D7B78C66116A8D2100D363A2 /* DivvyController.h */,
-				D7B78C67116A8D2100D363A2 /* DivvyController.m */,
-				D7EF07961173C5BB007FFCD1 /* DivvyModel.h */,
-				D7EF07971173C5BB007FFCD1 /* DivvyModel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -145,6 +173,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D730D27713B5297E00E01F31 /* Cocoa.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
@@ -156,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* Divvy.app */,
+				D730D23413B526A800E01F31 /* DivvyPlugin.framework */,
+				D730D23F13B5271A00E01F31 /* DivvyKMeans.plugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,10 +194,11 @@
 		29B97314FDCFA39411CA2CEA /* Divvy */ = {
 			isa = PBXGroup;
 			children = (
+				D730D24C13B5278700E01F31 /* Zhu */,
+				D730D24913B5277700E01F31 /* ScatterPlot */,
+				D730D24813B5276C00E01F31 /* PCA */,
+				D730D22C13B5261700E01F31 /* KMeans */,
 				D73A292713B26A760046EDE1 /* Protocols */,
-				D7B6E3E1139840610023D426 /* C Implementers */,
-				D7B6E3E01398404E0023D426 /* OpenCL Implementers */,
-				D771613B138C3FCA00C70C36 /* Implementers */,
 				D7764EEE13788C3100F7F49F /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -189,10 +221,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7764F2E1378B40400F7F49F /* DatasetViewPanel.xib */,
 				8D1107310486CEB800E47090 /* Divvy-Info.plist */,
+				D730D23513B526A800E01F31 /* DivvyPlugin-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
-				D7764F2E1378B40400F7F49F /* ClustererPanel.xib */,
 				D7764F361378B65A00F7F49F /* DatasetsPanel.xib */,
 				D7764F5C137B4CDE00F7F49F /* DatasetWindow.xib */,
 			);
@@ -208,6 +241,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D730D22C13B5261700E01F31 /* KMeans */ = {
+			isa = PBXGroup;
+			children = (
+				D730D24013B5271A00E01F31 /* DivvyKMeans-Info.plist */,
+				D7BC2CFA1178FF2000A37DF2 /* assignment.cl */,
+				D7BC2CFB1178FF2000A37DF2 /* move.cl */,
+				D7B1956D13983D4C00BF1EC7 /* DivvyKMeans.h */,
+				D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */,
+				D7DD8D6A13846A7400DADC35 /* DivvyKMeansController.h */,
+				D7DD8D6B13846A7400DADC35 /* DivvyKMeansController.m */,
+				D76454EF13A6A333000B4038 /* kmeans.h */,
+				D76454F013A6A333000B4038 /* kmeans.c */,
+				D730D22D13B5266500E01F31 /* DivvyKMeans.xcdatamodel */,
+				D730D27013B5287200E01F31 /* DivvyKMeans.xib */,
+			);
+			name = KMeans;
+			sourceTree = "<group>";
+		};
+		D730D24813B5276C00E01F31 /* PCA */ = {
+			isa = PBXGroup;
+			children = (
+				D7B1957613983DE500BF1EC7 /* DivvyPCA.h */,
+				D7B1957713983DE500BF1EC7 /* DivvyPCA.m */,
+			);
+			name = PCA;
+			sourceTree = "<group>";
+		};
+		D730D24913B5277700E01F31 /* ScatterPlot */ = {
+			isa = PBXGroup;
+			children = (
+				D7716140138C409500C70C36 /* DivvyScatterPlot.h */,
+				D7716141138C409500C70C36 /* DivvyScatterPlot.m */,
+			);
+			name = ScatterPlot;
+			sourceTree = "<group>";
+		};
+		D730D24C13B5278700E01F31 /* Zhu */ = {
+			isa = PBXGroup;
+			children = (
+				D7B1946713981F5B00BF1EC7 /* DivvyZhu.h */,
+				D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */,
+			);
+			name = Zhu;
+			sourceTree = "<group>";
+		};
 		D73A292713B26A760046EDE1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,21 +297,6 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
-		D771613B138C3FCA00C70C36 /* Implementers */ = {
-			isa = PBXGroup;
-			children = (
-				D7716140138C409500C70C36 /* DivvyScatterPlot.h */,
-				D7716141138C409500C70C36 /* DivvyScatterPlot.m */,
-				D7B1946713981F5B00BF1EC7 /* DivvyZhu.h */,
-				D7B1946813981F5B00BF1EC7 /* DivvyZhu.m */,
-				D7B1956D13983D4C00BF1EC7 /* DivvyKMeans.h */,
-				D7B1956E13983D4C00BF1EC7 /* DivvyKMeans.m */,
-				D7B1957613983DE500BF1EC7 /* DivvyPCA.h */,
-				D7B1957713983DE500BF1EC7 /* DivvyPCA.m */,
-			);
-			name = Implementers;
-			sourceTree = "<group>";
-		};
 		D7764EEE13788C3100F7F49F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,25 +305,23 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		D7B6E3E01398404E0023D426 /* OpenCL Implementers */ = {
-			isa = PBXGroup;
-			children = (
-				D7BC2CFA1178FF2000A37DF2 /* assignment.cl */,
-				D7BC2CFB1178FF2000A37DF2 /* move.cl */,
-			);
-			name = "OpenCL Implementers";
-			sourceTree = "<group>";
-		};
-		D7B6E3E1139840610023D426 /* C Implementers */ = {
-			isa = PBXGroup;
-			children = (
-				D76454EF13A6A333000B4038 /* kmeans.h */,
-				D76454F013A6A333000B4038 /* kmeans.c */,
-			);
-			name = "C Implementers";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D730D22F13B526A800E01F31 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D730D31313B5334C00E01F31 /* Divvy_Prefix.pch in Headers */,
+				D730D25113B527EF00E01F31 /* DivvyAppDelegate.h in Headers */,
+				D730D24D13B527E800E01F31 /* DivvyClusterer.h in Headers */,
+				D730D24E13B527E800E01F31 /* DivvyDatasetVisualizer.h in Headers */,
+				D730D24F13B527E800E01F31 /* DivvyPointVisualizer.h in Headers */,
+				D730D25013B527E800E01F31 /* DivvyReducer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* Divvy */ = {
@@ -280,6 +341,41 @@
 			productName = Divvy;
 			productReference = 8D1107320486CEB800E47090 /* Divvy.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D730D23313B526A800E01F31 /* DivvyPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D730D23813B526A900E01F31 /* Build configuration list for PBXNativeTarget "DivvyPlugin" */;
+			buildPhases = (
+				D730D22F13B526A800E01F31 /* Headers */,
+				D730D23013B526A800E01F31 /* Resources */,
+				D730D23113B526A800E01F31 /* Sources */,
+				D730D23213B526A800E01F31 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DivvyPlugin;
+			productName = DivvyPlugin;
+			productReference = D730D23413B526A800E01F31 /* DivvyPlugin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D730D23E13B5271A00E01F31 /* DivvyKMeans */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D730D24413B5271A00E01F31 /* Build configuration list for PBXNativeTarget "DivvyKMeans" */;
+			buildPhases = (
+				D730D23B13B5271A00E01F31 /* Resources */,
+				D730D23C13B5271A00E01F31 /* Sources */,
+				D730D23D13B5271A00E01F31 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DivvyKMeans;
+			productName = DivvyKMeans;
+			productReference = D730D23F13B5271A00E01F31 /* DivvyKMeans.plugin */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -301,6 +397,8 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Divvy */,
+				D730D23313B526A800E01F31 /* DivvyPlugin */,
+				D730D23E13B5271A00E01F31 /* DivvyKMeans */,
 			);
 		};
 /* End PBXProject section */
@@ -312,9 +410,24 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
-				D7764F2F1378B40400F7F49F /* ClustererPanel.xib in Resources */,
+				D7764F2F1378B40400F7F49F /* DatasetViewPanel.xib in Resources */,
 				D7764F371378B65A00F7F49F /* DatasetsPanel.xib in Resources */,
 				D7764F5D137B4CDE00F7F49F /* DatasetWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D730D23013B526A800E01F31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D730D23B13B5271A00E01F31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D730D27113B5287200E01F31 /* DivvyKMeans.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,19 +440,33 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* DivvyAppDelegate.m in Sources */,
-				D7B78C68116A8D2100D363A2 /* DivvyController.m in Sources */,
-				D7EF07981173C5BB007FFCD1 /* DivvyModel.m in Sources */,
 				D7764EF413788C9A00F7F49F /* Divvy_DataModel.xcdatamodel in Sources */,
 				D7764F46137B4A9900F7F49F /* DivvyDataset.m in Sources */,
 				D7DD89C4137C70A400DADC35 /* DivvyDatasetsPanel.m in Sources */,
 				D7DD8B4F137C9A7200DADC35 /* DivvyDatasetWindow.m in Sources */,
 				D7DD8BE11381DEBA00DADC35 /* DivvyDatasetView.m in Sources */,
-				D7DD8D6C13846A7400DADC35 /* DivvyClustererPanel.m in Sources */,
 				D7716142138C409500C70C36 /* DivvyScatterPlot.m in Sources */,
 				D7B1946913981F5B00BF1EC7 /* DivvyZhu.m in Sources */,
-				D7B1956F13983D4C00BF1EC7 /* DivvyKMeans.m in Sources */,
 				D7B1957813983DE500BF1EC7 /* DivvyPCA.m in Sources */,
-				D76454F113A6A333000B4038 /* kmeans.c in Sources */,
+				D730D28213B52AE200E01F31 /* DivvyDatasetViewPanel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D730D23113B526A800E01F31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D730D23C13B5271A00E01F31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D730D25313B5281E00E01F31 /* DivvyKMeans.m in Sources */,
+				D730D25513B5281E00E01F31 /* DivvyKMeansController.m in Sources */,
+				D730D25813B5281E00E01F31 /* DivvyKMeans.xcdatamodel in Sources */,
+				D730D2E513B5307400E01F31 /* kmeans.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +505,12 @@
 				GCC_PREFIX_HEADER = Divvy_Prefix.pch;
 				INFOPLIST_FILE = "Divvy-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
 				PRODUCT_NAME = Divvy;
 			};
 			name = Debug;
@@ -406,7 +539,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
@@ -422,6 +555,110 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		D730D23613B526A900E01F31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "DivvyPlugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = DivvyPlugin;
+			};
+			name = Debug;
+		};
+		D730D23713B526A900E01F31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "DivvyPlugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = DivvyPlugin;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D730D24213B5271A00E01F31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Divvy_Prefix.pch;
+				INFOPLIST_FILE = "DivvyKMeans-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = DivvyKMeans;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		D730D24313B5271A00E01F31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "DivvyKMeans-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = DivvyKMeans;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -442,6 +679,24 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D730D23813B526A900E01F31 /* Build configuration list for PBXNativeTarget "DivvyPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D730D23613B526A900E01F31 /* Debug */,
+				D730D23713B526A900E01F31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D730D24413B5271A00E01F31 /* Build configuration list for PBXNativeTarget "DivvyKMeans" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D730D24213B5271A00E01F31 /* Debug */,
+				D730D24313B5271A00E01F31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

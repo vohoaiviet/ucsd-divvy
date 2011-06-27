@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "DivvyClustererPanel.h"
+#import "DivvyKMeansController.h"
 #import "DivvyAppDelegate.h"
 
-@implementation DivvyClustererPanel
+@implementation DivvyKMeansController
 
 -(IBAction) changeK:(id)sender {
   [(DivvyAppDelegate *)[NSApp delegate] clustererChanged];

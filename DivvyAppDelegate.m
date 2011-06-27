@@ -8,7 +8,7 @@
 
 #import "DivvyAppDelegate.h"
 #import "DivvyDataset.h"
-#import "DivvyClustererPanel.h"
+#import "DivvyDatasetViewPanel.h"
 #import "DivvyDatasetsPanel.h"
 #import "DivvyDatasetWindow.h"
 #import "DivvyDatasetVisualizer.h"
@@ -20,7 +20,7 @@
 
 @implementation DivvyAppDelegate
 
-@synthesize clustererPanelController;
+@synthesize datasetViewPanelController;
 @synthesize datasetsPanelController;
 @synthesize datasetWindowController;
 
@@ -40,6 +40,10 @@
   [[self selectedDatasetView] clustererChanged];
   [[[self datasetWindowController] datasetViewsBrowser] reloadData];
 }
+
+- (void) datasetVisualizerChanged {}
+- (void) pointVisualizerChanged {}
+- (void) reducerChanged {}
 
 - (id <DivvyDatasetVisualizer>)defaultDatasetVisualizer {
   if (defaultDatasetVisualizer) return defaultDatasetVisualizer;
@@ -84,7 +88,8 @@
 }
 
 - (id <DivvyClusterer>)defaultClusterer {
-  return [DivvyKMeans kMeansInDefaultContext];
+  //return [DivvyKMeans kMeansInDefaultContext];
+  return nil;
 }
 
 - (NSArray *)defaultSortDescriptors {
@@ -131,10 +136,10 @@
   self.datasetsPanelController = panelController;
   [panelController release];
 
-  DivvyClustererPanel *panelController2;
-  panelController2 = [[DivvyClustererPanel alloc] initWithWindowNibName:@"ClustererPanel"];
+  DivvyDatasetViewPanel *panelController2;
+  panelController2 = [[DivvyDatasetViewPanel alloc] initWithWindowNibName:@"DatasetViewPanel"];
   [panelController2 showWindow:nil];  
-  self.clustererPanelController = panelController2;
+  self.datasetViewPanelController = panelController2;
   [panelController2 release];  
   
   DivvyDatasetWindow *windowController;
@@ -341,7 +346,7 @@
   [managedObjectModel release];
   
   [datasetsPanelController release];
-  [clustererPanelController release];
+  [datasetViewPanelController release];
   [datasetWindowController release];
   
   [super dealloc];
