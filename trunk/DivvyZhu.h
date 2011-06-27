@@ -12,6 +12,10 @@
 
 @interface DivvyZhu : NSManagedObject <DivvyPointVisualizer>
 
+@property (nonatomic, retain) NSString *uniqueID;
+
+@property (nonatomic, retain) NSNumber *lineWidth;
+
 + (id <DivvyPointVisualizer>) zhuInDefaultContext;
 
 @end

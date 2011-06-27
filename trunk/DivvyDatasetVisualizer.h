@@ -12,6 +12,8 @@
 
 @protocol DivvyDatasetVisualizer
 
+- (NSString *) uniqueID;
+
 - (void) drawImage:(NSImage *) image
        reducedData:(NSData *)reducedData
            dataset:(DivvyDataset *)dataset

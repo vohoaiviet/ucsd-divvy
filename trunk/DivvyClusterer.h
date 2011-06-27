@@ -12,6 +12,8 @@
 
 @protocol DivvyClusterer
 
+- (NSString *) uniqueID;
+
 - (void) clusterDataset:(DivvyDataset *)dataset
              assignment:(NSData *)assignment;
 

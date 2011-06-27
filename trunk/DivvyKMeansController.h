@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface DivvyClustererPanel : NSWindowController
+@interface DivvyKMeansController : NSViewController
 
 -(IBAction) changeK:(id)sender;
 

@@ -11,6 +11,10 @@
 
 @implementation DivvyScatterPlot
 
+@dynamic uniqueID;
+
+@dynamic pointSize;
+
 + (id <DivvyDatasetVisualizer>) scatterPlotInDefaultContext {
   
   NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
@@ -36,12 +40,13 @@
   NSColor* black = [NSColor blackColor];
   NSColor* white = [NSColor whiteColor];
   
-  NSArray* clusterColors = [[NSArray alloc] initWithObjects:[NSColor blueColor], 
+  NSArray* clusterColors = [[NSArray alloc] initWithObjects:
+                            [NSColor whiteColor], [NSColor blueColor], 
                             [NSColor redColor], [NSColor greenColor], 
                             [NSColor yellowColor], [NSColor magentaColor],
                             [NSColor brownColor], [NSColor grayColor],
                             [NSColor orangeColor], [NSColor cyanColor],
-                            [NSColor purpleColor], [NSColor whiteColor], nil];
+                            [NSColor purpleColor], nil];
 
   NSRect rect;
 
@@ -77,6 +82,5 @@
 
   [image unlockFocus];
 }
-
 
 @end
