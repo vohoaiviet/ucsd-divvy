@@ -14,6 +14,7 @@
 @dynamic data;
 @dynamic n;
 @dynamic title;
+@dynamic zoomValue;
 
 @dynamic datasetViews;
 

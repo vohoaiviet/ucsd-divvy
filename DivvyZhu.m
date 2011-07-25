@@ -23,6 +23,8 @@
   newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Zhu"
                                           inManagedObjectContext:context];
   
+  newItem.uniqueID = [NSString stringWithString:@"test"];
+  
   return newItem;
 }
 

@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSData * data;
 @property (nonatomic, retain) NSNumber * n;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * zoomValue;
 
 @property (nonatomic, retain) NSSet * datasetViews;
 

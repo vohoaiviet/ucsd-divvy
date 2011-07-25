@@ -12,7 +12,7 @@
 
 @interface DivvyScatterPlot : NSManagedObject <DivvyDatasetVisualizer>
 
-@property (nonatomic, retain) NSString *uniqueID;
+@property (nonatomic, retain) NSString *datasetVisualizerID;
 
 @property (nonatomic, retain) NSNumber *pointSize;
 
