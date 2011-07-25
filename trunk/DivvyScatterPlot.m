@@ -11,7 +11,7 @@
 
 @implementation DivvyScatterPlot
 
-@dynamic uniqueID;
+@dynamic datasetVisualizerID;
 
 @dynamic pointSize;
 
@@ -24,6 +24,12 @@
                                           inManagedObjectContext:context];
   
   return newItem;
+}
+
+- (void) awakeFromInsert {
+  [super awakeFromInsert];
+
+  self.datasetVisualizerID = [[NSProcessInfo processInfo] globallyUniqueString];
 }
 
 - (void) drawImage:(NSImage *) image 

@@ -8,6 +8,7 @@
 
 #import "DivvyAppDelegate.h"
 #import "DivvyDataset.h"
+#import "DivvyDatasetView.h"
 #import "DivvyDatasetViewPanel.h"
 #import "DivvyDatasetsPanel.h"
 #import "DivvyDatasetWindow.h"
@@ -129,7 +130,6 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  
   DivvyDatasetsPanel *panelController;
   panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
   [panelController showWindow:nil];  
@@ -283,8 +283,7 @@
  before the application terminates.
  */
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-  
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {  
   // Stops a bunch of CoreGraphics errors from the binding between the dataset window
   // title and the selected dataset title. There's probably a better way to fix them though.
   self.selectedDataset = nil;
