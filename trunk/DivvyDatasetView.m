@@ -54,10 +54,10 @@
   newItem.dataset = dataset;
   
   newItem.datasetVisualizer = datasetVisualizer;
-  newItem.datasetVisualizerID = [datasetVisualizer uniqueID];
+  newItem.datasetVisualizerID = [datasetVisualizer datasetVisualizerID];
   
   newItem.pointVisualizer = nil;
-  newItem.pointVisualizerID = nil;
+  newItem.pointVisualizerID = [NSString stringWithString:@"test"];
   
   newItem.clusterer = nil;
   newItem.clustererID = nil;
@@ -142,9 +142,35 @@
 #pragma mark Core Data Methods
 
 - (void) awakeFromInsert {
+  [super awakeFromInsert];
   
   // called when the object is first created.
   [self generateUniqueID];
+}
+
+- (void) awakeFromFetch {
+  [super awakeFromFetch];
+  
+  // Reconnect datasetView with its components.
+  NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
+  NSManagedObjectModel *mom = [[NSApp delegate] managedObjectModel];
+  NSError *error = nil;
+  
+  for(NSEntityDescription *anEntityDescription in mom.entities) {
+    if([anEntityDescription.propertiesByName objectForKey:@"datasetVisualizerID"] && 
+       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+      NSFetchRequest *datasetVisualizerRequest = [[[NSFetchRequest alloc] init] autorelease];
+      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(datasetVisualizerID LIKE %@)", self.datasetVisualizerID];
+
+      [datasetVisualizerRequest setEntity:anEntityDescription];
+      [datasetVisualizerRequest setPredicate:idPredicate];
+      
+      NSArray *datasetVisualizerArray = [moc executeFetchRequest:datasetVisualizerRequest error:&error];
+      
+      for(id <DivvyDatasetVisualizer> aDatasetVisualizer in datasetVisualizerArray) // Should only be one
+        self.datasetVisualizer = aDatasetVisualizer;      
+    }
+  }
 }
 
 #pragma mark -
@@ -190,6 +216,11 @@
   // Core Data properties automatically managed.
   // Only release sythesized properties.
   [[self renderedImage] release];
+  
+  // Are the releases below needed? Warnings about release not being found in the protocol.
+  //[[self datasetVisualizer] release];
+  //[[self pointVisualizer] release];
+  //[[self clusterer] release];
   [super dealloc];
 }
 
