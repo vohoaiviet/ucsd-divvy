@@ -57,7 +57,7 @@
   newItem.datasetVisualizerID = [datasetVisualizer datasetVisualizerID];
   
   newItem.pointVisualizer = nil;
-  newItem.pointVisualizerID = [NSString stringWithString:@"test"];
+  newItem.pointVisualizerID = nil;
   
   newItem.clusterer = nil;
   newItem.clustererID = nil;
@@ -156,12 +156,13 @@
   NSManagedObjectModel *mom = [[NSApp delegate] managedObjectModel];
   NSError *error = nil;
   
+  // This should be generalized
   for(NSEntityDescription *anEntityDescription in mom.entities) {
     if([anEntityDescription.propertiesByName objectForKey:@"datasetVisualizerID"] && 
        ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
       NSFetchRequest *datasetVisualizerRequest = [[[NSFetchRequest alloc] init] autorelease];
       NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(datasetVisualizerID LIKE %@)", self.datasetVisualizerID];
-
+      
       [datasetVisualizerRequest setEntity:anEntityDescription];
       [datasetVisualizerRequest setPredicate:idPredicate];
       
@@ -169,6 +170,38 @@
       
       for(id <DivvyDatasetVisualizer> aDatasetVisualizer in datasetVisualizerArray) // Should only be one
         self.datasetVisualizer = aDatasetVisualizer;      
+    }
+  }
+
+  for(NSEntityDescription *anEntityDescription in mom.entities) {
+    if([anEntityDescription.propertiesByName objectForKey:@"clustererID"] && 
+       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+      NSFetchRequest *clustererRequest = [[[NSFetchRequest alloc] init] autorelease];
+      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(clustererID LIKE %@)", self.clustererID];
+      
+      [clustererRequest setEntity:anEntityDescription];
+      [clustererRequest setPredicate:idPredicate];
+      
+      NSArray *clustererArray = [moc executeFetchRequest:clustererRequest error:&error];
+      
+      for(id <DivvyClusterer> aClusterer in clustererArray) // Should only be one
+        self.clusterer = aClusterer;      
+    }
+  }
+
+  for(NSEntityDescription *anEntityDescription in mom.entities) {
+    if([anEntityDescription.propertiesByName objectForKey:@"pointVisualizerID"] && 
+       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+      NSFetchRequest *pointVisualizerRequest = [[[NSFetchRequest alloc] init] autorelease];
+      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(pointVisualizerID LIKE %@)", self.pointVisualizerID];
+      
+      [pointVisualizerRequest setEntity:anEntityDescription];
+      [pointVisualizerRequest setPredicate:idPredicate];
+      
+      NSArray *pointVisualizerArray = [moc executeFetchRequest:pointVisualizerRequest error:&error];
+      
+      for(id <DivvyPointVisualizer> aPointVisualizer in pointVisualizerArray) // Should only be one
+        self.pointVisualizer = aPointVisualizer;      
     }
   }
 }

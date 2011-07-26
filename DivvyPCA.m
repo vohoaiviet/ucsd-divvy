@@ -11,11 +11,19 @@
 
 @implementation DivvyPCA
 
-@dynamic uniqueID;
+@dynamic reducerID;
+@dynamic name;
 
 @dynamic firstAxis;
 @dynamic secondAxis;
 @dynamic rotatedData;
+
+- (void) awakeFromInsert {
+  [super awakeFromInsert];
+  
+  self.name = @"Principal Components Analysis";
+  self.reducerID = [[NSProcessInfo processInfo] globallyUniqueString];
+}
 
 - (void) reduceDataset:(DivvyDataset *)dataset
            reducedData:(NSData *)reducedData {

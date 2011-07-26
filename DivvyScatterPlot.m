@@ -12,6 +12,7 @@
 @implementation DivvyScatterPlot
 
 @dynamic datasetVisualizerID;
+@dynamic name;
 
 @dynamic pointSize;
 
@@ -29,6 +30,7 @@
 - (void) awakeFromInsert {
   [super awakeFromInsert];
 
+  self.name = @"Scatter Plot";
   self.datasetVisualizerID = [[NSProcessInfo processInfo] globallyUniqueString];
 }
 

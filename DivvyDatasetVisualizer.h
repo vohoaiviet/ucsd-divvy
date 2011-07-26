@@ -13,6 +13,7 @@
 @protocol DivvyDatasetVisualizer
 
 - (NSString *) datasetVisualizerID;
+- (NSString *) name;
 
 - (void) drawImage:(NSImage *) image
        reducedData:(NSData *)reducedData

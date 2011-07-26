@@ -7,17 +7,20 @@
 //
 
 #import "DivvyAppDelegate.h"
+
 #import "DivvyDataset.h"
 #import "DivvyDatasetView.h"
+
+#import "DivvyDatasetVisualizer.h"
+#import "DivvyPointVisualizer.h"
+#import "DivvyClusterer.h"
+#import "DivvyReducer.h"
+
+#import "DivvyPluginManager.h"
+
 #import "DivvyDatasetViewPanel.h"
 #import "DivvyDatasetsPanel.h"
 #import "DivvyDatasetWindow.h"
-#import "DivvyDatasetVisualizer.h"
-#import "DivvyScatterPlot.h"
-#import "DivvyPointVisualizer.h"
-#import "DivvyZhu.h"
-#import "DivvyClusterer.h"
-#import "DivvyKMeans.h"
 
 @implementation DivvyAppDelegate
 
@@ -27,10 +30,6 @@
 
 @synthesize selectedDataset;
 @synthesize selectedDatasetView;
-
-@synthesize defaultDatasetVisualizer;
-@synthesize defaultPointVisualizer;
-@synthesize defaultClusterer;
 
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
@@ -47,50 +46,18 @@
 - (void) reducerChanged {}
 
 - (id <DivvyDatasetVisualizer>)defaultDatasetVisualizer {
-  if (defaultDatasetVisualizer) return defaultDatasetVisualizer;
-  
-  NSManagedObjectContext *moc = [self managedObjectContext];
-  NSEntityDescription *entityDescription = [NSEntityDescription
-                                            entityForName:@"ScatterPlot" inManagedObjectContext:moc];
-  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-  [request setEntity:entityDescription];
-  
-  NSError *error = nil;
-  NSArray *array = [moc executeFetchRequest:request error:&error];
-  if (array == nil || array.count == 0) {
-    self.defaultDatasetVisualizer = [DivvyScatterPlot scatterPlotInDefaultContext];
-  }
-  else {
-    self.defaultDatasetVisualizer = (id <DivvyDatasetVisualizer>)[array objectAtIndex:0];
-  }
-  
-  return defaultDatasetVisualizer;
+  return (id <DivvyDatasetVisualizer>)[NSEntityDescription insertNewObjectForEntityForName:@"ScatterPlot"
+                                                                  inManagedObjectContext:[self managedObjectContext]];
 }
 
 - (id <DivvyPointVisualizer>)defaultPointVisualizer {
-  if (defaultPointVisualizer) return defaultPointVisualizer;
-  
-  NSManagedObjectContext *moc = [self managedObjectContext];
-  NSEntityDescription *entityDescription = [NSEntityDescription
-                                            entityForName:@"Zhu" inManagedObjectContext:moc];
-  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-  [request setEntity:entityDescription];
-  
-  NSError *error = nil;
-  NSArray *array = [moc executeFetchRequest:request error:&error];
-  if (array == nil || array.count == 0) {
-    self.defaultPointVisualizer = [DivvyZhu zhuInDefaultContext];
-  }
-  else {
-    self.defaultPointVisualizer = (id <DivvyPointVisualizer>)[array objectAtIndex:0];
-  }
-  
-  return defaultPointVisualizer;
+  return (id <DivvyPointVisualizer>)[NSEntityDescription insertNewObjectForEntityForName:@"Zhu"
+                                                                    inManagedObjectContext:[self managedObjectContext]];
 }
 
 - (id <DivvyClusterer>)defaultClusterer {
-  //return [DivvyKMeans kMeansInDefaultContext];
-  return nil;
+  return (id <DivvyClusterer>)[NSEntityDescription insertNewObjectForEntityForName:@"KMeans"
+                                                                  inManagedObjectContext:[self managedObjectContext]];
 }
 
 - (NSArray *)defaultSortDescriptors {
@@ -147,6 +114,19 @@
   [windowController showWindow:nil];  
   self.datasetWindowController = windowController;
   [windowController release];
+  
+  Class kmeansController = NSClassFromString(@"DivvyKMeansController");
+  id controller = [[kmeansController alloc] init];
+  [NSBundle loadNibNamed:@"DivvyKMeans" owner:controller];
+  
+  //NSRect topFrame = [[[panelController2 window] contentView] frame];
+  NSRect viewFrame = [panelController2.clustererView frame];
+  NSRect subFrame = [[controller view] frame];
+  float top = viewFrame.origin.y + viewFrame.size.height;
+  viewFrame.size = subFrame.size;
+  viewFrame.origin.y = top - subFrame.size.height;
+  [panelController2.clustererView setFrame:viewFrame];
+  [panelController2.clustererView addSubview:[controller view]];
 }
 
 /**
@@ -172,8 +152,13 @@
 - (NSManagedObjectModel *)managedObjectModel {
   
   if (managedObjectModel) return managedObjectModel;
-	
-  managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+  
+  NSMutableArray *models = [NSMutableArray array];
+  [models addObject:[NSManagedObjectModel mergedModelFromBundles:nil]];
+  [models addObjectsFromArray:[[DivvyPluginManager shared] pluginModels]];
+  
+  managedObjectModel = [[NSManagedObjectModel modelByMergingModels:models] retain];
+  
   return managedObjectModel;
 }
 
@@ -208,17 +193,30 @@
 		}
   }
   
-  NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"storedata"]];
+  NSMutableArray *configArray = [NSMutableArray array];
+  [configArray addObject:@"DivvyCore"];
+  
+  for(Class aClass in [[DivvyPluginManager shared] pluginClasses])
+    [configArray addObject:NSStringFromClass(aClass)];
+  
   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
-  if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType 
-                                                configuration:nil 
-                                                          URL:url 
-                                                      options:nil 
-                                                        error:&error]){
-    [[NSApplication sharedApplication] presentError:error];
-    [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-    return nil;
-  }    
+  
+  NSString *filePath;
+  for (NSString *configName in configArray) {
+    filePath = [configName stringByAppendingPathExtension:@"storedata"];
+    filePath = [applicationSupportDirectory stringByAppendingPathComponent:filePath];
+
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType 
+                                                  configuration:configName 
+                                                            URL:url 
+                                                        options:nil 
+                                                          error:&error]){
+      [[NSApplication sharedApplication] presentError:error];
+      [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+      return nil;
+    }
+  }
   
   return persistentStoreCoordinator;
 }
