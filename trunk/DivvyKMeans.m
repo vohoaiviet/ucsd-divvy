@@ -14,10 +14,19 @@
 
 @implementation DivvyKMeans
 
-@dynamic uniqueID;
+@dynamic clustererID;
+@dynamic name;
+
 @dynamic k;
 @dynamic numRestarts;
 @dynamic initCentroidsFromPointsInDataset;
+
+- (void) awakeFromInsert {
+  [super awakeFromInsert];
+  
+  self.name = @"K-means";
+  self.clustererID = [[NSProcessInfo processInfo] globallyUniqueString];
+}
 
 - (void) clusterDataset:(DivvyDataset *)dataset
              assignment:(NSData *)assignment {

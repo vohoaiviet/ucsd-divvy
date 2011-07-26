@@ -7,13 +7,15 @@
 //
 
 #import "DivvyDatasetWindow.h"
+
 #import "DivvyDataset.h"
 #import "DivvyDatasetView.h"
+
 #import "DivvyDatasetVisualizer.h"
+#import "DivvyPointVisualizer.h"
+#import "DivvyClusterer.h"
+
 #import "DivvyAppDelegate.h"
-
-#import "DivvyZhu.h" // Temp hack
-
 
 @implementation DivvyDatasetWindow
 
@@ -26,11 +28,15 @@
 
 - (IBAction)addDatasetViewAction:(id)sender {
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
-  id <DivvyDatasetVisualizer>datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
+  id <DivvyDatasetVisualizer> datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
   DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
                                                                   datasetVisualizer:datasetVisualizer];
-  [view setPointVisualizer:[[NSApp delegate] defaultPointVisualizer]];
-  [view setClusterer:[[NSApp delegate] defaultClusterer]];
+  
+  view.pointVisualizer = [[NSApp delegate] defaultPointVisualizer];
+  view.pointVisualizerID = view.pointVisualizer.pointVisualizerID;
+  
+  view.clusterer = [[NSApp delegate] defaultClusterer];
+  view.clustererID = view.clusterer.clustererID;
 }
 
 - (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser {

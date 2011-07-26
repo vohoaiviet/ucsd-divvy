@@ -11,21 +11,16 @@
 
 @implementation DivvyZhu
 
-@dynamic uniqueID;
+@dynamic pointVisualizerID;
+@dynamic name;
 
 @dynamic lineWidth;
 
-+ (id <DivvyPointVisualizer>) zhuInDefaultContext {
+- (void) awakeFromInsert {
+  [super awakeFromInsert];
   
-  NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
-  
-  DivvyZhu *newItem;    
-  newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Zhu"
-                                          inManagedObjectContext:context];
-  
-  newItem.uniqueID = [NSString stringWithString:@"test"];
-  
-  return newItem;
+  self.name = @"Zhu";
+  self.pointVisualizerID = [[NSProcessInfo processInfo] globallyUniqueString];
 }
 
 - (void) drawImage:(NSImage *) image 

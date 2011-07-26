@@ -12,7 +12,9 @@
 @interface DivvyKMeans : NSManagedObject <DivvyClusterer>
 
 // Core Data Accessors
-@property (nonatomic, retain) NSString *uniqueID;
+@property (nonatomic, retain) NSString *clustererID;
+@property (nonatomic, retain) NSString *name;
+
 @property (nonatomic, retain) NSNumber *k;
 @property (nonatomic, retain) NSNumber *numRestarts;
 @property (nonatomic, retain) NSNumber *initCentroidsFromPointsInDataset;

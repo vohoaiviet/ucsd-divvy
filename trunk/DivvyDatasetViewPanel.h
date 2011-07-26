@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface DivvyDatasetViewPanel : NSWindowController {
+@interface DivvyDatasetViewPanel : NSWindowController
 
-}
+@property (retain) IBOutlet NSView *clustererView;
 
 @end

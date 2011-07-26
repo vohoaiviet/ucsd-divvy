@@ -11,4 +11,6 @@
 
 @implementation DivvyDatasetViewPanel
 
+@synthesize clustererView;
+
 @end

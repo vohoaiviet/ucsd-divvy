@@ -12,7 +12,8 @@
 
 @protocol DivvyReducer
 
-- (NSString *) uniqueID;
+- (NSString *) reducerID;
+- (NSString *) name;
 
 - (void) reduceDataset:(DivvyDataset *)dataset
              reducedData:(NSData *)reducedData;

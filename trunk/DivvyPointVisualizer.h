@@ -12,7 +12,8 @@
 
 @protocol DivvyPointVisualizer
 
-- (NSString *) uniqueID;
+- (NSString *) pointVisualizerID;
+- (NSString *) name;
 
 - (void) drawImage:(NSImage *) image
        reducedData:(NSData *)reducedData
