@@ -41,7 +41,10 @@
   [[[self datasetWindowController] datasetViewsBrowser] reloadData];
 }
 
-- (void) datasetVisualizerChanged {}
+- (void) datasetVisualizerChanged {
+  [[self selectedDatasetView] datasetVisualizerChanged];
+  [[[self datasetWindowController] datasetViewsBrowser] reloadData];
+}
 - (void) pointVisualizerChanged {}
 - (void) reducerChanged {}
 
@@ -83,8 +86,8 @@
 }
 
 - (IBAction) closeDatasets:(id)sender {
-  DivvyDatasetsPanel *panelController = self.datasetsPanelController;
-  NSTableView *datasetsTable = [panelController datasetsTable];
+  DivvyDatasetsPanel *datasetsPanel = self.datasetsPanelController;
+  NSTableView *datasetsTable = [datasetsPanel datasetsTable];
   NSIndexSet *selections = datasetsTable.selectedRowIndexes;
   NSArray *datasets = [[datasetsPanelController datasetsArrayController] arrangedObjects];
   
@@ -97,36 +100,77 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  DivvyDatasetsPanel *panelController;
-  panelController = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
-  [panelController showWindow:nil];  
-  self.datasetsPanelController = panelController;
-  [panelController release];
+  DivvyDatasetsPanel *datasetsPanel;
+  datasetsPanel = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
+  [datasetsPanel showWindow:nil];  
+  self.datasetsPanelController = datasetsPanel;
+  [datasetsPanel release];
 
-  DivvyDatasetViewPanel *panelController2;
-  panelController2 = [[DivvyDatasetViewPanel alloc] initWithWindowNibName:@"DatasetViewPanel"];
-  [panelController2 showWindow:nil];  
-  self.datasetViewPanelController = panelController2;
-  [panelController2 release];  
+  DivvyDatasetViewPanel *datasetViewPanel;
+  datasetViewPanel = [[DivvyDatasetViewPanel alloc] initWithWindowNibName:@"DatasetViewPanel"];
+  [datasetViewPanel showWindow:nil];  
+  self.datasetViewPanelController = datasetViewPanel;
+  [datasetViewPanel release];
   
-  DivvyDatasetWindow *windowController;
-  windowController = [[DivvyDatasetWindow alloc] initWithWindowNibName:@"DatasetWindow"];
-  [windowController showWindow:nil];  
-  self.datasetWindowController = windowController;
-  [windowController release];
+  DivvyDatasetWindow *datasetWindow;
+  datasetWindow = [[DivvyDatasetWindow alloc] initWithWindowNibName:@"DatasetWindow"];
+  [datasetWindow showWindow:nil];  
+  self.datasetWindowController = datasetWindow;
+  [datasetWindow release];
   
+  // Temp -- this will be moved into DivvyDatasetViewPanel to handle popup selection changes
   Class kmeansController = NSClassFromString(@"DivvyKMeansController");
-  id controller = [[kmeansController alloc] init];
-  [NSBundle loadNibNamed:@"DivvyKMeans" owner:controller];
+  id clustererController = [[kmeansController alloc] init];
+  [NSBundle loadNibNamed:@"DivvyKMeans" owner:clustererController];
   
-  //NSRect topFrame = [[[panelController2 window] contentView] frame];
-  NSRect viewFrame = [panelController2.clustererView frame];
-  NSRect subFrame = [[controller view] frame];
-  float top = viewFrame.origin.y + viewFrame.size.height;
-  viewFrame.size = subFrame.size;
-  viewFrame.origin.y = top - subFrame.size.height;
-  [panelController2.clustererView setFrame:viewFrame];
-  [panelController2.clustererView addSubview:[controller view]];
+  Class scatterPlotController = NSClassFromString(@"DivvyScatterPlotController");
+  id datasetVisualizerController = [[scatterPlotController alloc] init];
+  [NSBundle loadNibNamed:@"DivvyScatterPlot" owner:datasetVisualizerController];
+  
+  NSRect topFrame = [[datasetViewPanel window] frame];
+  
+  NSRect clustererFrame = [datasetViewPanel.clustererView frame];
+  NSRect subClustererFrame = [[clustererController view] frame];
+  NSRect clustererPopUpFrame = [datasetViewPanel.clustererPopUp frame];
+  NSRect clustererDisclosureButtonFrame = [datasetViewPanel.clustererDisclosureButton frame];
+  
+  NSRect datasetVisualizerFrame = [datasetViewPanel.datasetVisualizerView frame];
+  NSRect subDatasetVisualizerFrame = [[datasetVisualizerController view] frame];
+  NSRect datasetVisualizerPopUpFrame = [datasetViewPanel.datasetVisualizerPopUp frame];
+  NSRect datasetVisualizerDisclosureButtonFrame = [datasetViewPanel.datasetVisualizerDisclosureButton frame];
+  
+  float y = 0.f; // Go from the bottom up
+  float popUpOffset = 8.f;
+  float disclosureButtonOffset = 8.f;
+
+  datasetVisualizerFrame.size.height = subDatasetVisualizerFrame.size.height;
+  y += subDatasetVisualizerFrame.size.height;
+  
+  datasetVisualizerPopUpFrame.origin.y = y - popUpOffset;
+  datasetVisualizerDisclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
+  y += datasetVisualizerPopUpFrame.size.height - popUpOffset;
+  
+  clustererFrame.origin.y = y;
+  clustererFrame.size.height = subClustererFrame.size.height;
+  y += subClustererFrame.size.height;
+  
+  clustererPopUpFrame.origin.y = y - popUpOffset;
+  clustererDisclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
+  y += clustererPopUpFrame.size.height - popUpOffset;
+  
+  y += 26.f; // Top border
+  
+  topFrame.size.height = y;
+  [datasetViewPanel.window setFrame:topFrame display:NO animate:YES];
+  [datasetViewPanel.datasetVisualizerView setFrame:datasetVisualizerFrame];
+  [datasetViewPanel.datasetVisualizerPopUp setFrame:datasetVisualizerPopUpFrame];
+  [datasetViewPanel.datasetVisualizerDisclosureButton setFrame:datasetVisualizerDisclosureButtonFrame];
+  [datasetViewPanel.clustererView setFrame:clustererFrame];
+  [datasetViewPanel.clustererPopUp setFrame:clustererPopUpFrame];
+  [datasetViewPanel.clustererDisclosureButton setFrame:clustererDisclosureButtonFrame];
+  
+  [datasetViewPanel.clustererView addSubview:[clustererController view]];
+  [datasetViewPanel.datasetVisualizerView addSubview:[datasetVisualizerController view]];
 }
 
 /**
@@ -337,14 +381,16 @@
  */
 
 - (void)dealloc {
+  [datasetsPanelController release];
+  [datasetViewPanelController release];
+  [datasetWindowController release];
+  
+  [selectedDataset release];
+  [selectedDatasetView release];
   
   [managedObjectContext release];
   [persistentStoreCoordinator release];
   [managedObjectModel release];
-  
-  [datasetsPanelController release];
-  [datasetViewPanelController release];
-  [datasetWindowController release];
   
   [super dealloc];
 }

@@ -29,6 +29,7 @@
 - (IBAction)addDatasetViewAction:(id)sender {
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
   id <DivvyDatasetVisualizer> datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
+  
   DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
                                                                   datasetVisualizer:datasetVisualizer];
   
@@ -49,8 +50,16 @@
     NSArray *datasetViews = [self.datasetViewsArrayController arrangedObjects];
     
     DivvyDatasetView *datasetView = [datasetViews objectAtIndex:[selectionIndexes lastIndex]];
+    [[NSApp delegate] setValue:nil forKey:@"selectedDatasetView"];
     [[NSApp delegate] setValue:datasetView forKey:@"selectedDatasetView"];
   }
+}
+
+- (void) dealloc {
+  [self.datasetViewsBrowser release];
+  [self.datasetViewsArrayController release];
+  
+  [super dealloc];
 }
 
 @end

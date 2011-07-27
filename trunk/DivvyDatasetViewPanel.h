@@ -12,5 +12,15 @@
 @interface DivvyDatasetViewPanel : NSWindowController
 
 @property (retain) IBOutlet NSView *clustererView;
+@property (retain) IBOutlet NSView *datasetVisualizerView;
+
+@property (retain) IBOutlet NSPopUpButton *clustererPopUp;
+@property (retain) IBOutlet NSPopUpButton *datasetVisualizerPopUp;
+
+@property (retain) IBOutlet NSButton *clustererDisclosureButton;
+@property (retain) IBOutlet NSButton *datasetVisualizerDisclosureButton;
+
+@property (retain) NSArray *clusterers;
+@property (retain) NSArray *datasetVisualizers;
 
 @end

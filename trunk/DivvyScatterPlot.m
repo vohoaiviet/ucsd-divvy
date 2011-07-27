@@ -32,6 +32,8 @@
 
   self.name = @"Scatter Plot";
   self.datasetVisualizerID = [[NSProcessInfo processInfo] globallyUniqueString];
+  
+  self.pointSize = [NSNumber numberWithInt:5];
 }
 
 - (void) drawImage:(NSImage *) image 
@@ -59,7 +61,7 @@
   NSRect rect;
 
   float x, y, rectSize;
-  rectSize = 5.0f;
+  rectSize = [self.pointSize floatValue];
 
   // get the view geometry and fill the background.
 

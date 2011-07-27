@@ -41,5 +41,6 @@
                             datasetVisualizer:(id <DivvyDatasetVisualizer>)datasetVisualizer;
 
 - (void) clustererChanged;
+- (void) datasetVisualizerChanged;
 
 @end

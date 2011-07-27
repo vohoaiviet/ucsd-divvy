@@ -10,6 +10,9 @@
 
 #import "DivvyPluginManager.h"
 #import "DivvyClusterer.h"
+#import "DivvyReducer.h"
+#import "DivvyDatasetVisualizer.h"
+#import "DivvyPointVisualizer.h"
 
 @implementation DivvyPluginManager
 
@@ -41,7 +44,10 @@
     NSBundle *pluginBundle = [NSBundle bundleWithPath:pluginPath];
     Class principalClass = [pluginBundle principalClass];
     
-    if (![principalClass conformsToProtocol:@protocol(DivvyClusterer)]) continue;
+    if (![principalClass conformsToProtocol:@protocol(DivvyClusterer)] &&
+        ![principalClass conformsToProtocol:@protocol(DivvyReducer)] &&
+        ![principalClass conformsToProtocol:@protocol(DivvyDatasetVisualizer)] &&
+        ![principalClass conformsToProtocol:@protocol(DivvyPointVisualizer)]) continue;
 
     [loadArray addObject:principalClass];
   }

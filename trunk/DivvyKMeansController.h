@@ -1,10 +1,7 @@
-//
-//  DivvyClustererPanel.h
-//  Divvy
-//
-//  Created by Joshua Lewis on 5/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+//  Written by Joshua Lewis at the UC San Diego Natural Computation Lab,
+//  PI Virginia de Sa, supported by NSF Award #0963071.
+//  Licensed under the New BSD License.
+//  
 
 #import <Cocoa/Cocoa.h>
 

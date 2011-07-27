@@ -1,10 +1,7 @@
-// 
-//  Dataset.m
-//  Divvy
-//
-//  Created by Joshua Lewis on 5/11/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+//  Written by Joshua Lewis at the UC San Diego Natural Computation Lab,
+//  PI Virginia de Sa, supported by NSF Award #0963071.
+//  Licensed under the New BSD License.
+//  
 
 #import "DivvyDataset.h"
 
@@ -19,9 +16,9 @@
 @dynamic datasetViews;
 
 + (id) datasetInDefaultContextWithFile:(NSString *)path {
-  NSManagedObjectContext * context = [[NSApp delegate] managedObjectContext];
+  NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
   
-  DivvyDataset * newItem;
+  DivvyDataset *newItem;
   newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Dataset"
                                           inManagedObjectContext:context];
   
