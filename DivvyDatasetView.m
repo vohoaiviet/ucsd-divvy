@@ -54,13 +54,7 @@
   newItem.dataset = dataset;
   
   newItem.datasetVisualizer = datasetVisualizer;
-  newItem.datasetVisualizerID = [datasetVisualizer datasetVisualizerID];
-  
-  newItem.pointVisualizer = nil;
-  newItem.pointVisualizerID = nil;
-  
-  newItem.clusterer = nil;
-  newItem.clustererID = nil;
+  newItem.datasetVisualizerID = datasetVisualizer.datasetVisualizerID;
   
   unsigned int n = [[dataset n] unsignedIntValue];
   unsigned int d = [[dataset d] unsignedIntValue];
@@ -105,9 +99,13 @@
 
 - (void) clustererChanged {
   self.renderedImage = nil;
-  NSNumber *newVersion = [NSNumber numberWithInt:[[self version] intValue] + 1];
+  NSNumber *newVersion = [NSNumber numberWithInt:self.version.intValue + 1];
   self.version = nil;
   self.version = newVersion;
+}
+
+- (void) datasetVisualizerChanged {
+  [self clustererChanged];
 }
 
 - (NSImage *) image {

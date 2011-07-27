@@ -41,12 +41,12 @@
     NSArray *datasets = [self.datasetsArrayController arrangedObjects];
     
     DivvyDataset *dataset = [datasets objectAtIndex:selection];
+    [[NSApp delegate] setValue:nil forKey:@"selectedDataset"];
     [[NSApp delegate] setValue:dataset forKey:@"selectedDataset"];
   }
 }
 
 - (void) dealloc {
-  
   [self.datasetsTable release];
   [self.datasetsArrayController release];
   
