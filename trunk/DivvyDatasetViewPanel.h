@@ -20,7 +20,17 @@
 @property (retain) IBOutlet NSButton *clustererDisclosureButton;
 @property (retain) IBOutlet NSButton *datasetVisualizerDisclosureButton;
 
+@property (retain) IBOutlet NSArrayController *clustererArrayController;
+@property (retain) IBOutlet NSArrayController *datasetVisualizerArrayController;
+
+@property (retain) NSMutableArray *clustererViewControllers;
+@property (retain) NSMutableArray *datasetVisualizerViewControllers;
+
 @property (retain) NSArray *clusterers;
 @property (retain) NSArray *datasetVisualizers;
+
+- (IBAction) clustererSelect:(id)sender;
+
+- (void) reflow;
 
 @end

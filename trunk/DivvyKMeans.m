@@ -24,7 +24,6 @@
 - (void) awakeFromInsert {
   [super awakeFromInsert];
   
-  self.name = @"K-means";
   self.clustererID = [[NSProcessInfo processInfo] globallyUniqueString];
 }
 

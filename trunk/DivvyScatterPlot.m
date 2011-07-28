@@ -30,7 +30,6 @@
 - (void) awakeFromInsert {
   [super awakeFromInsert];
 
-  self.name = @"Scatter Plot";
   self.datasetVisualizerID = [[NSProcessInfo processInfo] globallyUniqueString];
   
   self.pointSize = [NSNumber numberWithInt:5];
