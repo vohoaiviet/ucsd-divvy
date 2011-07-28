@@ -118,59 +118,7 @@
   self.datasetWindowController = datasetWindow;
   [datasetWindow release];
   
-  // Temp -- this will be moved into DivvyDatasetViewPanel to handle popup selection changes
-  Class kmeansController = NSClassFromString(@"DivvyKMeansController");
-  id clustererController = [[kmeansController alloc] init];
-  [NSBundle loadNibNamed:@"DivvyKMeans" owner:clustererController];
-  
-  Class scatterPlotController = NSClassFromString(@"DivvyScatterPlotController");
-  id datasetVisualizerController = [[scatterPlotController alloc] init];
-  [NSBundle loadNibNamed:@"DivvyScatterPlot" owner:datasetVisualizerController];
-  
-  NSRect topFrame = [[datasetViewPanel window] frame];
-  
-  NSRect clustererFrame = [datasetViewPanel.clustererView frame];
-  NSRect subClustererFrame = [[clustererController view] frame];
-  NSRect clustererPopUpFrame = [datasetViewPanel.clustererPopUp frame];
-  NSRect clustererDisclosureButtonFrame = [datasetViewPanel.clustererDisclosureButton frame];
-  
-  NSRect datasetVisualizerFrame = [datasetViewPanel.datasetVisualizerView frame];
-  NSRect subDatasetVisualizerFrame = [[datasetVisualizerController view] frame];
-  NSRect datasetVisualizerPopUpFrame = [datasetViewPanel.datasetVisualizerPopUp frame];
-  NSRect datasetVisualizerDisclosureButtonFrame = [datasetViewPanel.datasetVisualizerDisclosureButton frame];
-  
-  float y = 0.f; // Go from the bottom up
-  float popUpOffset = 8.f;
-  float disclosureButtonOffset = 8.f;
-
-  datasetVisualizerFrame.size.height = subDatasetVisualizerFrame.size.height;
-  y += subDatasetVisualizerFrame.size.height;
-  
-  datasetVisualizerPopUpFrame.origin.y = y - popUpOffset;
-  datasetVisualizerDisclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
-  y += datasetVisualizerPopUpFrame.size.height - popUpOffset;
-  
-  clustererFrame.origin.y = y;
-  clustererFrame.size.height = subClustererFrame.size.height;
-  y += subClustererFrame.size.height;
-  
-  clustererPopUpFrame.origin.y = y - popUpOffset;
-  clustererDisclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
-  y += clustererPopUpFrame.size.height - popUpOffset;
-  
-  y += 26.f; // Top border
-  
-  topFrame.size.height = y;
-  [datasetViewPanel.window setFrame:topFrame display:NO animate:YES];
-  [datasetViewPanel.datasetVisualizerView setFrame:datasetVisualizerFrame];
-  [datasetViewPanel.datasetVisualizerPopUp setFrame:datasetVisualizerPopUpFrame];
-  [datasetViewPanel.datasetVisualizerDisclosureButton setFrame:datasetVisualizerDisclosureButtonFrame];
-  [datasetViewPanel.clustererView setFrame:clustererFrame];
-  [datasetViewPanel.clustererPopUp setFrame:clustererPopUpFrame];
-  [datasetViewPanel.clustererDisclosureButton setFrame:clustererDisclosureButtonFrame];
-  
-  [datasetViewPanel.clustererView addSubview:[clustererController view]];
-  [datasetViewPanel.datasetVisualizerView addSubview:[datasetVisualizerController view]];
+  [datasetViewPanel reflow];
 }
 
 /**
