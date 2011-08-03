@@ -7,6 +7,8 @@
 //
 
 #import "DivvyDatasetView.h"
+
+#import "DivvyAppDelegate.h"
 #import "DivvyDataset.h"
 
 #import "DivvyClusterer.h"
@@ -32,6 +34,8 @@
 @dynamic clustererID;
 @dynamic reducerID;
 
+@dynamic dateCreated;
+
 @dynamic assignment;
 @dynamic reducedData;
 @dynamic exemplarList;
@@ -56,6 +60,8 @@
   newItem.datasetVisualizer = datasetVisualizer;
   newItem.datasetVisualizerID = datasetVisualizer.datasetVisualizerID;
   
+  newItem.dateCreated = [NSDate date];
+    
   unsigned int n = [[dataset n] unsignedIntValue];
   unsigned int d = [[dataset d] unsignedIntValue];
   float *data = [dataset floatData];
@@ -115,7 +121,7 @@
   NSSize      size  = NSMakeSize( 1024, 1024 );
   NSImage*    image = [[NSImage alloc] initWithSize:size];
   
-  if([self clusterer])
+  if([self clusterer] )
     [[self clusterer] clusterDataset:[self dataset]
                           assignment:[self assignment]];
   
@@ -149,57 +155,32 @@
 - (void) awakeFromFetch {
   [super awakeFromFetch];
   
+  DivvyAppDelegate *delegate = [NSApp delegate];
+  
   // Reconnect datasetView with its components.
-  NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
-  NSManagedObjectModel *mom = [[NSApp delegate] managedObjectModel];
+  NSManagedObjectContext *moc = [delegate managedObjectContext];
+  NSManagedObjectModel *mom = [delegate managedObjectModel];
   NSError *error = nil;
   
-  // This should be generalized
-  for(NSEntityDescription *anEntityDescription in mom.entities) {
-    if([anEntityDescription.propertiesByName objectForKey:@"datasetVisualizerID"] && 
-       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-      NSFetchRequest *datasetVisualizerRequest = [[[NSFetchRequest alloc] init] autorelease];
-      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(datasetVisualizerID LIKE %@)", self.datasetVisualizerID];
-      
-      [datasetVisualizerRequest setEntity:anEntityDescription];
-      [datasetVisualizerRequest setPredicate:idPredicate];
-      
-      NSArray *datasetVisualizerArray = [moc executeFetchRequest:datasetVisualizerRequest error:&error];
-      
-      for(id <DivvyDatasetVisualizer> aDatasetVisualizer in datasetVisualizerArray) // Should only be one
-        self.datasetVisualizer = aDatasetVisualizer;      
-    }
-  }
-
-  for(NSEntityDescription *anEntityDescription in mom.entities) {
-    if([anEntityDescription.propertiesByName objectForKey:@"clustererID"] && 
-       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-      NSFetchRequest *clustererRequest = [[[NSFetchRequest alloc] init] autorelease];
-      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(clustererID LIKE %@)", self.clustererID];
-      
-      [clustererRequest setEntity:anEntityDescription];
-      [clustererRequest setPredicate:idPredicate];
-      
-      NSArray *clustererArray = [moc executeFetchRequest:clustererRequest error:&error];
-      
-      for(id <DivvyClusterer> aClusterer in clustererArray) // Should only be one
-        self.clusterer = aClusterer;      
-    }
-  }
-
-  for(NSEntityDescription *anEntityDescription in mom.entities) {
-    if([anEntityDescription.propertiesByName objectForKey:@"pointVisualizerID"] && 
-       ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-      NSFetchRequest *pointVisualizerRequest = [[[NSFetchRequest alloc] init] autorelease];
-      NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(pointVisualizerID LIKE %@)", self.pointVisualizerID];
-      
-      [pointVisualizerRequest setEntity:anEntityDescription];
-      [pointVisualizerRequest setPredicate:idPredicate];
-      
-      NSArray *pointVisualizerArray = [moc executeFetchRequest:pointVisualizerRequest error:&error];
-      
-      for(id <DivvyPointVisualizer> aPointVisualizer in pointVisualizerArray) // Should only be one
-        self.pointVisualizer = aPointVisualizer;      
+  NSArray *pluginTypes = [delegate pluginTypes];
+  
+  for(NSString *pluginType in pluginTypes) {
+    NSString *pluginID = [NSString stringWithFormat:@"%@ID", pluginType];
+    
+    for(NSEntityDescription *anEntityDescription in mom.entities) {
+      if([anEntityDescription.propertiesByName objectForKey:pluginID] && 
+         ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginID, [self valueForKey:pluginID]];
+        
+        [request setEntity:anEntityDescription];
+        [request setPredicate:idPredicate];
+        
+        NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
+        
+        for(id aPlugin in pluginArray) // Should only be one
+          [self setValue:aPlugin forKey:pluginType];
+      }
     }
   }
 }

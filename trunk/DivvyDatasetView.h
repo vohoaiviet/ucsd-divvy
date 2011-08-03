@@ -27,6 +27,8 @@
 @property (nonatomic, retain) NSString *clustererID;
 @property (nonatomic, retain) NSString *reducerID;
 
+@property (nonatomic, retain) NSDate *dateCreated;
+
 @property (nonatomic, retain) NSData *assignment;
 @property (nonatomic, retain) NSData *reducedData;
 @property (nonatomic, retain) NSData *exemplarList;

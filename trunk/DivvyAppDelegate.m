@@ -31,6 +31,8 @@
 @synthesize selectedDataset;
 @synthesize selectedDatasetView;
 
+@synthesize pluginTypes;
+
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
@@ -99,7 +101,17 @@
   }
 }
 
+- (id)init
+{
+  if (!(self = [super init])) return nil;
+  
+  pluginTypes = [[NSArray alloc] initWithObjects:@"clusterer", @"reducer", @"datasetVisualizer", @"pointVisualizer", nil];
+  
+  return self;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+  
   DivvyDatasetsPanel *datasetsPanel;
   datasetsPanel = [[DivvyDatasetsPanel alloc] initWithWindowNibName:@"DatasetsPanel"];
   [datasetsPanel showWindow:nil];  
@@ -335,6 +347,8 @@
   
   [selectedDataset release];
   [selectedDatasetView release];
+  
+  [pluginTypes release];
   
   [managedObjectContext release];
   [persistentStoreCoordinator release];
