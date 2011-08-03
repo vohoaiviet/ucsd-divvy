@@ -27,6 +27,8 @@
 @property (retain) DivvyDataset *selectedDataset;
 @property (retain) DivvyDatasetView *selectedDatasetView;
 
+@property (retain) NSArray *pluginTypes;
+
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;

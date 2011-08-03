@@ -62,14 +62,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D704B6A013E08871002692E9 /* DivvyScatterPlot */;
+			remoteGlobalIDString = D704B6A013E08871002692E9;
 			remoteInfo = DivvyScatterPlot;
 		};
 		D704B89613E1F057002692E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D704B88613E1ED5E002692E9 /* DivvyNilClusterer */;
+			remoteGlobalIDString = D704B88613E1ED5E002692E9;
 			remoteInfo = DivvyNilClusterer;
 		};
 		D74C691D13DF6A9000CC5BB2 /* PBXContainerItemProxy */ = {

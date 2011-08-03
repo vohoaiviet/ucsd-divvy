@@ -24,6 +24,11 @@
 
 - (void) loadWindow {
   [super loadWindow];
+  
+  NSSortDescriptor *dateCreatedDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES] autorelease];
+  NSArray *sortDescriptors = [NSArray arrayWithObjects:dateCreatedDescriptor, nil];
+  
+  [datasetViewsArrayController setSortDescriptors:sortDescriptors];
 }
 
 - (IBAction)addDatasetViewAction:(id)sender {
