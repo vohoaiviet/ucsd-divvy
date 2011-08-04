@@ -8,8 +8,12 @@
 
 #import "DivvyDatasetWindow.h"
 
+#import "DivvyAppDelegate.h"
+
 #import "DivvyDataset.h"
 #import "DivvyDatasetView.h"
+
+#import "DivvyDatasetViewPanel.h"
 
 #import "DivvyDatasetVisualizer.h"
 #import "DivvyPointVisualizer.h"
@@ -33,30 +37,30 @@
 
 - (IBAction)addDatasetViewAction:(id)sender {
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
-  id <DivvyDatasetVisualizer> datasetVisualizer = [[NSApp delegate] defaultDatasetVisualizer];
   
-  DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset
-                                                                  datasetVisualizer:datasetVisualizer];
+  DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset];
   
   view.pointVisualizer = [[NSApp delegate] defaultPointVisualizer];
   view.pointVisualizerID = view.pointVisualizer.pointVisualizerID;
-  
-  view.clusterer = [[NSApp delegate] defaultClusterer];
-  view.clustererID = view.clusterer.clustererID;
 }
 
 - (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser {
   NSIndexSet *selectionIndexes = [aBrowser selectionIndexes];
+  DivvyAppDelegate *delegate = [NSApp delegate];
 
   if(selectionIndexes.count == 0) {
-    [[NSApp delegate] setValue:nil forKey:@"selectedDatasetView"];
+    [delegate setValue:nil forKey:@"selectedDatasetView"];
+    [delegate.datasetViewPanelController reflow];
   }
   else {
     NSArray *datasetViews = [self.datasetViewsArrayController arrangedObjects];
     
     DivvyDatasetView *datasetView = [datasetViews objectAtIndex:[selectionIndexes lastIndex]];
-    [[NSApp delegate] setValue:nil forKey:@"selectedDatasetView"];
-    [[NSApp delegate] setValue:datasetView forKey:@"selectedDatasetView"];
+    [delegate setValue:nil forKey:@"selectedDatasetView"];
+    [delegate setValue:datasetView forKey:@"selectedDatasetView"];
+    
+    //[delegate.datasetViewPanelController.clustererPopUp selectItemAtIndex:[datasetView.clusterers indexOfObject:datasetView.selectedClusterer]];
+    [delegate.datasetViewPanelController reflow];
   }
 }
 

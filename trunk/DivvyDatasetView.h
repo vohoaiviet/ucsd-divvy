@@ -24,7 +24,7 @@
 
 @property (nonatomic, retain) NSString *datasetVisualizerID;
 @property (nonatomic, retain) NSString *pointVisualizerID;
-@property (nonatomic, retain) NSString *clustererID;
+@property (nonatomic, retain) NSArray *clustererIDs;
 @property (nonatomic, retain) NSString *reducerID;
 
 @property (nonatomic, retain) NSDate *dateCreated;
@@ -35,12 +35,15 @@
 
 @property (nonatomic, retain) id <DivvyDatasetVisualizer> datasetVisualizer;
 @property (nonatomic, retain) id <DivvyPointVisualizer> pointVisualizer;
-@property (nonatomic, retain) id <DivvyClusterer> clusterer;
+@property (nonatomic, retain) NSArray *clusterers;
+
+@property (nonatomic, retain) NSString *selectedClustererID;
+
+@property (nonatomic, retain) id <DivvyClusterer> selectedClusterer;
 
 @property (readonly) NSImage *image;
 
-+ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
-                            datasetVisualizer:(id <DivvyDatasetVisualizer>)datasetVisualizer;
++ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset;
 
 - (void) clustererChanged;
 - (void) datasetVisualizerChanged;
