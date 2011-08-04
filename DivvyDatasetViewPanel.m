@@ -26,6 +26,9 @@
 @synthesize clustererArrayController;
 @synthesize datasetVisualizerArrayController;
 
+@synthesize clustererController;
+@synthesize datasetVisualizerController;
+
 @synthesize clustererViewControllers;
 @synthesize datasetVisualizerViewControllers;
 
@@ -66,16 +69,18 @@
   [self reflow];
   
   DivvyAppDelegate *delegate = [NSApp delegate];
-  NSManagedObjectContext *moc = delegate.managedObjectContext;
-  DivvyDatasetView *datasetView = delegate.selectedDatasetView;
   
-  [moc deleteObject:(NSManagedObject *)datasetView.clusterer];
-  
-  NSEntityDescription *newClusterer = [clusterers objectAtIndex:[clustererArrayController selectionIndex]];
-  datasetView.clusterer = (id <DivvyClusterer>)[NSEntityDescription insertNewObjectForEntityForName:newClusterer.name
-                                                                             inManagedObjectContext:moc];
+  // A bit verbose for debugging purposes
+  //int selectionIndex = [clustererArrayController.arrangedObjects indexOfObject:[clustererController content]];
+  id <DivvyClusterer> popClusterer = [clustererController content];
+  //id <DivvyClusterer> newClusterer = delegate.selectedDatasetView.selectedClusterer;
+  DivvyDatasetView *selectedDatasetView = delegate.selectedDatasetView;
 
-  datasetView.clustererID = datasetView.clusterer.clustererID;
+  selectedDatasetView.selectedClusterer = nil;
+  selectedDatasetView.selectedClusterer = popClusterer;
+
+  //delegate.selectedDatasetView.selectedClusterer = [delegate.selectedDatasetView.clusterers objectAtIndex:[clustererArrayController selectionIndex]];
+  selectedDatasetView.selectedClustererID = popClusterer.clustererID;
   
   [delegate clustererChanged];
 }
@@ -84,31 +89,46 @@
   DivvyAppDelegate *delegate = [NSApp delegate];
   NSArray *pluginTypes = delegate.pluginTypes;
   
+  //DivvyDatasetView *selectedDatasetView = delegate.selectedDatasetView;
+  //id <DivvyClusterer> selectedClusterer = selectedDatasetView.selectedClusterer;
+  
   NSRect topFrame = [[self window] frame];
   
   float y = 0.f; // Go from the bottom up
   float popUpOffset = 13.f; // View borders from IB are 20px, we want 7px separation
   float disclosureButtonOffset = 7.f; // Centered disclosure buttons are 7px above their corresponding popups
   
-  // Need to set topFrame height before positioning the subviews
-  for(NSString *pluginType in pluginTypes) {
-    if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-    
-    NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
-    NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
-    NSView *view = [self valueForKey:[NSString stringWithFormat:@"%@View", pluginType]];
-    NSView *popup = [self valueForKey:[NSString stringWithFormat:@"%@PopUp", pluginType]];
-    
-    for(NSView *aView in view.subviews)
-      [aView removeFromSuperview];
-    
-    NSViewController *aController = [viewControllers objectAtIndex:[arrayController selectionIndex]];
-        
-    NSRect subFrame = [[aController view] frame];
-    NSRect popUpFrame = [popup frame];
-    
-    y += subFrame.size.height;
-    y += popUpFrame.size.height - popUpOffset;
+  if(delegate.selectedDatasetView) {
+  
+    // Need to set topFrame height before positioning the subviews
+    for(NSString *pluginType in pluginTypes) {
+      if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
+      
+      NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
+      NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
+      NSObjectController *objectController = [self valueForKey:[NSString stringWithFormat:@"%@Controller", pluginType]];
+      NSView *view = [self valueForKey:[NSString stringWithFormat:@"%@View", pluginType]];
+      NSView *popup = [self valueForKey:[NSString stringWithFormat:@"%@PopUp", pluginType]];
+      
+      for(NSView *aView in view.subviews)
+        [aView removeFromSuperview];
+      
+      NSViewController *aController;
+      
+      if([pluginType isEqual:@"clusterer"])
+        aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
+      else
+        aController = [viewControllers objectAtIndex:0];
+      
+      NSRect subFrame = [[aController view] frame];
+      
+      
+      NSRect popUpFrame = [popup frame];
+      
+      y += subFrame.size.height;
+      y += popUpFrame.size.height - popUpOffset;
+      
+    }
     
   }
   
@@ -120,35 +140,44 @@
   
   y = 0.f; // Reset to position subviews
   
-  for(NSString *pluginType in pluginTypes) {
-    if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-    
-    NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
-    NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
-    NSView *view = [self valueForKey:[NSString stringWithFormat:@"%@View", pluginType]];
-    NSView *popUp = [self valueForKey:[NSString stringWithFormat:@"%@PopUp", pluginType]];
-    NSView *disclosureButton = [self valueForKey:[NSString stringWithFormat:@"%@DisclosureButton", pluginType]];
-    
-    NSViewController *aController = [viewControllers objectAtIndex:[arrayController selectionIndex]];
-    
-    NSRect frame = [view frame];
-    NSRect subFrame = [[aController view] frame];
-    NSRect popUpFrame = [popUp frame];
-    NSRect disclosureButtonFrame = [disclosureButton frame];
-    
-    frame.origin.y = y;
-    frame.size.height = subFrame.size.height;
-    y += subFrame.size.height;
-    
-    popUpFrame.origin.y = y - popUpOffset;
-    disclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
-    y += popUpFrame.size.height - popUpOffset;
-    
-    [view setFrame:frame];
-    [popUp setFrame:popUpFrame];
-    [disclosureButton setFrame:disclosureButtonFrame];
-    
-    [view addSubview:[aController view]];
+  if(delegate.selectedDatasetView) {
+  
+    for(NSString *pluginType in pluginTypes) {
+      if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
+      
+      NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
+      NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
+      NSObjectController *objectController = [self valueForKey:[NSString stringWithFormat:@"%@Controller", pluginType]];
+      NSView *view = [self valueForKey:[NSString stringWithFormat:@"%@View", pluginType]];
+      NSView *popUp = [self valueForKey:[NSString stringWithFormat:@"%@PopUp", pluginType]];
+      NSView *disclosureButton = [self valueForKey:[NSString stringWithFormat:@"%@DisclosureButton", pluginType]];
+      
+      NSViewController *aController;
+      
+      if([pluginType isEqual:@"clusterer"])
+        aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
+      else
+        aController = [viewControllers objectAtIndex:0];
+      
+      NSRect frame = [view frame];
+      NSRect subFrame = [[aController view] frame];
+      NSRect popUpFrame = [popUp frame];
+      NSRect disclosureButtonFrame = [disclosureButton frame];
+      
+      frame.origin.y = y;
+      frame.size.height = subFrame.size.height;
+      y += subFrame.size.height;
+      
+      popUpFrame.origin.y = y - popUpOffset;
+      disclosureButtonFrame.origin.y = y - popUpOffset + disclosureButtonOffset;
+      y += popUpFrame.size.height - popUpOffset;
+      
+      [view setFrame:frame];
+      [popUp setFrame:popUpFrame];
+      [disclosureButton setFrame:disclosureButtonFrame];
+      
+      [view addSubview:[aController view]];
+    }
   }
 }
 
@@ -165,7 +194,6 @@
   [self.clustererArrayController release];
   [self.datasetVisualizerArrayController release];  
   
-  [self.clusterers release];
   [self.datasetVisualizers release];
   
   [super dealloc];

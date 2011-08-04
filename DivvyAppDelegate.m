@@ -60,9 +60,8 @@
                                                                     inManagedObjectContext:[self managedObjectContext]];
 }
 
-- (id <DivvyClusterer>)defaultClusterer {
-  return (id <DivvyClusterer>)[NSEntityDescription insertNewObjectForEntityForName:@"KMeans"
-                                                                  inManagedObjectContext:[self managedObjectContext]];
+- (NSString *)defaultClusterer {
+  return @"KMeans";
 }
 
 - (NSArray *)defaultSortDescriptors {

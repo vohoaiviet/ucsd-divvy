@@ -15,8 +15,6 @@
 #import "DivvyDatasetVisualizer.h"
 #import "DivvyPointVisualizer.h"
 
-#import <Quartz/Quartz.h>
-
 @interface DivvyDatasetView ()
 @property (retain) NSImage *renderedImage;
 - (void) generateUniqueID;
@@ -31,7 +29,7 @@
 
 @dynamic datasetVisualizerID;
 @dynamic pointVisualizerID;
-@dynamic clustererID;
+@dynamic clustererIDs;
 @dynamic reducerID;
 
 @dynamic dateCreated;
@@ -42,25 +40,60 @@
 
 @synthesize datasetVisualizer;
 @synthesize pointVisualizer;
-@synthesize clusterer;
+@synthesize clusterers;
+
+@dynamic selectedClustererID;
+
+@synthesize selectedClusterer;
 
 @synthesize renderedImage;
 
-+ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset 
-                            datasetVisualizer:(id <DivvyDatasetVisualizer>)datasetVisualizer {
++ (id) datasetViewInDefaultContextWithDataset:(DivvyDataset *)dataset {
+  DivvyAppDelegate *delegate = [NSApp delegate];
+  NSManagedObjectContext* moc = delegate.managedObjectContext;
+  NSManagedObjectModel* mom = delegate.managedObjectModel;
+  NSArray *pluginTypes = delegate.pluginTypes;
   
-  NSManagedObjectContext* context = [[NSApp delegate] managedObjectContext];
+  DivvyDatasetView *datasetView;    
+  datasetView = [NSEntityDescription insertNewObjectForEntityForName:@"DatasetView"
+                                               inManagedObjectContext:moc];
   
-  DivvyDatasetView *newItem;    
-  newItem = [NSEntityDescription insertNewObjectForEntityForName:@"DatasetView"
-                                          inManagedObjectContext:context];
+  datasetView.dataset = dataset;
   
-  newItem.dataset = dataset;
   
-  newItem.datasetVisualizer = datasetVisualizer;
-  newItem.datasetVisualizerID = datasetVisualizer.datasetVisualizerID;
+  for(NSString *pluginType in pluginTypes) {
+    if(![pluginType isEqual:@"clusterer"]) continue;
+    
+    [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
+    [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
+    
+    for(NSEntityDescription *anEntityDescription in [mom entities])
+      if([anEntityDescription.propertiesByName objectForKey:[NSString stringWithFormat:@"%@ID", pluginType]]) {
+        
+        id anEntity = [NSEntityDescription insertNewObjectForEntityForName:anEntityDescription.name inManagedObjectContext:moc];
+        
+        [[datasetView valueForKey:[NSString stringWithFormat:@"%@s", pluginType]] addObject:anEntity];
+        [[datasetView valueForKey:[NSString stringWithFormat:@"%@IDs", pluginType]] addObject:[anEntity valueForKey:[NSString stringWithFormat:@"%@ID", pluginType]]];
+        
+        if([anEntityDescription.name isEqual:[delegate defaultClusterer]]) {
+          [datasetView setValue:anEntity 
+                         forKey:[NSString stringWithFormat:@"selected%@%@", 
+                                 [[pluginType substringToIndex:0] capitalizedString], 
+                                 [[pluginType substringFromIndex:0] capitalizedString]]];
+          
+          [datasetView setValue:[anEntity valueForKey:[NSString stringWithFormat:@"%@ID", pluginType]]
+                         forKey:[NSString stringWithFormat:@"selected%@%@ID", 
+                                 [[pluginType substringToIndex:0] capitalizedString], 
+                                 [[pluginType substringFromIndex:0] capitalizedString]]];
+
+        }
+      }
+  }
   
-  newItem.dateCreated = [NSDate date];
+  datasetView.datasetVisualizer = [delegate defaultDatasetVisualizer];
+  datasetView.datasetVisualizerID = datasetView.datasetVisualizer.datasetVisualizerID;
+  
+  datasetView.dateCreated = [NSDate date];
     
   unsigned int n = [[dataset n] unsignedIntValue];
   unsigned int d = [[dataset d] unsignedIntValue];
@@ -89,18 +122,18 @@
     newReducedData[i * 2 + 1] = (data[i * d + 1] - min) / (max - min);
   }
   
-  newItem.reducedData = [NSData dataWithBytesNoCopy:newReducedData
+  datasetView.reducedData = [NSData dataWithBytesNoCopy:newReducedData
                                              length:numBytes
                                        freeWhenDone:YES]; // Hands responsibility for freeing reduced to the NSData object
-  newItem.exemplarList = nil;
+  datasetView.exemplarList = nil;
   
   numBytes = sizeof(int) * n;
   int *newAssignment = calloc(numBytes, sizeof(int));
-  newItem.assignment = [NSData dataWithBytesNoCopy:newAssignment
+  datasetView.assignment = [NSData dataWithBytesNoCopy:newAssignment
                                             length:numBytes
                                       freeWhenDone:YES];
   
-  return newItem;
+  return datasetView;
 }
 
 - (void) clustererChanged {
@@ -121,8 +154,8 @@
   NSSize      size  = NSMakeSize( 1024, 1024 );
   NSImage*    image = [[NSImage alloc] initWithSize:size];
   
-  if([self clusterer] )
-    [[self clusterer] clusterDataset:[self dataset]
+  if([self selectedClusterer] )
+    [[self selectedClusterer] clusterDataset:[self dataset]
                           assignment:[self assignment]];
   
   [[self datasetVisualizer] drawImage:image
@@ -165,21 +198,52 @@
   NSArray *pluginTypes = [delegate pluginTypes];
   
   for(NSString *pluginType in pluginTypes) {
-    NSString *pluginID = [NSString stringWithFormat:@"%@ID", pluginType];
-    
-    for(NSEntityDescription *anEntityDescription in mom.entities) {
-      if([anEntityDescription.propertiesByName objectForKey:pluginID] && 
-         ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-        NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginID, [self valueForKey:pluginID]];
-        
-        [request setEntity:anEntityDescription];
-        [request setPredicate:idPredicate];
-        
-        NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
-        
-        for(id aPlugin in pluginArray) // Should only be one
-          [self setValue:aPlugin forKey:pluginType];
+    if([pluginType isEqual:@"clusterer"]) {
+      [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
+      
+      NSMutableArray *plugins = [self valueForKey:[NSString stringWithFormat:@"%@s", pluginType]];
+      
+      NSArray *pluginIDs = [self valueForKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
+      
+      NSString *pluginIDString = [NSString stringWithFormat:@"%@ID", pluginType];
+      
+      for(NSString *anID in pluginIDs)
+        for(NSEntityDescription *anEntityDescription in mom.entities) {
+          if([anEntityDescription.propertiesByName objectForKey:pluginIDString] && 
+             ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+            NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+            NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginIDString, anID];
+            
+            [request setEntity:anEntityDescription];
+            [request setPredicate:idPredicate];
+            
+            NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
+            
+            for(id aPlugin in pluginArray) { // Should only be one
+              [plugins addObject:aPlugin];
+              if([self.selectedClustererID isEqual:[aPlugin valueForKey:pluginIDString]])
+                self.selectedClusterer = aPlugin;
+            }
+          }
+        }
+    }
+    else {
+      NSString *pluginID = [NSString stringWithFormat:@"%@ID", pluginType];
+      
+      for(NSEntityDescription *anEntityDescription in mom.entities) {
+        if([anEntityDescription.propertiesByName objectForKey:pluginID] && 
+           ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+          NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+          NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginID, [self valueForKey:pluginID]];
+          
+          [request setEntity:anEntityDescription];
+          [request setPredicate:idPredicate];
+          
+          NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
+          
+          for(id aPlugin in pluginArray) // Should only be one
+            [self setValue:aPlugin forKey:pluginType];
+        }
       }
     }
   }

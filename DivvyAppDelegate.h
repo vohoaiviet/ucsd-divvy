@@ -41,7 +41,7 @@
 
 - (id <DivvyDatasetVisualizer>) defaultDatasetVisualizer;
 - (id <DivvyPointVisualizer>) defaultPointVisualizer;
-- (id <DivvyClusterer>) defaultClusterer;
+- (NSString *) defaultClusterer;
 
 - (void) datasetVisualizerChanged;
 - (void) pointVisualizerChanged;

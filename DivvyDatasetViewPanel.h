@@ -23,6 +23,9 @@
 @property (retain) IBOutlet NSArrayController *clustererArrayController;
 @property (retain) IBOutlet NSArrayController *datasetVisualizerArrayController;
 
+@property (retain) IBOutlet NSObjectController *clustererController;
+@property (retain) IBOutlet NSObjectController *datasetVisualizerController;
+
 @property (retain) NSMutableArray *clustererViewControllers;
 @property (retain) NSMutableArray *datasetVisualizerViewControllers;
 
