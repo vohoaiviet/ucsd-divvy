@@ -32,36 +32,43 @@
 @synthesize selectedDatasetView;
 
 @synthesize pluginTypes;
+@synthesize pluginDefaults;
 
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
 
+- (void) datasetViewChanged {
+  [[self selectedDatasetView] reloadImage];
+  [[[self datasetWindowController] datasetViewsBrowser] reloadData];
+}
 
 - (void) clustererChanged {
   [[self selectedDatasetView] clustererChanged];
-  [[[self datasetWindowController] datasetViewsBrowser] reloadData];
+  [self datasetViewChanged];
 }
 
 - (void) datasetVisualizerChanged {
   [[self selectedDatasetView] datasetVisualizerChanged];
-  [[[self datasetWindowController] datasetViewsBrowser] reloadData];
+  [self datasetViewChanged];
 }
-- (void) pointVisualizerChanged {}
-- (void) reducerChanged {}
+- (void) pointVisualizerChanged {[self datasetViewChanged];}
+- (void) reducerChanged {[self datasetViewChanged];}
 
-- (id <DivvyDatasetVisualizer>)defaultDatasetVisualizer {
-  return (id <DivvyDatasetVisualizer>)[NSEntityDescription insertNewObjectForEntityForName:@"ScatterPlot"
-                                                                  inManagedObjectContext:[self managedObjectContext]];
+- (NSString *)defaultDatasetVisualizer {
+  return @"ScatterPlot";
 }
 
-- (id <DivvyPointVisualizer>)defaultPointVisualizer {
-  return (id <DivvyPointVisualizer>)[NSEntityDescription insertNewObjectForEntityForName:@"Zhu"
-                                                                    inManagedObjectContext:[self managedObjectContext]];
+- (NSString *)defaultPointVisualizer {
+  return @"Zhu";
 }
 
 - (NSString *)defaultClusterer {
   return @"KMeans";
+}
+
+- (NSString *)defaultReducer {
+  return @"NilReducer";
 }
 
 - (NSArray *)defaultSortDescriptors {
@@ -104,7 +111,8 @@
 {
   if (!(self = [super init])) return nil;
   
-  pluginTypes = [[NSArray alloc] initWithObjects:@"clusterer", @"reducer", @"datasetVisualizer", @"pointVisualizer", nil];
+  pluginTypes = [[NSArray alloc] initWithObjects:@"datasetVisualizer", @"pointVisualizer", @"clusterer", @"reducer", nil];
+  pluginDefaults = [[NSArray alloc] initWithObjects:@"ScatterPlot", @"Zhu", @"KMeans", @"NilReducer", nil];
   
   return self;
 }
@@ -348,6 +356,7 @@
   [selectedDatasetView release];
   
   [pluginTypes release];
+  [pluginDefaults release];
   
   [managedObjectContext release];
   [persistentStoreCoordinator release];

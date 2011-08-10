@@ -17,7 +17,6 @@
 
 - (void) drawImage:(NSImage *) image
        reducedData:(NSData *)reducedData
-      exemplarList:(NSData *)exemplarList
            dataset:(DivvyDataset *)dataset;
 
 @end

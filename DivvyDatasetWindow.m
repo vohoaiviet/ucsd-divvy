@@ -38,10 +38,7 @@
 - (IBAction)addDatasetViewAction:(id)sender {
   DivvyDataset *dataset = [[NSApp delegate] selectedDataset];
   
-  DivvyDatasetView *view = [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset];
-  
-  view.pointVisualizer = [[NSApp delegate] defaultPointVisualizer];
-  view.pointVisualizerID = view.pointVisualizer.pointVisualizerID;
+  [DivvyDatasetView datasetViewInDefaultContextWithDataset:dataset];
 }
 
 - (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser {

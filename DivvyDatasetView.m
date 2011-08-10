@@ -11,9 +11,10 @@
 #import "DivvyAppDelegate.h"
 #import "DivvyDataset.h"
 
-#import "DivvyClusterer.h"
 #import "DivvyDatasetVisualizer.h"
 #import "DivvyPointVisualizer.h"
+#import "DivvyClusterer.h"
+#import "DivvyReducer.h"
 
 @interface DivvyDatasetView ()
 @property (retain) NSImage *renderedImage;
@@ -24,27 +25,34 @@
 
 @dynamic uniqueID;
 @dynamic version;
+@dynamic dateCreated;
 
 @dynamic dataset;
 
-@dynamic datasetVisualizerID;
-@dynamic pointVisualizerID;
+@dynamic datasetVisualizerIDs;
+@dynamic pointVisualizerIDs;
 @dynamic clustererIDs;
-@dynamic reducerID;
+@dynamic reducerIDs;
 
-@dynamic dateCreated;
-
-@dynamic assignment;
-@dynamic reducedData;
-@dynamic exemplarList;
-
-@synthesize datasetVisualizer;
-@synthesize pointVisualizer;
-@synthesize clusterers;
-
+@dynamic selectedDatasetVisualizerID;
+@dynamic selectedPointVisualizerID;
 @dynamic selectedClustererID;
+@dynamic selectedReducerID;
 
+@dynamic datasetVisualizerResults;
+@dynamic pointVisualizerResults;
+@dynamic clustererResults;
+@dynamic reducerResults;
+
+@synthesize datasetVisualizers;
+@synthesize pointVisualizers;
+@synthesize clusterers;
+@synthesize reducers;
+
+@synthesize selectedDatasetVisualizer;
+@synthesize selectedPointVisualizer;
 @synthesize selectedClusterer;
+@synthesize selectedReducer;
 
 @synthesize renderedImage;
 
@@ -53,17 +61,18 @@
   NSManagedObjectContext* moc = delegate.managedObjectContext;
   NSManagedObjectModel* mom = delegate.managedObjectModel;
   NSArray *pluginTypes = delegate.pluginTypes;
+  NSArray *pluginDefaults = delegate.pluginDefaults;
   
   DivvyDatasetView *datasetView;    
   datasetView = [NSEntityDescription insertNewObjectForEntityForName:@"DatasetView"
                                                inManagedObjectContext:moc];
+
+  datasetView.dateCreated = [NSDate date];  
   
   datasetView.dataset = dataset;
   
   
   for(NSString *pluginType in pluginTypes) {
-    if(![pluginType isEqual:@"clusterer"]) continue;
-    
     [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
     [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
     
@@ -75,100 +84,112 @@
         [[datasetView valueForKey:[NSString stringWithFormat:@"%@s", pluginType]] addObject:anEntity];
         [[datasetView valueForKey:[NSString stringWithFormat:@"%@IDs", pluginType]] addObject:[anEntity valueForKey:[NSString stringWithFormat:@"%@ID", pluginType]]];
         
-        if([anEntityDescription.name isEqual:[delegate defaultClusterer]]) {
+        if([anEntityDescription.name isEqual:[pluginDefaults objectAtIndex:[pluginTypes indexOfObject:pluginType]]]) {
           [datasetView setValue:anEntity 
                          forKey:[NSString stringWithFormat:@"selected%@%@", 
-                                 [[pluginType substringToIndex:0] capitalizedString], 
-                                 [[pluginType substringFromIndex:0] capitalizedString]]];
-          
-          [datasetView setValue:[anEntity valueForKey:[NSString stringWithFormat:@"%@ID", pluginType]]
-                         forKey:[NSString stringWithFormat:@"selected%@%@ID", 
-                                 [[pluginType substringToIndex:0] capitalizedString], 
-                                 [[pluginType substringFromIndex:0] capitalizedString]]];
-
+                                 [[pluginType substringToIndex:1] capitalizedString], 
+                                 [pluginType substringFromIndex:1]]];
         }
       }
+
+    NSMutableArray *pluginResults = [[NSMutableArray alloc] init];
+    for(id aPlugin in [datasetView valueForKey:[NSString stringWithFormat:@"%@s", pluginType]])
+      [pluginResults addObject:[NSNull null]];
+    [datasetView setValue:pluginResults forKey:[NSString stringWithFormat:@"%@Results", pluginType]];
   }
-  
-  datasetView.datasetVisualizer = [delegate defaultDatasetVisualizer];
-  datasetView.datasetVisualizerID = datasetView.datasetVisualizer.datasetVisualizerID;
-  
-  datasetView.dateCreated = [NSDate date];
-    
-  unsigned int n = [[dataset n] unsignedIntValue];
-  unsigned int d = [[dataset d] unsignedIntValue];
-  float *data = [dataset floatData];
-  
-  // reducedData is by default the first two dimensions scaled to be between
-  // 0 and 1
-  float x, y, min, max;
-  min = FLT_MAX;
-  max = FLT_MIN;
-  for(int i = 0; i < n; i++) {
-    x = data[i * d];
-    y = data[i * d + 1];
-    
-    if(x < min) min = x;
-    if(x > max) max = x;
-    if(y < min) min = y;
-    if(y > max) max = y;
-  }
-  
-  unsigned int numBytes = sizeof(float) * n * 2;
-  float *newReducedData = malloc(numBytes);
-  
-  for(int i = 0; i < n; i++) {
-    newReducedData[i * 2] = (data[i * d] - min) / (max - min);
-    newReducedData[i * 2 + 1] = (data[i * d + 1] - min) / (max - min);
-  }
-  
-  datasetView.reducedData = [NSData dataWithBytesNoCopy:newReducedData
-                                             length:numBytes
-                                       freeWhenDone:YES]; // Hands responsibility for freeing reduced to the NSData object
-  datasetView.exemplarList = nil;
-  
-  numBytes = sizeof(int) * n;
-  int *newAssignment = calloc(numBytes, sizeof(int));
-  datasetView.assignment = [NSData dataWithBytesNoCopy:newAssignment
-                                            length:numBytes
-                                      freeWhenDone:YES];
   
   return datasetView;
 }
 
-- (void) clustererChanged {
+- (void) reloadImage {
   self.renderedImage = nil;
+
+  int datasetVisualizerIndex = [self.datasetVisualizers indexOfObject:self.selectedDatasetVisualizer];  
+  [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:[NSNull null]];  
+  
   NSNumber *newVersion = [NSNumber numberWithInt:self.version.intValue + 1];
   self.version = nil;
   self.version = newVersion;
 }
 
+- (void) clustererChanged {
+  int clustererIndex = [self.clusterers indexOfObject:self.selectedClusterer];  
+  [self.clustererResults replaceObjectAtIndex:clustererIndex withObject:[NSNull null]];
+  
+  int datasetVisualizerIndex = [self.datasetVisualizers indexOfObject:self.selectedDatasetVisualizer];  
+  [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:[NSNull null]];  
+}
+
 - (void) datasetVisualizerChanged {
-  [self clustererChanged];
 }
 
 - (NSImage *) image {
   
   if ( self.renderedImage ) return self.renderedImage;
   
-  NSSize      size  = NSMakeSize( 1024, 1024 );
-  NSImage*    image = [[NSImage alloc] initWithSize:size];
-  
-  if([self selectedClusterer] )
-    [[self selectedClusterer] clusterDataset:[self dataset]
-                          assignment:[self assignment]];
-  
-  [[self datasetVisualizer] drawImage:image
-                          reducedData:[self reducedData]
-                              dataset:[self dataset]
-                           assignment:[self assignment]];
-  
-  if([self pointVisualizer])
-    [[self pointVisualizer] drawImage:image
-                          reducedData:[self reducedData]
-                         exemplarList:[self exemplarList]
-                              dataset:[self dataset]];
+  NSSize imageSize = NSMakeSize(1024, 1024); // Size of output image
     
+  int clustererIndex = [self.clusterers indexOfObject:self.selectedClusterer];
+  NSData *assignment = [self.clustererResults objectAtIndex:clustererIndex];
+  if(assignment == (NSData *)[NSNull null]) {
+    int numBytes = [self.dataset.n intValue] * sizeof(int);
+    int *newAssignment = malloc(numBytes);
+    NSData *newData = [NSData dataWithBytesNoCopy:newAssignment length:numBytes freeWhenDone:YES];
+    [self.clustererResults replaceObjectAtIndex:clustererIndex withObject:newData];
+    
+    [self.selectedClusterer clusterDataset:self.dataset
+                                assignment:[self.clustererResults objectAtIndex:clustererIndex]];
+  }
+  
+  int reducerIndex = [self.reducers indexOfObject:self.selectedReducer];
+  NSData *reducedData = [self.reducerResults objectAtIndex:reducerIndex];
+  if(reducedData == (NSData *)[NSNull null]) {
+    int numBytes = [self.dataset.n intValue] * 2 * sizeof(int);
+    int *newReducedData = malloc(numBytes);
+    NSData *newData = [NSData dataWithBytesNoCopy:newReducedData length:numBytes freeWhenDone:YES];
+    [self.reducerResults replaceObjectAtIndex:reducerIndex withObject:newData];
+    
+    [self.selectedReducer reduceDataset:self.dataset
+                            reducedData:[self.reducerResults objectAtIndex:reducerIndex]];
+  }
+  
+  int datasetVisualizerIndex = [self.datasetVisualizers indexOfObject:self.selectedDatasetVisualizer];
+  NSImage *dataImage = [self.datasetVisualizerResults objectAtIndex:datasetVisualizerIndex];
+  if(dataImage == (NSImage *)[NSNull null]) {
+    NSImage *newImage = [[NSImage alloc] initWithSize:imageSize];
+
+    [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:newImage];
+    
+    [self.selectedDatasetVisualizer drawImage:[self.datasetVisualizerResults objectAtIndex:datasetVisualizerIndex]
+                                  reducedData:[self.reducerResults objectAtIndex:reducerIndex]
+                                      dataset:self.dataset
+                                   assignment:[self.clustererResults objectAtIndex:clustererIndex]];
+  }  
+
+  int pointVisualizerIndex = [self.pointVisualizers indexOfObject:self.selectedPointVisualizer];
+  NSImage *pointImage = [self.pointVisualizerResults objectAtIndex:pointVisualizerIndex];
+  if(pointImage == (NSImage *)[NSNull null]) {
+    NSImage *newImage = [[NSImage alloc] initWithSize:imageSize];
+    
+    [self.pointVisualizerResults replaceObjectAtIndex:pointVisualizerIndex withObject:newImage];
+    
+    [self.selectedPointVisualizer drawImage:[self.pointVisualizerResults objectAtIndex:pointVisualizerIndex]
+                                reducedData:[self.reducerResults objectAtIndex:reducerIndex]
+                                    dataset:self.dataset];
+  }
+  
+  NSImage *image = [[NSImage alloc] initWithSize:imageSize];
+  
+  [image lockFocus];
+  [[self.datasetVisualizerResults objectAtIndex:datasetVisualizerIndex] drawAtPoint:NSMakePoint(0.f, 0.f) 
+                                                                           fromRect:NSZeroRect 
+                                                                          operation:NSCompositeSourceOver 
+                                                                           fraction:1.0];
+  [[self.pointVisualizerResults objectAtIndex:pointVisualizerIndex] drawAtPoint:NSMakePoint(0.f, 0.f) 
+                                                                       fromRect:NSZeroRect 
+                                                                      operation:NSCompositeSourceOver 
+                                                                       fraction:1.0];  
+  [image unlockFocus];
   
   self.renderedImage = image;
   
@@ -198,55 +219,73 @@
   NSArray *pluginTypes = [delegate pluginTypes];
   
   for(NSString *pluginType in pluginTypes) {
-    if([pluginType isEqual:@"clusterer"]) {
-      [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
-      
-      NSMutableArray *plugins = [self valueForKey:[NSString stringWithFormat:@"%@s", pluginType]];
-      
-      NSArray *pluginIDs = [self valueForKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
-      
-      NSString *pluginIDString = [NSString stringWithFormat:@"%@ID", pluginType];
-      
-      for(NSString *anID in pluginIDs)
-        for(NSEntityDescription *anEntityDescription in mom.entities) {
-          if([anEntityDescription.propertiesByName objectForKey:pluginIDString] && 
-             ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-            NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-            NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginIDString, anID];
-            
-            [request setEntity:anEntityDescription];
-            [request setPredicate:idPredicate];
-            
-            NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
-            
-            for(id aPlugin in pluginArray) { // Should only be one
-              [plugins addObject:aPlugin];
-              if([self.selectedClustererID isEqual:[aPlugin valueForKey:pluginIDString]])
-                self.selectedClusterer = aPlugin;
-            }
-          }
-        }
-    }
-    else {
-      NSString *pluginID = [NSString stringWithFormat:@"%@ID", pluginType];
-      
+    [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
+    
+    NSMutableArray *plugins = [self valueForKey:[NSString stringWithFormat:@"%@s", pluginType]];
+    
+    NSArray *pluginIDs = [self valueForKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
+    
+    NSString *pluginIDString = [NSString stringWithFormat:@"%@ID", pluginType];
+    NSString *selectedPluginString = [NSString stringWithFormat:@"selected%@%@", 
+                                      [[pluginType substringToIndex:1] capitalizedString], 
+                                      [pluginType substringFromIndex:1]];
+    
+    NSString *selectedPluginIDString = [NSString stringWithFormat:@"selected%@%@ID", 
+                                        [[pluginType substringToIndex:1] capitalizedString], 
+                                        [pluginType substringFromIndex:1]];
+    
+    for(NSString *anID in pluginIDs)
       for(NSEntityDescription *anEntityDescription in mom.entities) {
-        if([anEntityDescription.propertiesByName objectForKey:pluginID] && 
-           ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
+        if([anEntityDescription.propertiesByName objectForKey:pluginIDString]) {
           NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-          NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginID, [self valueForKey:pluginID]];
+          NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"(%K LIKE %@)", pluginIDString, anID];
           
           [request setEntity:anEntityDescription];
           [request setPredicate:idPredicate];
           
           NSArray *pluginArray = [moc executeFetchRequest:request error:&error];
           
-          for(id aPlugin in pluginArray) // Should only be one
-            [self setValue:aPlugin forKey:pluginType];
+          for(id aPlugin in pluginArray) { // Should only be one
+            [plugins addObject:aPlugin];
+            if([[self valueForKey:selectedPluginIDString] isEqual:[aPlugin valueForKey:pluginIDString]])
+              [self setValue:aPlugin forKey:selectedPluginString];
+          }
         }
-      }
     }
   }
+}
+
+- (void) willSave { // Don't save all the images--it makes things slow and takes up a lot of disk
+  for(NSImage *anImage in self.datasetVisualizerResults)
+    if(anImage != (NSImage *)[NSNull null]) {
+      [self.datasetVisualizerResults replaceObjectAtIndex:[self.datasetVisualizerResults indexOfObject:anImage] withObject:[NSNull null]];
+      [anImage release];
+    }
+  for(NSImage *anImage in self.pointVisualizerResults)
+    if(anImage != (NSImage *)[NSNull null]) {
+      [self.pointVisualizerResults replaceObjectAtIndex:[self.pointVisualizerResults indexOfObject:anImage] withObject:[NSNull null]];
+      [anImage release];
+    }
+}
+
+- (void) setSelectedDatasetVisualizer:(id <DivvyDatasetVisualizer>)aDatasetVisualizer {
+  self.selectedDatasetVisualizerID = aDatasetVisualizer.datasetVisualizerID;
+  selectedDatasetVisualizer = aDatasetVisualizer;
+}
+
+- (void) setSelectedPointVisualizer:(id <DivvyPointVisualizer>)aPointVisualizer {
+  self.selectedPointVisualizerID = aPointVisualizer.pointVisualizerID;
+  selectedPointVisualizer = aPointVisualizer;
+}
+
+- (void) setSelectedClusterer:(id <DivvyClusterer>)aClusterer {
+  self.selectedClustererID = aClusterer.clustererID;
+  selectedClusterer = aClusterer;
+}
+
+- (void) setSelectedReducer:(id <DivvyReducer>)aReducer {
+  self.selectedReducerID = aReducer.reducerID;
+  selectedReducer = aReducer;
 }
 
 #pragma mark -

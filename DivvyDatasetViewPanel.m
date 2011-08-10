@@ -14,48 +14,46 @@
 
 @implementation DivvyDatasetViewPanel
 
-@synthesize clustererView;
 @synthesize datasetVisualizerView;
+@synthesize pointVisualizerView;
+@synthesize clustererView;
+@synthesize reducerView;
 
-@synthesize clustererPopUp;
 @synthesize datasetVisualizerPopUp;
+@synthesize pointVisualizerPopUp;
+@synthesize clustererPopUp;
+@synthesize reducerPopUp;
 
-@synthesize clustererDisclosureButton;
 @synthesize datasetVisualizerDisclosureButton;
+@synthesize pointVisualizerDisclosureButton;
+@synthesize clustererDisclosureButton;
+@synthesize reducerDisclosureButton;
 
-@synthesize clustererArrayController;
 @synthesize datasetVisualizerArrayController;
+@synthesize pointVisualizerArrayController;
+@synthesize clustererArrayController;
+@synthesize reducerArrayController;
 
-@synthesize clustererController;
 @synthesize datasetVisualizerController;
+@synthesize pointVisualizerController;
+@synthesize clustererController;
+@synthesize reducerController;
 
-@synthesize clustererViewControllers;
+@synthesize selectViewTextField;
+
 @synthesize datasetVisualizerViewControllers;
-
-@synthesize clusterers;
-@synthesize datasetVisualizers;
+@synthesize pointVisualizerViewControllers;
+@synthesize clustererViewControllers;
+@synthesize reducerViewControllers;
 
 - (void) windowWillLoad {
   DivvyAppDelegate *delegate = [NSApp delegate];
   NSArray *pluginTypes = delegate.pluginTypes;
 
   for(NSString *pluginType in pluginTypes) {
-    if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-    
     [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
-    [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
-  }
-
-  for(NSString *pluginType in pluginTypes) {
-        if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-    
     for(NSEntityDescription *anEntityDescription in [[[NSApp delegate] managedObjectModel] entities])
-      if([anEntityDescription.propertiesByName objectForKey:[NSString stringWithFormat:@"%@ID", pluginType]] && 
-         ![anEntityDescription.name isEqualToString:@"DatasetView"]) {
-
-        NSMutableArray *entities = [self valueForKey:[NSString stringWithFormat:@"%@s", pluginType]];
-        [entities addObject:anEntityDescription];
-        
+      if([anEntityDescription.propertiesByName objectForKey:[NSString stringWithFormat:@"%@ID", pluginType]]) {        
         Class controller = NSClassFromString([NSString stringWithFormat:@"%@%@%@", @"Divvy", anEntityDescription.name, @"Controller"]);
         NSMutableArray *controllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
         id controllerInstance = [[controller alloc] init];
@@ -82,7 +80,9 @@
   //delegate.selectedDatasetView.selectedClusterer = [delegate.selectedDatasetView.clusterers objectAtIndex:[clustererArrayController selectionIndex]];
   selectedDatasetView.selectedClustererID = popClusterer.clustererID;
   
-  [delegate clustererChanged];
+  //[delegate clustererChanged];
+  
+  [delegate datasetViewChanged];
 }
 
 - (void) reflow {
@@ -102,8 +102,6 @@
   
     // Need to set topFrame height before positioning the subviews
     for(NSString *pluginType in pluginTypes) {
-      if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-      
       NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
       NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
       NSObjectController *objectController = [self valueForKey:[NSString stringWithFormat:@"%@Controller", pluginType]];
@@ -115,10 +113,7 @@
       
       NSViewController *aController;
       
-      if([pluginType isEqual:@"clusterer"])
-        aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
-      else
-        aController = [viewControllers objectAtIndex:0];
+      aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
       
       NSRect subFrame = [[aController view] frame];
       
@@ -129,11 +124,15 @@
       y += popUpFrame.size.height - popUpOffset;
       
     }
-    
+   
+    //y += 30.f; // Top border
   }
-  
+//  else {
+//    y += 57.f; // Room for select view label
+//  }
+
   y += 30.f; // Top border
-  
+
   topFrame.origin.y += topFrame.size.height - y;
   topFrame.size.height = y;
   [self.window setFrame:topFrame display:YES animate:YES];
@@ -143,8 +142,6 @@
   if(delegate.selectedDatasetView) {
   
     for(NSString *pluginType in pluginTypes) {
-      if(![pluginType isEqual:@"clusterer"] && ![pluginType isEqual:@"datasetVisualizer"]) continue;
-      
       NSArray *viewControllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
       NSArrayController *arrayController = [self valueForKey:[NSString stringWithFormat:@"%@ArrayController", pluginType]];
       NSObjectController *objectController = [self valueForKey:[NSString stringWithFormat:@"%@Controller", pluginType]];
@@ -154,10 +151,7 @@
       
       NSViewController *aController;
       
-      if([pluginType isEqual:@"clusterer"])
-        aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
-      else
-        aController = [viewControllers objectAtIndex:0];
+      aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
       
       NSRect frame = [view frame];
       NSRect subFrame = [[aController view] frame];
@@ -178,23 +172,24 @@
       
       [view addSubview:[aController view]];
     }
+
+    NSRect selectViewFrame = [selectViewTextField frame];
+    selectViewFrame.origin.y = -50.f;
+    [selectViewTextField setFrame:selectViewFrame];
   }
+//  else {
+//    NSRect selectViewFrame = [selectViewTextField frame];
+//    selectViewFrame.origin.y = 20.f;
+//    [selectViewTextField setFrame:selectViewFrame];    
+//  }
+
 }
 
 - (void) dealloc {
-  [self.clustererView release];
-  [self.datasetVisualizerView release];
-
-  [self.clustererPopUp release];
-  [self.datasetVisualizerPopUp release];
-
-  [self.clustererDisclosureButton release];
-  [self.datasetVisualizerDisclosureButton release];  
-
-  [self.clustererArrayController release];
-  [self.datasetVisualizerArrayController release];  
-  
-  [self.datasetVisualizers release];
+  [self.datasetVisualizerViewControllers release];
+  [self.pointVisualizerViewControllers release];
+  [self.clustererViewControllers release];
+  [self.reducerViewControllers release];
   
   [super dealloc];
 }

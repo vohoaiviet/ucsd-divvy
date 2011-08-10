@@ -25,7 +25,6 @@
 
 - (void) drawImage:(NSImage *) image 
        reducedData:(NSData *)reducedData
-      exemplarList:(NSData *)exemplarList
            dataset:(DivvyDataset *)dataset {
   
   float *data = (float *)[reducedData bytes];
@@ -49,10 +48,10 @@
   rect.size.width = rectSize;
   rect.size.height = rectSize;
   
-  zhuVertical.size.width = 4;
+  zhuVertical.size.width = [self.lineWidth intValue];
   zhuVertical.size.height = rectSize - frameSize;
   zhuHorizontal.size.width = rectSize - frameSize;
-  zhuHorizontal.size.height = 4;
+  zhuHorizontal.size.height = [self.lineWidth intValue];
   
   int index;
   for(int i = 0; i < 30; i++) {
