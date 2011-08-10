@@ -28,6 +28,7 @@
 @property (retain) DivvyDatasetView *selectedDatasetView;
 
 @property (retain) NSArray *pluginTypes;
+@property (retain) NSArray *pluginDefaults;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
@@ -39,9 +40,7 @@
 
 - (NSArray *)defaultSortDescriptors;
 
-- (id <DivvyDatasetVisualizer>) defaultDatasetVisualizer;
-- (id <DivvyPointVisualizer>) defaultPointVisualizer;
-- (NSString *) defaultClusterer;
+- (void) datasetViewChanged;
 
 - (void) datasetVisualizerChanged;
 - (void) pointVisualizerChanged;
