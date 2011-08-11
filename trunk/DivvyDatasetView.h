@@ -44,10 +44,10 @@
 @property (nonatomic, retain) NSMutableArray *clusterers;
 @property (nonatomic, retain) NSMutableArray *reducers;
 
-@property (nonatomic, retain) id <DivvyDatasetVisualizer> selectedDatasetVisualizer;
-@property (nonatomic, retain) id <DivvyPointVisualizer> selectedPointVisualizer;
-@property (nonatomic, retain) id <DivvyClusterer> selectedClusterer;
-@property (nonatomic, retain) id <DivvyReducer> selectedReducer;
+@property (nonatomic, assign) id <DivvyDatasetVisualizer> selectedDatasetVisualizer;
+@property (nonatomic, assign) id <DivvyPointVisualizer> selectedPointVisualizer;
+@property (nonatomic, assign) id <DivvyClusterer> selectedClusterer;
+@property (nonatomic, assign) id <DivvyReducer> selectedReducer;
 
 @property (readonly) NSImage *image;
 
@@ -55,7 +55,9 @@
 
 - (void) reloadImage;
 
-- (void) clustererChanged;
 - (void) datasetVisualizerChanged;
+- (void) pointVisualizerChanged;
+- (void) clustererChanged;
+- (void) reducerChanged;
 
 @end

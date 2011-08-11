@@ -11,4 +11,6 @@
 
 @interface DivvyZhuController : NSViewController
 
+- (IBAction) changeLineWidth:(id)sender;
+
 @end

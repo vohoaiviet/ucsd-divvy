@@ -17,7 +17,7 @@
 #import "DivvyReducer.h"
 
 @interface DivvyDatasetView ()
-@property (retain) NSImage *renderedImage;
+@property (nonatomic, retain) NSImage *renderedImage;
 - (void) generateUniqueID;
 @end
 
@@ -73,8 +73,12 @@
   
   
   for(NSString *pluginType in pluginTypes) {
-    [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@s", pluginType]];
-    [datasetView setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
+    NSMutableArray *plugins = [[NSMutableArray alloc] init];
+    NSMutableArray *pluginIDs = [[NSMutableArray alloc] init];
+    [datasetView setValue:plugins forKey:[NSString stringWithFormat:@"%@s", pluginType]];
+    [datasetView setValue:pluginIDs forKey:[NSString stringWithFormat:@"%@IDs", pluginType]];
+    [plugins release];
+    [pluginIDs release];
     
     for(NSEntityDescription *anEntityDescription in [mom entities])
       if([anEntityDescription.propertiesByName objectForKey:[NSString stringWithFormat:@"%@ID", pluginType]]) {
@@ -96,6 +100,7 @@
     for(id aPlugin in [datasetView valueForKey:[NSString stringWithFormat:@"%@s", pluginType]])
       [pluginResults addObject:[NSNull null]];
     [datasetView setValue:pluginResults forKey:[NSString stringWithFormat:@"%@Results", pluginType]];
+    [pluginResults release];
   }
   
   return datasetView;
@@ -103,24 +108,35 @@
 
 - (void) reloadImage {
   self.renderedImage = nil;
-
-  int datasetVisualizerIndex = [self.datasetVisualizers indexOfObject:self.selectedDatasetVisualizer];  
-  [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:[NSNull null]];  
   
   NSNumber *newVersion = [NSNumber numberWithInt:self.version.intValue + 1];
   self.version = nil;
   self.version = newVersion;
 }
 
-- (void) clustererChanged {
-  int clustererIndex = [self.clusterers indexOfObject:self.selectedClusterer];  
-  [self.clustererResults replaceObjectAtIndex:clustererIndex withObject:[NSNull null]];
-  
+- (void) datasetVisualizerChanged {
   int datasetVisualizerIndex = [self.datasetVisualizers indexOfObject:self.selectedDatasetVisualizer];  
   [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:[NSNull null]];  
 }
 
-- (void) datasetVisualizerChanged {
+- (void) pointVisualizerChanged {
+  int pointVisualizerIndex = [self.pointVisualizers indexOfObject:self.selectedPointVisualizer];  
+  [self.pointVisualizerResults replaceObjectAtIndex:pointVisualizerIndex withObject:[NSNull null]];  
+}
+
+- (void) clustererChanged {
+  int clustererIndex = [self.clusterers indexOfObject:self.selectedClusterer];  
+  [self.clustererResults replaceObjectAtIndex:clustererIndex withObject:[NSNull null]];
+
+  [self datasetVisualizerChanged];
+}
+
+- (void) reducerChanged {
+  int reducerIndex = [self.reducers indexOfObject:self.selectedReducer];  
+  [self.reducerResults replaceObjectAtIndex:reducerIndex withObject:[NSNull null]];
+  
+  [self datasetVisualizerChanged];  
+  [self pointVisualizerChanged];
 }
 
 - (NSImage *) image {
@@ -160,6 +176,8 @@
 
     [self.datasetVisualizerResults replaceObjectAtIndex:datasetVisualizerIndex withObject:newImage];
     
+    [newImage release];
+    
     [self.selectedDatasetVisualizer drawImage:[self.datasetVisualizerResults objectAtIndex:datasetVisualizerIndex]
                                   reducedData:[self.reducerResults objectAtIndex:reducerIndex]
                                       dataset:self.dataset
@@ -170,8 +188,8 @@
   NSImage *pointImage = [self.pointVisualizerResults objectAtIndex:pointVisualizerIndex];
   if(pointImage == (NSImage *)[NSNull null]) {
     NSImage *newImage = [[NSImage alloc] initWithSize:imageSize];
-    
     [self.pointVisualizerResults replaceObjectAtIndex:pointVisualizerIndex withObject:newImage];
+    [newImage release];
     
     [self.selectedPointVisualizer drawImage:[self.pointVisualizerResults objectAtIndex:pointVisualizerIndex]
                                 reducedData:[self.reducerResults objectAtIndex:reducerIndex]
@@ -330,12 +348,8 @@
   
   // Core Data properties automatically managed.
   // Only release sythesized properties.
-  [[self renderedImage] release];
+  [renderedImage release];
   
-  // Are the releases below needed? Warnings about release not being found in the protocol.
-  //[[self datasetVisualizer] release];
-  //[[self pointVisualizer] release];
-  //[[self clusterer] release];
   [super dealloc];
 }
 

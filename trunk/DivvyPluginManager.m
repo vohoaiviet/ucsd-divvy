@@ -66,9 +66,10 @@
   for (Class aClass in [self pluginClasses]) {
     NSBundle *myBundle = [NSBundle bundleForClass:aClass];
     NSArray *bundles = [NSArray arrayWithObject:myBundle];
-    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:bundles] retain];
     
+    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:bundles] retain];
     [models addObject:managedObjectModel];
+    [managedObjectModel release];
   }
   
   self.pluginModels = models;
