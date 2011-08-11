@@ -40,7 +40,7 @@
 
 - (NSArray *)defaultSortDescriptors;
 
-- (void) datasetViewChanged;
+- (void) reloadSelectedDatasetViewImage;
 
 - (void) datasetVisualizerChanged;
 - (void) pointVisualizerChanged;

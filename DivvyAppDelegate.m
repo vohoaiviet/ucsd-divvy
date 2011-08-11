@@ -38,22 +38,29 @@
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
 
-- (void) datasetViewChanged {
+- (void) reloadSelectedDatasetViewImage {
   [[self selectedDatasetView] reloadImage];
   [[[self datasetWindowController] datasetViewsBrowser] reloadData];
 }
 
-- (void) clustererChanged {
-  [[self selectedDatasetView] clustererChanged];
-  [self datasetViewChanged];
-}
-
 - (void) datasetVisualizerChanged {
   [[self selectedDatasetView] datasetVisualizerChanged];
-  [self datasetViewChanged];
+  [self reloadSelectedDatasetViewImage];
 }
-- (void) pointVisualizerChanged {[self datasetViewChanged];}
-- (void) reducerChanged {[self datasetViewChanged];}
+- (void) pointVisualizerChanged {
+  [[self selectedDatasetView] pointVisualizerChanged];
+  [self reloadSelectedDatasetViewImage];
+}
+
+- (void) clustererChanged {
+  [[self selectedDatasetView] clustererChanged];
+  [self reloadSelectedDatasetViewImage];
+}
+
+- (void) reducerChanged {
+  [[self selectedDatasetView] reducerChanged];
+  [self reloadSelectedDatasetViewImage];
+}
 
 - (NSString *)defaultDatasetVisualizer {
   return @"ScatterPlot";

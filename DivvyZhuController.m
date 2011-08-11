@@ -8,7 +8,13 @@
 
 #import "DivvyZhuController.h"
 
+#import "DivvyAppDelegate.h"
+
 
 @implementation DivvyZhuController
+
+- (IBAction) changeLineWidth:(id)sender {
+  [(DivvyAppDelegate *)[NSApp delegate] pointVisualizerChanged];
+}
 
 @end

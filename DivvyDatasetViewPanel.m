@@ -51,13 +51,19 @@
   NSArray *pluginTypes = delegate.pluginTypes;
 
   for(NSString *pluginType in pluginTypes) {
-    [self setValue:[[NSMutableArray alloc] init] forKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
+    NSMutableArray *pluginViewControllers = [[NSMutableArray alloc] init];
+    [self setValue:pluginViewControllers forKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
+    [pluginViewControllers release];
+    
     for(NSEntityDescription *anEntityDescription in [[[NSApp delegate] managedObjectModel] entities])
       if([anEntityDescription.propertiesByName objectForKey:[NSString stringWithFormat:@"%@ID", pluginType]]) {        
         Class controller = NSClassFromString([NSString stringWithFormat:@"%@%@%@", @"Divvy", anEntityDescription.name, @"Controller"]);
         NSMutableArray *controllers = [self valueForKey:[NSString stringWithFormat:@"%@ViewControllers", pluginType]];
+        
         id controllerInstance = [[controller alloc] init];
         [controllers addObject:controllerInstance];
+        [controllerInstance release];
+        
         [NSBundle loadNibNamed:[NSString stringWithFormat:@"%@%@", @"Divvy", anEntityDescription.name] owner:controllerInstance];
       }
   }
@@ -68,21 +74,10 @@
   
   DivvyAppDelegate *delegate = [NSApp delegate];
   
-  // A bit verbose for debugging purposes
-  //int selectionIndex = [clustererArrayController.arrangedObjects indexOfObject:[clustererController content]];
-  id <DivvyClusterer> popClusterer = [clustererController content];
-  //id <DivvyClusterer> newClusterer = delegate.selectedDatasetView.selectedClusterer;
-  DivvyDatasetView *selectedDatasetView = delegate.selectedDatasetView;
-
-  selectedDatasetView.selectedClusterer = nil;
-  selectedDatasetView.selectedClusterer = popClusterer;
-
-  //delegate.selectedDatasetView.selectedClusterer = [delegate.selectedDatasetView.clusterers objectAtIndex:[clustererArrayController selectionIndex]];
-  selectedDatasetView.selectedClustererID = popClusterer.clustererID;
+  delegate.selectedDatasetView.selectedClusterer = clustererController.content;
   
-  //[delegate clustererChanged];
-  
-  [delegate datasetViewChanged];
+  [delegate datasetVisualizerChanged]; // If the clustering changes, the dataset visualizer result needs to be updated
+  [delegate reloadSelectedDatasetViewImage]; 
 }
 
 - (void) reflow {
@@ -108,16 +103,15 @@
       NSView *view = [self valueForKey:[NSString stringWithFormat:@"%@View", pluginType]];
       NSView *popup = [self valueForKey:[NSString stringWithFormat:@"%@PopUp", pluginType]];
       
-      for(NSView *aView in view.subviews)
-        [aView removeFromSuperview];
-      
       NSViewController *aController;
       
       aController = [viewControllers objectAtIndex:[arrayController.arrangedObjects indexOfObject:[objectController content]]];
       
+      for(NSView *aView in view.subviews)
+        if(aView != aController.view) // Pointer comparison should work, since there's only one instance of each ViewController
+          [aView removeFromSuperview];
+      
       NSRect subFrame = [[aController view] frame];
-      
-      
       NSRect popUpFrame = [popup frame];
       
       y += subFrame.size.height;
@@ -135,7 +129,7 @@
 
   topFrame.origin.y += topFrame.size.height - y;
   topFrame.size.height = y;
-  [self.window setFrame:topFrame display:YES animate:YES];
+  [self.window setFrame:topFrame display:YES animate:NO];
   
   y = 0.f; // Reset to position subviews
   
@@ -170,7 +164,8 @@
       [popUp setFrame:popUpFrame];
       [disclosureButton setFrame:disclosureButtonFrame];
       
-      [view addSubview:[aController view]];
+      if([view.subviews count] == 0) // Will happen only if we've changed views
+        [view addSubview:[aController view]];
     }
 
     NSRect selectViewFrame = [selectViewTextField frame];
@@ -186,6 +181,8 @@
 }
 
 - (void) dealloc {
+  // Need to add a million releases here for the retained IBOutlets
+  
   [self.datasetVisualizerViewControllers release];
   [self.pointVisualizerViewControllers release];
   [self.clustererViewControllers release];
