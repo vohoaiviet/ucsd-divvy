@@ -275,15 +275,12 @@
 
 - (void) willSave { // Don't save all the images--it makes things slow and takes up a lot of disk
   for(NSImage *anImage in self.datasetVisualizerResults)
-    if(anImage != (NSImage *)[NSNull null]) {
+    if(anImage != (NSImage *)[NSNull null])
       [self.datasetVisualizerResults replaceObjectAtIndex:[self.datasetVisualizerResults indexOfObject:anImage] withObject:[NSNull null]];
-      [anImage release];
-    }
+
   for(NSImage *anImage in self.pointVisualizerResults)
-    if(anImage != (NSImage *)[NSNull null]) {
+    if(anImage != (NSImage *)[NSNull null])
       [self.pointVisualizerResults replaceObjectAtIndex:[self.pointVisualizerResults indexOfObject:anImage] withObject:[NSNull null]];
-      [anImage release];
-    }
 }
 
 - (void) setSelectedDatasetVisualizer:(id <DivvyDatasetVisualizer>)aDatasetVisualizer {
