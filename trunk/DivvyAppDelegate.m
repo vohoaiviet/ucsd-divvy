@@ -34,6 +34,8 @@
 @synthesize pluginTypes;
 @synthesize pluginDefaults;
 
+@synthesize pluginManager;
+
 @synthesize persistentStoreCoordinator;
 @synthesize managedObjectModel;
 @synthesize managedObjectContext;
@@ -121,6 +123,8 @@
   pluginTypes = [[NSArray alloc] initWithObjects:@"datasetVisualizer", @"pointVisualizer", @"clusterer", @"reducer", nil];
   pluginDefaults = [[NSArray alloc] initWithObjects:@"ScatterPlot", @"Zhu", @"KMeans", @"NilReducer", nil];
   
+  pluginManager = [DivvyPluginManager shared];
+  
   return self;
 }
 
@@ -173,7 +177,7 @@
   
   NSMutableArray *models = [NSMutableArray array];
   [models addObject:[NSManagedObjectModel mergedModelFromBundles:nil]];
-  [models addObjectsFromArray:[[DivvyPluginManager shared] pluginModels]];
+  [models addObjectsFromArray:[pluginManager pluginModels]];
   
   managedObjectModel = [[NSManagedObjectModel modelByMergingModels:models] retain];
   
@@ -214,7 +218,7 @@
   NSMutableArray *configArray = [NSMutableArray array];
   [configArray addObject:@"DivvyCore"];
   
-  for(Class aClass in [[DivvyPluginManager shared] pluginClasses])
+  for(Class aClass in [pluginManager pluginClasses])
     [configArray addObject:NSStringFromClass(aClass)];
   
   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
@@ -359,12 +363,11 @@
   [datasetViewPanelController release];
   [datasetWindowController release];
   
-  [selectedDataset release];
-  [selectedDatasetView release];
-  
   [pluginTypes release];
   [pluginDefaults release];
-  
+
+  [pluginManager release];
+
   [managedObjectContext release];
   [persistentStoreCoordinator release];
   [managedObjectModel release];
