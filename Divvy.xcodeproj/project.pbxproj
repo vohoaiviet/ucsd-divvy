@@ -327,12 +327,10 @@
 		29B97314FDCFA39411CA2CEA /* Divvy */ = {
 			isa = PBXGroup;
 			children = (
-				D7A24D9413F32053001AD337 /* NilReducer */,
-				D730D24C13B5278700E01F31 /* Zhu */,
-				D730D24913B5277700E01F31 /* ScatterPlot */,
-				D730D24813B5276C00E01F31 /* PCA */,
-				D704B87E13E1ED13002692E9 /* NilClusterer */,
-				D730D22C13B5261700E01F31 /* KMeans */,
+				D7642A6613F4EE5200F1CE56 /* Dataset Visualizers */,
+				D7642A6713F4EE5F00F1CE56 /* Point Visualizers */,
+				D7642A6813F4EE6C00F1CE56 /* Clusterers */,
+				D7642A6913F4EE7C00F1CE56 /* Reducers */,
 				D73A292713B26A760046EDE1 /* Protocols */,
 				D7764EEE13788C3100F7F49F /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -455,6 +453,40 @@
 				D7B1957313983DC200BF1EC7 /* DivvyReducer.h */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		D7642A6613F4EE5200F1CE56 /* Dataset Visualizers */ = {
+			isa = PBXGroup;
+			children = (
+				D730D24913B5277700E01F31 /* ScatterPlot */,
+			);
+			name = "Dataset Visualizers";
+			sourceTree = "<group>";
+		};
+		D7642A6713F4EE5F00F1CE56 /* Point Visualizers */ = {
+			isa = PBXGroup;
+			children = (
+				D730D24C13B5278700E01F31 /* Zhu */,
+			);
+			name = "Point Visualizers";
+			sourceTree = "<group>";
+		};
+		D7642A6813F4EE6C00F1CE56 /* Clusterers */ = {
+			isa = PBXGroup;
+			children = (
+				D704B87E13E1ED13002692E9 /* NilClusterer */,
+				D730D22C13B5261700E01F31 /* KMeans */,
+			);
+			name = Clusterers;
+			sourceTree = "<group>";
+		};
+		D7642A6913F4EE7C00F1CE56 /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				D7A24D9413F32053001AD337 /* NilReducer */,
+				D730D24813B5276C00E01F31 /* PCA */,
+			);
+			name = Reducers;
 			sourceTree = "<group>";
 		};
 		D7764EEE13788C3100F7F49F /* Models */ = {
