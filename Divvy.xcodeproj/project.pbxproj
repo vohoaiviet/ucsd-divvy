@@ -466,6 +466,7 @@
 		D7642A6713F4EE5F00F1CE56 /* Point Visualizers */ = {
 			isa = PBXGroup;
 			children = (
+				D7A2501B13F58627001AD337 /* NilPointVisualizer */,
 				D730D24C13B5278700E01F31 /* Zhu */,
 			);
 			name = "Point Visualizers";
@@ -509,6 +510,13 @@
 				D7A24DA513F321B9001AD337 /* DivvyNilReducer.xcdatamodel */,
 			);
 			name = NilReducer;
+			sourceTree = "<group>";
+		};
+		D7A2501B13F58627001AD337 /* NilPointVisualizer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NilPointVisualizer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

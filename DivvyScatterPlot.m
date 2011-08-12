@@ -90,6 +90,8 @@
   }
 
   [image unlockFocus];
+  
+  [clusterColors release];
 }
 
 @end

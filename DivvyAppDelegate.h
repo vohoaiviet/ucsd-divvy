@@ -10,9 +10,12 @@
 
 @class DivvyDataset;
 @class DivvyDatasetView;
+
 @class DivvyDatasetViewPanel;
 @class DivvyDatasetsPanel;
 @class DivvyDatasetWindow;
+
+@class DivvyPluginManager;
 
 @protocol DivvyClusterer;
 @protocol DivvyDatasetVisualizer;
@@ -20,15 +23,17 @@
 
 @interface DivvyAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (retain) DivvyDatasetViewPanel *datasetViewPanelController;
-@property (retain) DivvyDatasetsPanel *datasetsPanelController;
-@property (retain) DivvyDatasetWindow *datasetWindowController;
+@property (nonatomic, retain) DivvyDatasetViewPanel *datasetViewPanelController;
+@property (nonatomic, retain) DivvyDatasetsPanel *datasetsPanelController;
+@property (nonatomic, retain) DivvyDatasetWindow *datasetWindowController;
 
-@property (retain) DivvyDataset *selectedDataset;
-@property (retain) DivvyDatasetView *selectedDatasetView;
+@property (nonatomic, assign) DivvyDataset *selectedDataset;
+@property (nonatomic, assign) DivvyDatasetView *selectedDatasetView;
 
-@property (retain) NSArray *pluginTypes;
-@property (retain) NSArray *pluginDefaults;
+@property (nonatomic, retain) NSArray *pluginTypes;
+@property (nonatomic, retain) NSArray *pluginDefaults;
+
+@property (nonatomic, retain) DivvyPluginManager *pluginManager;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

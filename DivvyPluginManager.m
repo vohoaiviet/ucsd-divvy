@@ -24,7 +24,7 @@
 {
   static DivvyPluginManager *sharedInstance;
   if (!sharedInstance) {
-    sharedInstance = [[DivvyPluginManager alloc] init];
+    sharedInstance = [[DivvyPluginManager alloc] init]; // I think it's OK to just let this get destroyed at application termination--no need to balance with a release
   }
   return sharedInstance;
 }
@@ -56,6 +56,13 @@
   self.pluginClasses = loadArray;
   
   return self;
+}
+
+- (void) dealloc {
+  [pluginClasses release];
+  [pluginModels release];
+  
+  [super dealloc];
 }
 
 - (NSArray*)pluginModels;
