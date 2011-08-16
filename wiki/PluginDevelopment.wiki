@@ -1,5 +1,7 @@
 #summary Things to remember when developing a Divvy plugin.
 
+The prefix header for the plugin needs to be set to Divvy_Prefix.pch.
+
 = Required resources =
   * The main plugin class DivvyYourPluginName (e.g. DivvyPCA), it must conform to one and only one of the plugin protocols
   * The controller class for the UI DivvyYourPluginNameController
