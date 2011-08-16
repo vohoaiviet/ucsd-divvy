@@ -26,3 +26,4 @@ When creating new classes and C source files, make sure they don't get added to 
 
 = UI =
   * "Raises For Not Applicable Keys" must *not* be checked in any bindings to parameters of your plugin
+  * The class identity (in the rightmost identity panel) of the File's Owner should be set to DivvyYourPluginNameController
