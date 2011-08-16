@@ -1,10 +1,9 @@
 #summary Things to remember when developing a Divvy plugin.
 
-The prefix header for the plugin needs to be set to Divvy_Prefix.pch.
-
-C source files need extension .c (.cpp might not work).
-
-When creating new classes and C source files, make sure they don't get added to the Divvy application target.
+= General comments =
+  * The prefix header for the plugin needs to be set to Divvy_Prefix.pch (in the plugin's build settings).
+  * C source files need extension .c (not .cpp).
+  * When creating new classes and C source files, make sure they don't get added to the Divvy application target (uncheck that target in the creation dialog).
 
 = Required resources =
   * The main plugin class DivvyYourPluginName (e.g. DivvyPCA), it must conform to one and only one of the plugin protocols
@@ -27,3 +26,4 @@ When creating new classes and C source files, make sure they don't get added to 
 = UI =
   * "Raises For Not Applicable Keys" must *not* be checked in any bindings to parameters of your plugin
   * The class identity (in the rightmost identity panel) of the File's Owner should be set to DivvyYourPluginNameController
+  * File's Owner's view outlet needs to be connected to the custom view in the .xib
