@@ -1,9 +1,9 @@
 #summary Things to remember when developing a Divvy plugin.
 
 = General comments =
-  * The prefix header for the plugin needs to be set to Divvy_Prefix.pch (in the plugin's build settings).
-  * C source files need extension .c (not .cpp).
-  * When creating new classes and C source files, make sure they don't get added to the Divvy application target (uncheck that target in the creation dialog).
+  * The prefix header for the plugin needs to be set to Divvy_Prefix.pch (in the plugin's build settings)
+  * C source files need extension .c (not .cpp)
+  * When creating new classes and C source files, make sure they don't get added to the Divvy application target (uncheck that target in the creation dialog)
 
 = Required resources =
   * The main plugin class DivvyYourPluginName (e.g. DivvyPCA), it must conform to one and only one of the plugin protocols
