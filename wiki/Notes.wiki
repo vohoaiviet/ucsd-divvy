@@ -6,6 +6,8 @@ For Xcode projects, add "`*`.pbxuser `*`.mode1v3 build" to the global-ignores li
 
 After adding a repository, the initial checkout, opening the associated project, and configuring SCM, Xcode doesn't show the full SCM menu until Xcode is restarted.
 
+After updating to Xcode 4, do the first commit from the command line so that you can permanently accept Google's SSL certificate.
+
 = OpenCL =
 
 clGetDeviceInfo often returns incorrect CPU and GPU details, such as CPU count & GPU memory stats.
