@@ -6,7 +6,7 @@ For Xcode projects, add "`*`.pbxuser `*`.mode1v3 build" to the global-ignores li
 
 After adding a repository, the initial checkout, opening the associated project, and configuring SCM, Xcode doesn't show the full SCM menu until Xcode is restarted.
 
-After updating to Xcode 4, do the first commit from the command line so that you can permanently accept Google's SSL certificate. Actually it turns out that after upgrading to Lion (and maybe before, but it started causing trouble in Xcode 3.2 after the upgrade) ~/.subversion is owned by root, causing endless "Do you accept this SSL certificate?" messages. Running "sudo chown -R your_user_name:staff .subversion" in the home directory fixed this problem.
+After updating to Xcode 4, do the first commit from the command line so that you can permanently accept Google's SSL certificate. Actually it turns out that after upgrading to Lion (and maybe before, but it started causing trouble in Xcode 3.2 after the upgrade) ~/.subversion is owned by root, causing endless "Do you accept this SSL certificate?" messages. Running "sudo chown -R your_user_name:staff .subversion" in the home directory fixed this problem. Here's the [http://chipsandtv.com/articles/svn-invalid-certificates relevant link].
 
 = OpenCL =
 
