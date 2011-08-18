@@ -6,8 +6,8 @@
   * When creating new classes and C source files, make sure they don't get added to the Divvy application target (uncheck that target in the creation dialog)
 
 = Required resources =
-  * The main plugin class DivvyYourPluginName (e.g. DivvyPCA), it must conform to one and only one of the plugin protocols
-  * The controller class for the UI DivvyYourPluginNameController
+  * The main plugin class DivvyYourPluginName (e.g. DivvyPCA), it must conform to one and only one of the plugin protocols and derive from NSManagedObject
+  * The controller class for the UI DivvyYourPluginNameController, it derives from NSViewController
   * The UI DivvyYourPluginName.xib
   * The property list DivvyYourPluginName-Info.plist
   * The data model DivvyYourPluginName.xcdatamodel
