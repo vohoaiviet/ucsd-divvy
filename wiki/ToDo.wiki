@@ -19,6 +19,8 @@
 = Outreach =
   * Create a Divvy demo video using some compelling sample datasets (MNIST, ??)
   * Launch divvy.ucsd.edu
+  * Provide scripts to move data out of common apps into Divvy
 
 = Long Term =
   * Click to visualize outliers
+  * Labeled dimensions?
